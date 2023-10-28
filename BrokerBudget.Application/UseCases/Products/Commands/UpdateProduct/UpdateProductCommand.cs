@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrokerBudget.Application.UseCases.Products.Commands.UpdateProduct
 {
-    internal class UpdateProductCommand
+    public class UpdateProductCommand
     {
     }
 }

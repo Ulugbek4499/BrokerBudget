@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrokerBudget.Application.UseCases.ProductGivers.Commands.CreateProductGiver
 {
-    internal class CreateProductGiverCommand
+    public class CreateProductGiverCommand
     {
     }
 }

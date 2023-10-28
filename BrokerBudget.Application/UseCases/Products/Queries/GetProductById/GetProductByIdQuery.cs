@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrokerBudget.Application.UseCases.Products.Queries.GetProductById
 {
-    internal class GetProductByIdQuery
+    public class GetProductByIdQuery
     {
     }
 }

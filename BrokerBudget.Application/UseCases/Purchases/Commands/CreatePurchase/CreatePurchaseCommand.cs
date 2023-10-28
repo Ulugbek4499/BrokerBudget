@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrokerBudget.Application.UseCases.Purchases.Commands.CreatePurchase
 {
-    internal class CreatePurchaseCommand
+    public class CreatePurchaseCommand
     {
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrokerBudget.Application.UseCases.ProductGivers.Commands.DeleteProductGiver
 {
-    internal class DeleteProductGiverCommand
+    public class DeleteProductGiverCommand
     {
     }
 }

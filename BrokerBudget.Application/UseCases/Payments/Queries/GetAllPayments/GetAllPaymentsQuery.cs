@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrokerBudget.Application.UseCases.Payments.Queries.GetAllPayments
 {
-    internal class GetAllPaymentsQuery
+    public class GetAllPaymentsQuery
     {
     }
 }

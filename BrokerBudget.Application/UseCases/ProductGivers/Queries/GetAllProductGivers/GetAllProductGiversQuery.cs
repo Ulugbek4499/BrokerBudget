@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrokerBudget.Application.UseCases.ProductGivers.Queries.GetAllProductGivers
 {
-    internal class GetAllProductGiversQuery
+    public class GetAllProductGiversQuery
     {
     }
 }

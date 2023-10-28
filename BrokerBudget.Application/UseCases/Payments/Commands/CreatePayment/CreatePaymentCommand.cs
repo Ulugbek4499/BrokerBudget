@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrokerBudget.Application.UseCases.Payments.Commands.CreatePayment
 {
-    internal class CreatePaymentCommand
+    public class CreatePaymentCommand
     {
     }
 }

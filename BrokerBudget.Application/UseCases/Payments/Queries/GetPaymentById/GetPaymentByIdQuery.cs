@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrokerBudget.Application.UseCases.Payments.Queries.GetPaymentById
 {
-    internal class GetPaymentByIdQuery
+    public class GetPaymentByIdQuery
     {
     }
 }
