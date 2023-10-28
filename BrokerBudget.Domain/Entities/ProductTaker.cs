@@ -2,7 +2,7 @@
 
 namespace BrokerBudget.Domain.Entities
 {
-    public class ProductTaker:BaseAuditableEntity
+    public class ProductTaker : BaseAuditableEntity
     {
         public string CompanyName { get; set; }
         public string ResponsiblePersonName { get; set; }
@@ -10,5 +10,6 @@ namespace BrokerBudget.Domain.Entities
         public string INN { get; set; }
 
         public virtual ICollection<Purchase>? Purchases { get; set; }
+        public virtual ICollection<Payment>? Payments { get; set; }
     }
 }
