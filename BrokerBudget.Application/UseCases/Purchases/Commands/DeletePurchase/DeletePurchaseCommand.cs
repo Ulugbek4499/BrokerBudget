@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BrokerBudget.Application.UseCases.Purchases.Commands.DeletePurchase
+﻿namespace BrokerBudget.Application.UseCases.Purchases.Commands.DeletePurchase
 {
     public class DeletePurchaseCommand
     {

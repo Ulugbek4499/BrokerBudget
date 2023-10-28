@@ -2,7 +2,7 @@
 {
     public enum AmountCategory
     {
-       KG,
-       Dona
+        KG,
+        Dona
     }
 }

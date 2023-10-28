@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BrokerBudget.Application.UseCases.Purchases
+﻿namespace BrokerBudget.Application.UseCases.Purchases
 {
-    internal class PurchaseResponse
+    public class PurchaseResponse
     {
     }
 }

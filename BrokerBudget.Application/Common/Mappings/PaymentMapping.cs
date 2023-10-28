@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using BrokerBudget.Application.UseCases.Payments;
 using BrokerBudget.Application.UseCases.Payments.Commands.CreatePayment;
 using BrokerBudget.Application.UseCases.Payments.Commands.DeletePayment;
 using BrokerBudget.Application.UseCases.Payments.Commands.UpdatePayment;
-using BrokerBudget.Application.UseCases.Payments;
 using BrokerBudget.Domain.Entities;
 
 namespace BrokerBudget.Application.Common.Mappings

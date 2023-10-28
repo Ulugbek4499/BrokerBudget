@@ -1,9 +1,8 @@
-﻿using System.Runtime;
-using BrokerBudget.Domain.Common;
+﻿using BrokerBudget.Domain.Common;
 
 namespace BrokerBudget.Domain.Entities
 {
-    public class ProductGiver:BaseAuditableEntity
+    public class ProductGiver : BaseAuditableEntity
     {
         public string CompanyName { get; set; }
         public string ResponsiblePersonName { get; set; }

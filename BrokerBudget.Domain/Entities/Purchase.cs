@@ -2,7 +2,7 @@
 
 namespace BrokerBudget.Domain.Entities
 {
-    public class Purchase:BaseAuditableEntity
+    public class Purchase : BaseAuditableEntity
     {
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
