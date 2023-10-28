@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using BrokerBudget.Application.UseCases.Payments.Commands.CreatePayment;
+using BrokerBudget.Application.UseCases.Payments.Commands.DeletePayment;
+using BrokerBudget.Application.UseCases.Payments.Commands.UpdatePayment;
+using BrokerBudget.Application.UseCases.Payments;
+using BrokerBudget.Domain.Entities;
 
 namespace BrokerBudget.Application.Common.Mappings
 {
-    internal class PaymentMapping
+    public class PaymentMapping : Profile
     {
+        public PaymentMapping()
+        {
+            CreateMap<CreatePaymentCommand, Payment>().ReverseMap();
+            CreateMap<DeletePaymentCommand, Payment>().ReverseMap();
+            CreateMap<UpdatePaymentCommand, Payment>().ReverseMap();
+            CreateMap<PaymentResponse, Payment>().ReverseMap();
+        }
     }
 }
