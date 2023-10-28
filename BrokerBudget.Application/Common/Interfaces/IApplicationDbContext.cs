@@ -1,17 +1,15 @@
-﻿using GameStore.Domain.Entities;
-using GameStore.Domain.Entities.Identity;
+﻿using BrokerBudget.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace GameStore.Application.Common.Interfaces
+namespace BrokerBudget.Application.Common.Interfaces
 {
     public interface IApplicationDbContext
     {
-        public DbSet<Cart> Carts { get; set; }
-        public DbSet<CartItem> CartItems { get; set; }
-        public DbSet<Comment> Comments { get; set; }
-        public DbSet<Game> Games { get; set; }
-        public DbSet<Genre> Genres { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductGiver> ProductGivers { get; set; }
+        public DbSet<ProductTaker> ProductTakers { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
