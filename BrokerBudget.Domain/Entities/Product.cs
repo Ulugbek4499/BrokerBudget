@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrokerBudget.Domain.Entities
 {
-    internal class Product
+    internal class ProductType
     {
     }
 }

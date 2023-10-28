@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GameStore.Domain.Common;
+namespace BrokerBudget.Domain.Common;
 
 public abstract class BaseEntity
 {

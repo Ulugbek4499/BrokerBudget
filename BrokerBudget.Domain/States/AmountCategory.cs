@@ -1,6 +1,8 @@
 ﻿namespace BrokerBudget.Domain.States
 {
-    public class AmountCategory
+    public enum AmountCategory
     {
+       KG,
+       Dona
     }
 }

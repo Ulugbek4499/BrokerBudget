@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BrokerBudget.Domain.Entities
+namespace BrokerBudget.Domain.Entities.Identity
 {
-    internal class ProductType
+    internal class Purchase
     {
     }
 }

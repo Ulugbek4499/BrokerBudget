@@ -1,4 +1,4 @@
-﻿namespace GameStore.Domain.Common;
+﻿namespace BrokerBudget.Domain.Common;
 
 public abstract class BaseAuditableEntity : BaseEntity
 {
