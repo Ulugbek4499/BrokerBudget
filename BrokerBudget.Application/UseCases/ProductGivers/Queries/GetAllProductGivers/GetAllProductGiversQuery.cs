@@ -2,6 +2,7 @@
 using BrokerBudget.Application.Common.Interfaces;
 using BrokerBudget.Application.UseCases.ProductGivers;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace BrokerBudget.Application.UseCases.ProductGivers.Queries.GetAllProductGivers
 {

@@ -1,5 +1,6 @@
 ﻿using BrokerBudget.Application.Common.Exceptions;
 using BrokerBudget.Application.Common.Interfaces;
+using BrokerBudget.Domain.Entities;
 using MediatR;
 
 namespace BrokerBudget.Application.UseCases.Purchases.Commands.DeletePurchase

@@ -1,7 +1,9 @@
-﻿using BrokerBudget.Application.Common.Interfaces;
+﻿using BrokerBudget.Application.Common.Exceptions;
+using BrokerBudget.Application.Common.Interfaces;
+using BrokerBudget.Domain.Entities;
 using MediatR;
 
-namespace BrokerBudget.Application.UseCases.ProductTakerTakers.Commands.DeleteProductTakerTaker
+namespace BrokerBudget.Application.UseCases.ProductTakers.Commands.DeleteProductTaker
 {
 
     public record DeleteProductTakerCommand(int Id) : IRequest;

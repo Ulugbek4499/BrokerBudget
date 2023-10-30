@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BrokerBudget.Application.Common.Interfaces;
+using BrokerBudget.Domain.Entities;
 using MediatR;
 
 namespace BrokerBudget.Application.UseCases.Payments.Commands.CreatePayment
@@ -8,7 +9,6 @@ namespace BrokerBudget.Application.UseCases.Payments.Commands.CreatePayment
     public class CreatePaymentCommand : IRequest<int>
     {
         public string UserId { get; set; }
-        public PaymentStatus PaymentStatus { get; set; } = PaymentStatus.OnSale;
     }
 
     public class CreatePaymentCommandHandler : IRequestHandler<CreatePaymentCommand, int>

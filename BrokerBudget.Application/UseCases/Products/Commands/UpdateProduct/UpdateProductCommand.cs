@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BrokerBudget.Application.Common.Interfaces;
+using BrokerBudget.Domain.Entities;
 using MediatR;
 
 namespace BrokerBudget.Application.UseCases.Products.Commands.UpdateProduct

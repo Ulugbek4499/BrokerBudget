@@ -2,23 +2,24 @@
 using BrokerBudget.Application.Common.Interfaces;
 using BrokerBudget.Application.UseCases.ProductTakers;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace BrokerBudget.Application.UseCases.Purchases.Queries.GetAllPurchases
 {
-    public record GetAlPurchasesQuery : IRequest<ProductTakerResponse[]>;
+    public record GetAllPurchasesQuery : IRequest<ProductTakerResponse[]>;
 
-    public class GetAlPurchasesQueryHandler : IRequestHandler<GetAlPurchasesQuery, ProductTakerResponse[]>
+    public class GetAllPurchasesQueryHandler : IRequestHandler<GetAllPurchasesQuery, ProductTakerResponse[]>
     {
         private readonly IMapper _mapper;
         private readonly IApplicationDbContext _context;
 
-        public GetAlPurchasesQueryHandler(IMapper mapper, IApplicationDbContext context)
+        public GetAllPurchasesQueryHandler(IMapper mapper, IApplicationDbContext context)
         {
             _mapper = mapper;
             _context = context;
         }
 
-        public async Task<ProductTakerResponse[]> Handle(GetAlPurchasesQuery request, CancellationToken cancellationToken)
+        public async Task<ProductTakerResponse[]> Handle(GetAllPurchasesQuery request, CancellationToken cancellationToken)
         {
             var ProductTakers = await _context.ProductTakers.ToArrayAsync();
 

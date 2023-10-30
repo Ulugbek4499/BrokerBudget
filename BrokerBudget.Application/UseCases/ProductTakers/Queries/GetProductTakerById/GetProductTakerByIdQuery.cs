@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using BrokerBudget.Application.Common.Exceptions;
 using BrokerBudget.Application.Common.Interfaces;
-using BrokerBudget.Application.UseCases.ProductTakers;
 using BrokerBudget.Domain.Entities;
 using MediatR;
 
-namespace BrokerBudget.Application.UseCases.ProductTakerTakers.Queries.GetProductTakerTakerById
+namespace BrokerBudget.Application.UseCases.ProductTakers.Queries.GetProductTakerTakerById
 {
     public record GetProductTakerByIdQuery(int Id) : IRequest<ProductTakerResponse>;
 

@@ -1,4 +1,6 @@
-﻿using BrokerBudget.Application.Common.Interfaces;
+﻿using BrokerBudget.Application.Common.Exceptions;
+using BrokerBudget.Application.Common.Interfaces;
+using BrokerBudget.Domain.Entities;
 using MediatR;
 
 namespace BrokerBudget.Application.UseCases.ProductGivers.Commands.DeleteProductGiver
@@ -18,7 +20,7 @@ namespace BrokerBudget.Application.UseCases.ProductGivers.Commands.DeleteProduct
             ProductGiver? productGiver = await _context.ProductGivers.FindAsync(request.Id, cancellationToken);
 
             if (productGiver is null)
-                throw new GameStore.Application.Common.Exceptions.NotFoundException(nameof(productGiver), request.Id);
+                throw new NotFoundException(nameof(productGiver), request.Id);
 
             _context.ProductGivers.Remove(productGiver);
 

@@ -7,6 +7,7 @@ using AutoMapper;
 using BrokerBudget.Application.Common.Interfaces;
 using BrokerBudget.Application.UseCases.ProductTakers;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace BrokerBudget.Application.UseCases.ProductTakerTakers.Queries.GetAllProductTakerTakers
 {

@@ -1,4 +1,5 @@
-﻿using BrokerBudget.Application.Common.Interfaces;
+﻿using BrokerBudget.Application.Common.Exceptions;
+using BrokerBudget.Application.Common.Interfaces;
 using BrokerBudget.Domain.Entities;
 using MediatR;
 
@@ -19,7 +20,7 @@ namespace BrokerBudget.Application.UseCases.Payments.Commands.DeletePayment
             Payment? payment = await _context.Payments.FindAsync(request.Id, cancellationToken);
 
             if (payment is null)
-                throw new GameStore.Application.Common.Exceptions.NotFoundException(nameof(payment), request.Id);
+                throw new NotFoundException(nameof(payment), request.Id);
 
             _context.Payments.Remove(payment);
 
