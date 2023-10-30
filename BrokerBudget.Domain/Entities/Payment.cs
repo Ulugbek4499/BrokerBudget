@@ -1,6 +1,8 @@
-﻿namespace BrokerBudget.Domain.Entities
+﻿using BrokerBudget.Domain.Common;
+
+namespace BrokerBudget.Domain.Entities
 {
-    public class Payment
+    public class Payment:BaseAuditableEntity
     {
         public int? ProductGiverId { get; set; }
         public virtual ProductGiver? ProductGiver { get; set; }

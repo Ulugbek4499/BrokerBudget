@@ -1,6 +1,29 @@
-﻿namespace BrokerBudget.Application.UseCases.Payments.Commands.DeletePayment
+﻿using BrokerBudget.Application.Common.Interfaces;
+using BrokerBudget.Domain.Entities;
+using MediatR;
+
+namespace BrokerBudget.Application.UseCases.Payments.Commands.DeletePayment
 {
-    public class DeletePaymentCommand
+    public record DeletePaymentCommand(int Id) : IRequest;
+    public class DeletePaymentCommandHandler : IRequestHandler<DeletePaymentCommand>
     {
+        private readonly IApplicationDbContext _context;
+
+        public DeletePaymentCommandHandler(IApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task Handle(DeletePaymentCommand request, CancellationToken cancellationToken)
+        {
+            Payment? payment = await _context.Payments.FindAsync(request.Id, cancellationToken);
+
+            if (payment is null)
+                throw new GameStore.Application.Common.Exceptions.NotFoundException(nameof(payment), request.Id);
+
+            _context.Payments.Remove(payment);
+
+            await _context.SaveChangesAsync(cancellationToken);
+        }
     }
 }
