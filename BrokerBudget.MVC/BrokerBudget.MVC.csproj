@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BrokerBudget.Infrastructure\BrokerBudget.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
