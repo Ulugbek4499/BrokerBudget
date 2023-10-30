@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="UseCases\ProductTakers\Queries\GetAllProductTakers\" />
-    <Folder Include="UseCases\ProductTakers\Queries\GetProductTakerById\" />
   </ItemGroup>
 
   <ItemGroup>
