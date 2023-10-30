@@ -1,6 +1,6 @@
-﻿using GameStore.Application.Common.Interfaces;
+﻿using BrokerBudget.Application.Common.Interfaces;
 
-namespace GameStore.Infrastructure.Services
+namespace BrokerBudget.Infrastructure.Services
 {
     public class DateTimeService : IDateTime
     {
