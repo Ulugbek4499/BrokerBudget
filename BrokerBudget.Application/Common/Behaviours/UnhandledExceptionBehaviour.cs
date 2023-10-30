@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Serilog;
 
-namespace GameStore.Application.Common.Behaviours
+namespace BrokerBudget.Application.Common.Behaviours
 {
     public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
     {

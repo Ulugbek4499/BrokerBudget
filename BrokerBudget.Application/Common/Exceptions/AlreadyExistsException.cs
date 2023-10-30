@@ -1,4 +1,4 @@
-﻿namespace GameStore.Application.Common.Exceptions
+﻿namespace BrokerBudget.Application.Common.Exceptions
 {
     public class AlreadyExistsException : Exception
     {

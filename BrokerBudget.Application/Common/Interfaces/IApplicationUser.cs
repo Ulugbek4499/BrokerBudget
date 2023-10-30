@@ -1,4 +1,4 @@
-﻿namespace GameStore.Application.Common.Interfaces
+﻿namespace BrokerBudget.Application.Common.Interfaces
 {
     public interface IApplicationUser
     {

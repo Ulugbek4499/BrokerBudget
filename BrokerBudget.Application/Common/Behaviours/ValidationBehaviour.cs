@@ -2,7 +2,7 @@
 using FluentValidation.Results;
 using MediatR;
 
-namespace GameStore.Application.Common.Behaviours
+namespace BrokerBudget.Application.Common.Behaviours
 {
     public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
     {
