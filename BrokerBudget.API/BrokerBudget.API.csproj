@@ -15,4 +15,8 @@
     <ProjectReference Include="..\BrokerBudget.Infrastructure\BrokerBudget.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
