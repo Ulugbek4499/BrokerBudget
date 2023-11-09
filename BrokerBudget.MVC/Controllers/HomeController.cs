@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
-using BrokerBudget.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using SalesDepartment.MVC.Models;
 
-namespace BrokerBudget.MVC.Controllers
+namespace SalesDepartment.MVC.Controllers
 {
     public class HomeController : Controller
     {
