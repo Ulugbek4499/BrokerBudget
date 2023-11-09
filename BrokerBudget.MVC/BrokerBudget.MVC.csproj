@@ -26,11 +26,4 @@
     <ProjectReference Include="..\BrokerBudget.Infrastructure\BrokerBudget.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Purchase\" />
-    <Folder Include="Views\ProductTaker\" />
-    <Folder Include="Views\ProductGiver\" />
-    <Folder Include="Views\Product\" />
-  </ItemGroup>
-
 </Project>
