@@ -2,7 +2,7 @@
 
 using BrokerBudget.Application.Common.Interfaces;
 
-namespace GameStore.WebApi.Services
+namespace BrokerBudget.API
 {
     public class CurrentUser : IApplicationUser
     {
