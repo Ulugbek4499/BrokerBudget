@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SalesDepartment.MVC.Controllers
+namespace BrokerBudget.MVC.Controllers
 {
     [Route("[controller]")]
     [ApiController]
