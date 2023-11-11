@@ -75,6 +75,7 @@ namespace BrokerBudget.MVC.Controllers
             return RedirectToAction("GetAllProductTakers");
         }
 
+
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> ViewProductTaker(int id)
         {
