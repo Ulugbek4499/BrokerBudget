@@ -16,7 +16,7 @@ namespace BrokerBudget.Application.UseCases.ProductGivers
 
         public DateTime CreatedDate { get; set; }
         public string? CreatedBy { get; set; }
-        public DateTime ModifyDate { get; set; }
+        public DateTime? ModifyDate { get; set; }
         public string? ModifiedBy { get; set; }
     }
 }

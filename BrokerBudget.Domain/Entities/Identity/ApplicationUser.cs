@@ -6,7 +6,4 @@ public class ApplicationUser : IdentityUser
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
-
-    // public virtual ICollection<Game>? Games { get; set; }
-    // public virtual ICollection<Order>? Orders { get; set; }
 }
