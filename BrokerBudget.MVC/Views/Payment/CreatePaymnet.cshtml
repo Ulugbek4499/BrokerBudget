@@ -15,7 +15,7 @@
 @model CreatePaymentCommand
 
 
-<h3 class="text-center">Добавить новый платеж</h3>
+<h3 class="text-center">Янги тўлов қўшиш</h3>
 <hr />
 <form asp-controller="Payment" asp-action="CreatePayment" enctype="multipart/form-data" method="post">
     <div class="container mt-4">
@@ -24,7 +24,7 @@
 
                 <div class="form-group mt-3">
                     <label asp-for="PaymentAmount" class="form-label">Тўлов Суммаси:</label>
-                    <input asp-for="PaymentAmount" type="text" class="form-control" placeholder="Введите Сумма">
+                    <input asp-for="PaymentAmount" type="text" class="form-control" placeholder="Тўлов Суммасини киритиш">
                     <span asp-validation-for="PaymentAmount" class="text-danger"></span>
                 </div>
       
@@ -37,7 +37,7 @@
                 <div class="form-group mt-3">
                     <label for="ProductGiverId">Товар Берувчи:</label>
                     <select class="form-control" id="ProductGiverId" name="ProductGiverId" required>
-                        <option value="">Товар Берувчини Танланг</option>
+                        <option value="">Товар Берувчини киритиш</option>
                         @foreach (var ProductGiver in ProductGivers)
                         {
                             <option value="@ProductGiver.Id" data-ProductGiver-number="@ProductGiver.CompanyName">@ProductGiver.ResponsiblePersonName / @ProductGiver.PhoneNumber</option>
@@ -54,7 +54,7 @@
                 <div class="form-group mt-3">
                     <label for="ProductTakerId">Товар Олувчи:</label>
                     <select class="form-control" id="ProductTakerId" name="ProductTakerId" required>
-                        <option value="">Товар Олувчини Танланг</option>
+                        <option value="">Товар Олувчини киритиш</option>
                         @foreach (var ProductTaker in ProductTakers)
                         {
                             <option value="@ProductTaker.Id" data-ProductGiver-number="@ProductTaker.CompanyName">@ProductTaker.ResponsiblePersonName / @ProductTaker.PhoneNumber</option>
