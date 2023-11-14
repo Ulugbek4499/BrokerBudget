@@ -8,10 +8,11 @@ namespace BrokerBudget.Application.UseCases.ProductGivers.Commands.UpdateProduct
     public class UpdateProductGiverCommand : IRequest
     {
         public int Id { get; set; }
-        public int Count { get; set; } = 1;
-        public int CardId { get; set; }
-        public int GameId { get; set; }
-        public string UserId { get; set; }
+        public string CompanyName { get; set; }
+        public string ResponsiblePersonName { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? INN { get; set; }
+        public string? BankAccountNumber { get; set; }
     }
 
     public class UpdateProductGiverCommandHandler : IRequestHandler<UpdateProductGiverCommand>

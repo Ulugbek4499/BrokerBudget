@@ -8,10 +8,17 @@ namespace BrokerBudget.Application.UseCases.Purchases.Commands.UpdatePurchase
     public class UpdatePurchaseCommand : IRequest
     {
         public int Id { get; set; }
-        public int Count { get; set; } = 1;
-        public int CardId { get; set; }
-        public int GameId { get; set; }
-        public string UserId { get; set; }
+        public int ProductId { get; set; }
+        public decimal Amount { get; set; }
+        public decimal? SaleAmountCategoryPercentage { get; set; }
+
+        public decimal PricePerAmount { get; set; }
+        public decimal? SaleForTotalPrice { get; set; }
+
+        public DateTime PurchaseDate { get; set; }
+
+        public int? ProductGiverId { get; set; }
+        public int? ProductTakerId { get; set; }
     }
 
     public class UpdatePurchaseCommandHandler : IRequestHandler<UpdatePurchaseCommand>

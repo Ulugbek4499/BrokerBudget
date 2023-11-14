@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BrokerBudget.Application.Common.Interfaces;
 using BrokerBudget.Domain.Entities;
+using BrokerBudget.Domain.States;
 using MediatR;
 
 namespace BrokerBudget.Application.UseCases.Products.Commands.UpdateProduct
@@ -9,10 +10,8 @@ namespace BrokerBudget.Application.UseCases.Products.Commands.UpdateProduct
     public class UpdateProductCommand : IRequest
     {
         public int Id { get; set; }
-        public int Count { get; set; } = 1;
-        public int CardId { get; set; }
-        public int GameId { get; set; }
-        public string UserId { get; set; }
+        public string Name { get; set; }
+        public AmountCategory AmountCategory { get; set; }
     }
 
     public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand>

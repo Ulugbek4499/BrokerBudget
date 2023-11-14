@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BrokerBudget.Application.Common.Interfaces;
 using BrokerBudget.Domain.Entities;
+using BrokerBudget.Domain.States;
 using MediatR;
 
 namespace BrokerBudget.Application.UseCases.Products.Commands.CreateProduct
@@ -8,7 +9,8 @@ namespace BrokerBudget.Application.UseCases.Products.Commands.CreateProduct
 
     public class CreateProductCommand : IRequest<int>
     {
-        public string UserId { get; set; }
+        public string Name { get; set; }
+        public AmountCategory AmountCategory { get; set; }
     }
 
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, int>

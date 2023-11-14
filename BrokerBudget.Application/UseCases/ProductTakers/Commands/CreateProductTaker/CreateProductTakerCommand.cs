@@ -7,7 +7,11 @@ namespace BrokerBudget.Application.UseCases.ProductTakers.Commands.CreateProduct
 {
     public class CreateProductTakerCommand : IRequest<int>
     {
-        public string UserId { get; set; }
+        public string CompanyName { get; set; }
+        public string ResponsiblePersonName { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? INN { get; set; }
+        public string? BankAccountNumber { get; set; }
     }
 
     public class CreateProductTakerCommandHandler : IRequestHandler<CreateProductTakerCommand, int>

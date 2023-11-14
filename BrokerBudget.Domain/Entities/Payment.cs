@@ -4,6 +4,7 @@ namespace BrokerBudget.Domain.Entities
 {
     public class Payment:BaseAuditableEntity
     {
+        public decimal PaymentAmount { get; set; } 
         public int? ProductGiverId { get; set; }
         public virtual ProductGiver? ProductGiver { get; set; }
 

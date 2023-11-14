@@ -7,7 +7,17 @@ namespace BrokerBudget.Application.UseCases.Purchases.Commands.CreatePurchase
 {
     public class CreatePurchaseCommand : IRequest<int>
     {
-        public string UserId { get; set; }
+        public int ProductId { get; set; }
+        public decimal Amount { get; set; }
+        public decimal? SaleAmountCategoryPercentage { get; set; }
+
+        public decimal PricePerAmount { get; set; }
+        public decimal? SaleForTotalPrice { get; set; }
+
+        public DateTime PurchaseDate { get; set; }
+
+        public int? ProductGiverId { get; set; }
+        public int? ProductTakerId { get; set; }
     }
 
     public class CreatePurchaseCommandHandler : IRequestHandler<CreatePurchaseCommand, int>

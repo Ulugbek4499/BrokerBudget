@@ -8,7 +8,10 @@ namespace BrokerBudget.Application.UseCases.Payments.Commands.CreatePayment
 
     public class CreatePaymentCommand : IRequest<int>
     {
-        public string UserId { get; set; }
+        public decimal PaymentAmount { get; set; }
+        public int? ProductGiverId { get; set; }
+        public int? ProductTakerId { get; set; }
+        public DateTime PaymentDate { get; set; }
     }
 
     public class CreatePaymentCommandHandler : IRequestHandler<CreatePaymentCommand, int>

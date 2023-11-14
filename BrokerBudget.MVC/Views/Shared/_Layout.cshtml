@@ -14,30 +14,72 @@
 </head>
 <body class="bg-black">
 
-    <div class="container1">
-        <div class="container2">
+
             <div style="display:flex; align-items: center;">
-                <a asp-controller="Home" asp-action="Index" class="navbar-brand text-white">
-                    <img src="~/StarIcon.png" alt="Star Icon" width="30" height="30">
-                    Game Store
-                </a>
                 <nav class="navbar navbar-expand-sm navbar-dark bg-black">
                     <ul class="navbar-nav ml-auto ">
-                        <li class="nav-item">
-                            <a asp-controller="Home" asp-action="Index" class="nav-link">Games</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link text-body-tertiary">Community</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Support</a>
-                        </li>
+                    <li class="nav-item mb-1">
+                        <a asp-controller="Home" asp-action="Index" class="nav-link">
+                            <div class="icon-wrapper">
+                                <i class="fa-solid fa-bars"></i>
+                            </div>
+                            <div class="name-wrapper">
+                                Asosiy Menyu
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a asp-controller="Contract" asp-action="GetAllContracts" class="nav-link">
+                            <div class="icon-wrapper">
+                                <i class="fa-solid fa-file-signature"></i>
+                            </div>
+                            <div class="name-wrapper">
+                                Tovarlar
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a asp-controller="HomeBuilding" asp-action="GetAllHomes" class="nav-link">
+                            <div class="icon-wrapper">
+                                <i class="fa-solid fa-building"></i>
+                            </div>
+                            <div class="name-wrapper">
+                                Olingan Tovarlar
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a asp-controller="Customer" asp-action="GetAllCustomers" class="nav-link">
+                            <div class="icon-wrapper">
+                                <i class="fa-solid fa-address-card"></i>
+                            </div>
+                            <div class="name-wrapper">
+                                Sotilgan Tovarlar
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a asp-controller="HomeBuilding" asp-action="GetAllHomes" class="nav-link">
+                            <div class="icon-wrapper">
+                                <i class="fa-solid fa-building"></i>
+                            </div>
+                            <div class="name-wrapper">
+                                Tovar Beruvchilar
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a asp-controller="Customer" asp-action="GetAllCustomers" class="nav-link">
+                            <div class="icon-wrapper">
+                                <i class="fa-solid fa-address-card"></i>
+                            </div>
+                            <div class="name-wrapper">
+                                Tovar Oluvchilar
+                            </div>
+                        </a>
+                    </li>
                     </ul>
                 </nav>
-            </div>
 
             <div style="display:flex; align-items:center; justify-content:space-between;">
                 <ul class="navbar-nav">
@@ -47,8 +89,14 @@
                 </ul>
             </div>
 
-        </div>
-    </div>
+            </div>
+
+
+
+
+
+
+
     <div class="body-faza pb-5">
         <div class="body-container">
             <main role="main" class="pb-3 main-container">

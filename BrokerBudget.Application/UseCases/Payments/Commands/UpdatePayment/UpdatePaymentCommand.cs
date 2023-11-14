@@ -9,10 +9,10 @@ namespace BrokerBudget.Application.UseCases.Payments.Commands.UpdatePayment
     public class UpdatePaymentCommand : IRequest
     {
         public int Id { get; set; }
-        public int Count { get; set; } = 1;
-        public int CardId { get; set; }
-        public int GameId { get; set; }
-        public string UserId { get; set; }
+        public decimal PaymentAmount { get; set; }
+        public int? ProductGiverId { get; set; }
+        public int? ProductTakerId { get; set; }
+        public DateTime PaymentDate { get; set; }
     }
 
     public class UpdatePaymentCommandHandler : IRequestHandler<UpdatePaymentCommand>
