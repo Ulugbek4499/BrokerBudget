@@ -12,9 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
 </head>
-<body class="bg-black">
-
-
+<body>
             <div style="display:flex; align-items: center;">
                 <nav class="navbar navbar-expand-sm navbar-dark bg-black">
                     <ul class="navbar-nav ml-auto ">
@@ -92,11 +90,6 @@
             </div>
 
 
-
-
-
-
-
     <div class="body-faza pb-5">
         <div class="body-container">
             <main role="main" class="pb-3 main-container">
@@ -105,25 +98,8 @@
         </div>
     </div>
 
-    <div class="container" style="padding-top:20px;">
-        <footer id="main-footer" class="border-top footer text-muted bg-black footer-content">
-            <div class="">
-                <p>
-                    Game Store
-                </p>
-            </div>
-            <div class="">
-                <p>
-                    Copyright &copy;
-                    <span id="year"></span>
-                </p>
-            </div>
-        </footer>
-    </div>
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script>$('#year').text(new Date().getFullYear());</script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

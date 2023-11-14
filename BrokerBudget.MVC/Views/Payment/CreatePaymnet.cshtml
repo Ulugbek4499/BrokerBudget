@@ -23,21 +23,21 @@
             <div class="col-lg-6 offset-lg-3" style="overflow-y:scroll; width:50%; height:70vh">
 
                 <div class="form-group mt-3">
-                    <label asp-for="PaymentAmount" class="form-label">To'lov Summasi:</label>
+                    <label asp-for="PaymentAmount" class="form-label">Тўлов Суммаси:</label>
                     <input asp-for="PaymentAmount" type="text" class="form-control" placeholder="Введите Сумма">
                     <span asp-validation-for="PaymentAmount" class="text-danger"></span>
                 </div>
       
                 <div class="form-group mt-3">
-                    <label asp-for="PaymentDate">To'lov Kuni</label>
+                    <label asp-for="PaymentDate">Тўлов Куни:</label>
                     <input asp-for="PaymentDate" type="date" class="form-control" required />
                     <span asp-validation-for="PaymentDate" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mt-3">
-                    <label for="ProductGiverId">Контракт №:</label>
+                    <label for="ProductGiverId">Товар Берувчи:</label>
                     <select class="form-control" id="ProductGiverId" name="ProductGiverId" required>
-                        <option value="">Выбрать Номер контракта</option>
+                        <option value="">Товар Берувчини Танланг</option>
                         @foreach (var ProductGiver in ProductGivers)
                         {
                             <option value="@ProductGiver.Id" data-ProductGiver-number="@ProductGiver.CompanyName">@ProductGiver.ResponsiblePersonName / @ProductGiver.PhoneNumber</option>
@@ -52,9 +52,9 @@
                 </script>
 
                 <div class="form-group mt-3">
-                    <label for="ProductTakerId">Контракт №:</label>
+                    <label for="ProductTakerId">Товар Олувчи:</label>
                     <select class="form-control" id="ProductTakerId" name="ProductTakerId" required>
-                        <option value="">Выбрать Номер контракта</option>
+                        <option value="">Товар Олувчини Танланг</option>
                         @foreach (var ProductTaker in ProductTakers)
                         {
                             <option value="@ProductTaker.Id" data-ProductGiver-number="@ProductTaker.CompanyName">@ProductTaker.ResponsiblePersonName / @ProductTaker.PhoneNumber</option>
@@ -70,7 +70,7 @@
 
 
                 <div class="form-group button-group mt-3">
-                    <button type="submit" class="btn btn-success">Сохранять</button>
+                    <button type="submit" class="btn btn-success">Сақлаш</button>
                 </div>
             </div>
         </div>
@@ -82,7 +82,7 @@
 <script>
     $(document).ready(function () {
         $('#ProductGiverId').select2({
-            placeholder: "Введите Номер контракта",
+            placeholder: "Товар Берувчи Танланг",
             allowClear: true,
             matcher: function (params, data) {
                 if ($.trim(params.term) === '') {
@@ -103,7 +103,7 @@
 
     $(document).ready(function () {
         $('#ProductTakerId').select2({
-            placeholder: "Введите Номер контракта",
+            placeholder: "Товар Олувчини Танланг",
             allowClear: true,
             matcher: function (params, data) {
                 if ($.trim(params.term) === '') {

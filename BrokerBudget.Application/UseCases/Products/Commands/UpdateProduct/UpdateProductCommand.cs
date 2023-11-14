@@ -6,7 +6,6 @@ using MediatR;
 
 namespace BrokerBudget.Application.UseCases.Products.Commands.UpdateProduct
 {
-
     public class UpdateProductCommand : IRequest
     {
         public int Id { get; set; }
