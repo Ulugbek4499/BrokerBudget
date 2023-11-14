@@ -1,1 +1,104 @@
-﻿
+﻿@{
+    Layout = "_Layout";
+}
+
+@model BrokerBudget.Application.UseCases.ProductGivers.ProductGiverResponse[]
+
+
+<h3 class="text-center">Барча Товар берувчилар</h3>
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
+            <a href="@Url.Action("CreateProductGiver")" class="btn btn-primary mr-2">
+                <i class="fa-solid fa-plus"></i> Товар берувчи қўшиш
+            </a>
+            <div style="display:flex; gap:5px">
+                <input id="searchInput" type="text" class="form-control" placeholder="Излаш" style="max-width: 200px;">
+                <div class="input-group-append">
+                    <button id="searchButton" class="btn btn-info" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="container" style="height: 55vh;">
+    <div class="row" style="display:flex; justify-content:center;">
+        <div class="col-lg-6" style="width:100%">
+            <div class="custom-cards">
+                @{
+                    if (Model.Length == 0)
+                    {
+                        <h2>Ҳозирда товар берувчилар йўқ...</h2>
+                    }
+                }
+
+                <div class="table-container" style="overflow-y: scroll; height: 68vh; width:100% ">
+                    <table id="ProductGiversTable" class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 15%;">Aмаллар</th>
+                                <th style="width: 15%;">Корхона номи</th>
+                                <th style="width: 15%;">Маъсул шахс исми</th>
+                                <th style="width: 15%;">Барча харидлар</th>
+                                <th style="width: 15%;">Барча тўловлар</th>
+                                <th style="width: 15%;">Фарқ</th>
+                                <th style="width: 15%;">Телефон рақам</th>
+                                <th style="width: 15%;">INN</th>
+                                <th style="width: 15%;">Банк хисоб рақам</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var ProductGiver in Model)
+                            {
+                                <tr>
+                                    <td class="action-links">
+                                        <div style="display:flex; gap:5px">
+                                            <a href="@Url.Action("UpdateProductGiver", new { id = ProductGiver.Id })" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i></a>
+                                            <a href="@Url.Action("DeleteProductGiver", new { id = ProductGiver.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
+                                            <a href="@Url.Action("ViewProductGiver", new { id = ProductGiver.Id })" class="btn btn-secondary"> <i class="fas fa-info-circle"></i> Подробно</a>
+                                        </div>
+                                    </td>
+                                    <td>@ProductGiver.CompanyName</td>
+                                    <td>@ProductGiver.ResponsiblePersonName</td>
+                                    <td>@ProductGiver.Purchases.Sum(x=>x.Amount)</td>
+                                    <td>@ProductGiver.Payments.Sum(x=>x.PaymentAmount)</td>
+                                    <td>500.00 </td>
+                                    <td>@ProductGiver.PhoneNumber</td>
+                                    <td>@ProductGiver.INN</td>
+                                    <td>@ProductGiver.BankAccountNumber</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('searchButton').addEventListener('click', function () {
+        var input = document.getElementById('searchInput').value.toLowerCase();
+        var rows = document.getElementById('ProductGiversTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var match = false;
+
+            for (var j = 0; j < cells.length; j++) {
+                var cellText = cells[j].innerText.toLowerCase();
+                if (cellText.includes(input)) {
+                    match = true;
+                    break;
+                }
+            }
+
+            rows[i].style.display = match ? '' : 'none';
+        }
+    });
+</script>
