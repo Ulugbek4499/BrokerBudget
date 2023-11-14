@@ -42,36 +42,6 @@
                 </script>
 
                 <div class="form-group mt-3">
-                    <label asp-for="Amount" class="form-label">Неча (Кг / Дона):</label>
-                    <input asp-for="Amount" type="text" class="form-control" placeholder="Неча (Кг / Дона)">
-                    <span asp-validation-for="Amount" class="text-danger"></span>
-                </div>
-
-                <div class="form-group mt-3">
-                    <label asp-for="SaleAmountCategoryPercentage" class="form-label">Чегирма (Кг / Дона):</label>
-                    <input asp-for="SaleAmountCategoryPercentage" type="text" class="form-control" placeholder="Чегирма (Кг / Дона)">
-                    <span asp-validation-for="SaleAmountCategoryPercentage" class="text-danger"></span>
-                </div>
-
-                <div class="form-group mt-3">
-                    <label asp-for="PricePerAmount" class="form-label">Бир дона/кг учун нархи:</label>
-                    <input asp-for="PricePerAmount" type="text" class="form-control" placeholder="Бир дона/кг учун нархини киритиш">
-                    <span asp-validation-for="PricePerAmount" class="text-danger"></span>
-                </div>
-
-                <div class="form-group mt-3">
-                    <label asp-for="SaleForTotalPrice" class="form-label">Умумий суммадан чегирма:</label>
-                    <input asp-for="SaleForTotalPrice" type="text" class="form-control" placeholder="Умумий суммадан чегирмани киритиш">
-                    <span asp-validation-for="SaleForTotalPrice" class="text-danger"></span>
-                </div>
-
-                <div class="form-group mt-3">
-                    <label asp-for="PurchaseDate">Харид куни:</label>
-                    <input asp-for="PurchaseDate" type="date" class="form-control" required />
-                    <span asp-validation-for="PurchaseDate" class="text-danger"></span>
-                </div>
-
-                <div class="form-group mt-3">
                     <label for="ProductGiverId">Товар Берувчи:</label>
                     <select class="form-control" id="ProductGiverId" name="ProductGiverId" required>
                         <option value="">Товар Берувчини киритиш</option>
@@ -105,6 +75,35 @@
                     });
                 </script>
 
+                <div class="form-group mt-3">
+                    <label asp-for="Amount" class="form-label">Миқдор (Кг / Дона):</label>
+                    <input asp-for="Amount" type="text" class="form-control" placeholder="Миқдор (Кг / Дона)">
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="SaleAmountCategoryPercentage" class="form-label">Чегирма (Кг / Дона):</label>
+                    <input asp-for="SaleAmountCategoryPercentage" type="text" class="form-control" placeholder="Чегирма (Кг / Дона)">
+                    <span asp-validation-for="SaleAmountCategoryPercentage" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="PricePerAmount" class="form-label">Бир дона/кг учун нархи:</label>
+                    <input asp-for="PricePerAmount" type="text" class="form-control" placeholder="Бир дона/кг учун нархини киритиш">
+                    <span asp-validation-for="PricePerAmount" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="SaleForTotalPrice" class="form-label">Умумий суммадан чегирма:</label>
+                    <input asp-for="SaleForTotalPrice" type="text" class="form-control" placeholder="Умумий суммадан чегирмани киритиш">
+                    <span asp-validation-for="SaleForTotalPrice" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="PurchaseDate">Харид куни:</label>
+                    <input asp-for="PurchaseDate" type="date" class="form-control" required />
+                    <span asp-validation-for="PurchaseDate" class="text-danger"></span>
+                </div>
 
                 <div class="form-group button-group mt-3">
                     <button type="submit" class="btn btn-success">Сақлаш</button>

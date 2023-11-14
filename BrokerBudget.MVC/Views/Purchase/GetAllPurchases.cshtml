@@ -40,10 +40,12 @@
             </div>
             <div style="display:flex; gap:5px">
                 <select id="sortColumn" class="form-control">
+                    <option value="ProductId">Товар:</option>
                     <option value="ProductGiverId">Товар Берувчи:</option>
                     <option value="ProductTakerId">Товар Олувчи:</option>
-                    <option value="PurchaseDate">Тўлов Куни</option>
-                    <option value="PurchasePurchaseAmount">Тўлов Суммаси</option>
+                    <option value="PurchaseDate">Харид Куни</option>
+                    <option value="Amount">Миқдор(Кг / Дона)</option>
+                    <option value="PricePerAmount">Бир бирлик учун нарх</option>
                 </select>
                 <select id="sortOrder" class="form-control">
                     <option value="asc">Ўсиш тартибида</option>
@@ -60,11 +62,11 @@
     <div class="row">
         <div class="col">
             <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:5px;">
+                <input id="searchProductId" type="text" class="form-control" placeholder="Товар">
                 <input id="searchProductGiverId" type="text" class="form-control" placeholder="Товар Берувчи">
                 <input id="searchProductTakerId" type="text" class="form-control" placeholder="Товар Олувчи">
                 <input id="searchStartDate" type="date" class="form-control" placeholder="Дан">
                 <input id="searchEndDate" type="date" class="form-control" placeholder="Гача">
-                <input id="searchPurchaseAmount" type="text" class="form-control" placeholder="Тўлов Суммаси">
                 <div class="input-group-append">
                     <button id="searchButton" class="btn btn-info" type="button">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -92,10 +94,15 @@
                         <thead>
                             <tr>
                                 <th style="width: 25%;">Aмаллар</th>
+                                <th data-column="ProductId" style="width: 10%;">Товар</th>
                                 <th data-column="ProductGiverId" style="width: 10%;">Товар Берувчи</th>
                                 <th data-column="ProductTakerId" style="width: 15%;">Товар Олувчи</th>
-                                <th data-column="PurchaseDate" style="width: 15%;">Тўлов Куни</th>
-                                <th data-column="PurchaseAmount" style="width: 15%;">Тўлов Суммаси</th>
+                                <th data-column="PurchaseDate" style="width: 15%;">Харид Куни</th>
+                                <th data-column="PurchaseTotalSum" style="width: 15%;">PurchaseTotalSum</th>
+                                <th data-column="Amount" style="width: 15%;">Миқдор</th>
+                                <th data-column="SaleAmountCategoryPercentage" style="width: 15%;">Миқдор</th>
+                                <th data-column="PricePerAmount" style="width: 15%;">Миқдор</th>
+                                <th data-column="SaleForTotalPrice" style="width: 15%;">Миқдор</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -104,17 +111,21 @@
                                 <tr>
                                     <td class="action-links">
                                         <div style="display:flex; gap:5px">
-                                            @*                                            <a href="@Url.Action("PurchaseInDocx", "Purchase", new { id = Purchase.Id })" class="btn btn-outline-primary">
-                                        <i class="fa-regular fa-file-word"></i>
-                                        </a>*@
+                                            <a href="@Url.Action("ViewPurchase", new { id = Purchase.Id })" class="btn btn-secondary"> <i class="fas fa-info-circle"></i> Батафсил</a>
                                             <a href="@Url.Action("UpdatePurchase", new { id = Purchase.Id })" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i></a>
                                             <a href="@Url.Action("DeletePurchase", new { id = Purchase.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
                                         </div>
                                     </td>
+                                    <td data-column="ProductGiverId">@Purchase.Product.Name</td>
                                     <td data-column="ProductGiverId">@Purchase.ProductGiver.CompanyName</td>
                                     <td data-column="ProductTakerId">@Purchase.ProductTaker.CompanyName</td>
                                     <td data-column="PurchaseDate">@Purchase.PurchaseDate.ToString("yyyy-MM-dd")</td>
-                                    <td data-column="PurchaseAmount" class="PurchaseAmount-cell">@Purchase.PurchaseAmount</td>
+                                    <td data-column="PurchaseTotalSum">Total Sum HERE</td>
+                                    <td data-column="Amount">@Purchase.Amount</td>
+                                    <td data-column="SaleAmountCategoryPercentage">@Purchase.SaleAmountCategoryPercentage</td>
+                                    <td data-column="PricePerAmount">@Purchase.PricePerAmount</td>
+                                    <td data-column="SaleForTotalPrice">@Purchase.SaleForTotalPrice</td>
+
                                 </tr>
                             }
                         </tbody>
@@ -182,11 +193,11 @@
 
 <script>
     document.getElementById('searchButton').addEventListener('click', function () {
+        var searchProductId = document.getElementById('searchProductId').value.toLowerCase();
         var searchProductGiverId = document.getElementById('searchProductGiverId').value.toLowerCase();
         var searchProductTakerId = document.getElementById('searchProductTakerId').value.toLowerCase();
         var searchStartDate = document.getElementById('searchStartDate').value;
         var searchEndDate = document.getElementById('searchEndDate').value;
-        var searchPurchaseAmount = document.getElementById('searchPurchaseAmount').value.toLowerCase();
 
         var rows = document.getElementById('PurchasesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
@@ -194,9 +205,15 @@
             var cells = rows[i].getElementsByTagName('td');
             var PurchaseDate = Date.parse(cells[3].innerText);
 
-            var match = true; // Assume it's a match initially
+            var match = true; 
 
-            if (searchProductGiverId && !cells[1].innerText.toLowerCase().includes(searchProductGiverId)) {
+            if (searchProductId && !cells[1].innerText.toLowerCase().includes(searchProductId)) {
+                match = false;
+            }
+            if (searchProductGiverId && !cells[2].innerText.toLowerCase().includes(searchProductGiverId)) {
+                match = false;
+            }
+            if (searchProductTakerId && !cells[3].innerText.toLowerCase().includes(searchProductTakerId)) {
                 match = false;
             }
             if (searchStartDate) {
@@ -207,17 +224,10 @@
                         match = false;
                     }
                 } else {
-                    // If only start date is entered, show Purchases for that specific day
                     if (!isSameDay(PurchaseDate, startDate)) {
                         match = false;
                     }
                 }
-            }
-            if (searchPurchaseAmount && !cells[4].innerText.toLowerCase().includes(searchPurchaseAmount)) {
-                match = false;
-            }
-            if (searchProductTakerId && !cells[2].innerText.toLowerCase().includes(searchProductTakerId)) {
-                match = false;
             }
 
             rows[i].style.display = match ? '' : 'none';
@@ -241,11 +251,11 @@
         document.getElementById('sortOrder').value = 'asc';
 
         // Reset the extended search fields
+        document.getElementById('searchProductId').value = '';
         document.getElementById('searchProductGiverId').value = '';
         document.getElementById('searchProductTakerId').value = '';
         document.getElementById('searchStartDate').value = '';
         document.getElementById('searchEndDate').value = '';
-        document.getElementById('searchPurchaseAmount').value = '';
 
         // Show all rows in the table
         var rows = document.getElementById('PurchasesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
@@ -263,23 +273,5 @@
         } else {
             extendedSearchContainer.style.display = 'none';
         }
-    });
-</script>
-
-<script>
-    // Function to format the PurchaseAmount cells
-    function formatPurchaseAmountCells() {
-        var PurchaseAmountCells = document.querySelectorAll('.PurchaseAmount-cell');
-        PurchaseAmountCells.forEach(function (cell) {
-            var PurchaseAmount = parseFloat(cell.textContent);
-            if (!isNaN(PurchaseAmount)) {
-                cell.textContent = PurchaseAmount.toLocaleString(undefined, { minimumFractionDigits: 2 });
-            }
-        });
-    }
-
-    // Call the function when the document is ready
-    document.addEventListener('DOMContentLoaded', function () {
-        formatPurchaseAmountCells();
     });
 </script>
