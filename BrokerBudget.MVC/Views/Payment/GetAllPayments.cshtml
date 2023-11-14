@@ -12,7 +12,7 @@
             
             <div style="display: flex; gap: 20px;">
                 <a href="@Url.Action("CreatePayment")" class="btn btn-primary mr-2">
-                    <i class="fa-solid fa-plus"></i> Тўлов
+                    <i class="fa-solid fa-plus"></i> Тўлов қўшиш
                 </a>
             </div>
 
@@ -34,20 +34,12 @@
     <div class="col">
         <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
             <div>
-                @*     <a asp-controller="Payment" asp-action="CreatePaymentFromExcel" class="btn btn-success">
-                <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-upload"></i>Создать Из Excel
-                </a>*@
                 <a asp-controller="Payment" asp-action="GetAllPaymentsExcel" class="btn btn-success">
                     <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-download"></i>Excel шаклда олиш
                 </a>
             </div>
             <div style="display:flex; gap:5px">
                 <select id="sortColumn" class="form-control">
-                 @*   <option value="ProductGiverId">Номер платежа №</option>  *@
-                @*    <option value="PaymentAmount">Сумма </option>*@
-           @*         <option value="ProductTakerId">Контракт №</option>            *@
-                    @*<option value="PaymentDate">Дата платежа</option>*@
-
                     <option value="ProductGiverId">Товар Берувчи:</option>
                     <option value="ProductTakerId">Товар Олувчи:</option>
                     <option value="PaymentDate">Тўлов Куни</option>

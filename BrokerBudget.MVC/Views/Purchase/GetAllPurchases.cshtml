@@ -1,1 +1,285 @@
-﻿
+﻿@{
+    Layout = "_Layout";
+}
+
+@model BrokerBudget.Application.UseCases.Purchases.PurchaseResponse[]
+
+<h3 class="text-center">Барча Харидлар</h3>
+
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:20px;">
+
+            <div style="display: flex; gap: 20px;">
+                <a href="@Url.Action("CreatePurchase")" class="btn btn-primary mr-2">
+                    <i class="fa-solid fa-plus"></i> Харид қўшиш
+                </a>
+            </div>
+
+            <div style="display:flex; gap:5px">
+                <button id="refreshButton" class="btn btn-warning"><i class="fa-solid fa-arrows-rotate"></i> </button>
+                <input id="searchInput" type="text" class="form-control" placeholder="Излаш" style="max-width: 200px;">
+                <div class="input-group-append">
+                    <button id="searchButtonSimple" class="btn btn-info" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
+            <div>
+                <a asp-controller="Purchase" asp-action="GetAllPurchasesExcel" class="btn btn-success">
+                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-download"></i>Excel шаклда олиш
+                </a>
+            </div>
+            <div style="display:flex; gap:5px">
+                <select id="sortColumn" class="form-control">
+                    <option value="ProductGiverId">Товар Берувчи:</option>
+                    <option value="ProductTakerId">Товар Олувчи:</option>
+                    <option value="PurchaseDate">Тўлов Куни</option>
+                    <option value="PurchasePurchaseAmount">Тўлов Суммаси</option>
+                </select>
+                <select id="sortOrder" class="form-control">
+                    <option value="asc">Ўсиш тартибида</option>
+                    <option value="desc">Камайиш тартибида</option>
+                </select>
+                <button id="sortButton" class="btn btn-info"><i class="fa-solid fa-arrow-up-a-z"></i> </button>
+                <button id="toggleExtendedSearch" class="btn btn-info"><i class="fa-solid fa-filter"></i> </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="extendedSearchContainer" style="display: none;">
+    <div class="row">
+        <div class="col">
+            <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:5px;">
+                <input id="searchProductGiverId" type="text" class="form-control" placeholder="Товар Берувчи">
+                <input id="searchProductTakerId" type="text" class="form-control" placeholder="Товар Олувчи">
+                <input id="searchStartDate" type="date" class="form-control" placeholder="Дан">
+                <input id="searchEndDate" type="date" class="form-control" placeholder="Гача">
+                <input id="searchPurchaseAmount" type="text" class="form-control" placeholder="Тўлов Суммаси">
+                <div class="input-group-append">
+                    <button id="searchButton" class="btn btn-info" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+
+<div class="container" style="height: 55vh;">
+    <div class="row" style="display:flex; justify-content:center;">
+        <div class="col-lg-6" style="width:100%">
+            <div class="custom-cards">
+                @{
+                    if (Model.Length == 0)
+                    {
+                        <h2>Ҳозирда xаридлар йўқ...</h2>
+                    }
+                }
+
+                <div class="table-container" style="overflow-y: scroll; height: 68vh; width:100% ">
+                    <table id="PurchasesTable" class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">Aмаллар</th>
+                                <th data-column="ProductGiverId" style="width: 10%;">Товар Берувчи</th>
+                                <th data-column="ProductTakerId" style="width: 15%;">Товар Олувчи</th>
+                                <th data-column="PurchaseDate" style="width: 15%;">Тўлов Куни</th>
+                                <th data-column="PurchaseAmount" style="width: 15%;">Тўлов Суммаси</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var Purchase in Model)
+                            {
+                                <tr>
+                                    <td class="action-links">
+                                        <div style="display:flex; gap:5px">
+                                            @*                                            <a href="@Url.Action("PurchaseInDocx", "Purchase", new { id = Purchase.Id })" class="btn btn-outline-primary">
+                                        <i class="fa-regular fa-file-word"></i>
+                                        </a>*@
+                                            <a href="@Url.Action("UpdatePurchase", new { id = Purchase.Id })" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i></a>
+                                            <a href="@Url.Action("DeletePurchase", new { id = Purchase.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
+                                        </div>
+                                    </td>
+                                    <td data-column="ProductGiverId">@Purchase.ProductGiver.CompanyName</td>
+                                    <td data-column="ProductTakerId">@Purchase.ProductTaker.CompanyName</td>
+                                    <td data-column="PurchaseDate">@Purchase.PurchaseDate.ToString("yyyy-MM-dd")</td>
+                                    <td data-column="PurchaseAmount" class="PurchaseAmount-cell">@Purchase.PurchaseAmount</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('searchButtonSimple').addEventListener('click', function () {
+        var input = document.getElementById('searchInput').value.toLowerCase();
+        var rows = document.getElementById('PurchasesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var match = false;
+
+            for (var j = 0; j < cells.length; j++) {
+                var cellText = cells[j].innerText.toLowerCase();
+                if (cellText.includes(input)) {
+                    match = true;
+                    break;
+                }
+            }
+
+            rows[i].style.display = match ? '' : 'none';
+        }
+    });
+
+    document.getElementById('sortButton').addEventListener('click', function () {
+        var column = document.getElementById('sortColumn').value;
+        var sortOrder = document.getElementById('sortOrder').value;
+        var rows = Array.from(document.getElementById('PurchasesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
+
+        rows.sort(function (a, b) {
+            var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
+            var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
+
+            if (column === "PurchaseAmount" || column === "ProductGiverId") {
+                cellA = parseFloat(cellA.replace(',', '.')) || 0;
+                cellB = parseFloat(cellB.replace(',', '.')) || 0;
+            }
+
+            if (column === "PurchaseDate") {
+                cellA = new Date(cellA);
+                cellB = new Date(cellB);
+            }
+
+            if (sortOrder === 'asc') {
+                return cellA < cellB ? -1 : cellA > cellB ? 1 : 0;
+            } else {
+                return cellB < cellA ? -1 : cellB > cellA ? 1 : 0;
+            }
+        });
+
+        var tbody = document.getElementById('PurchasesTable').getElementsByTagName('tbody')[0];
+        for (var i = 0; i < rows.length; i++) {
+            tbody.appendChild(rows[i]);
+        }
+    });
+
+</script>
+
+<script>
+    document.getElementById('searchButton').addEventListener('click', function () {
+        var searchProductGiverId = document.getElementById('searchProductGiverId').value.toLowerCase();
+        var searchProductTakerId = document.getElementById('searchProductTakerId').value.toLowerCase();
+        var searchStartDate = document.getElementById('searchStartDate').value;
+        var searchEndDate = document.getElementById('searchEndDate').value;
+        var searchPurchaseAmount = document.getElementById('searchPurchaseAmount').value.toLowerCase();
+
+        var rows = document.getElementById('PurchasesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var PurchaseDate = Date.parse(cells[3].innerText);
+
+            var match = true; // Assume it's a match initially
+
+            if (searchProductGiverId && !cells[1].innerText.toLowerCase().includes(searchProductGiverId)) {
+                match = false;
+            }
+            if (searchStartDate) {
+                var startDate = new Date(searchStartDate);
+                if (searchEndDate) {
+                    var endDate = new Date(searchEndDate);
+                    if (PurchaseDate < startDate || PurchaseDate > endDate) {
+                        match = false;
+                    }
+                } else {
+                    // If only start date is entered, show Purchases for that specific day
+                    if (!isSameDay(PurchaseDate, startDate)) {
+                        match = false;
+                    }
+                }
+            }
+            if (searchPurchaseAmount && !cells[4].innerText.toLowerCase().includes(searchPurchaseAmount)) {
+                match = false;
+            }
+            if (searchProductTakerId && !cells[2].innerText.toLowerCase().includes(searchProductTakerId)) {
+                match = false;
+            }
+
+            rows[i].style.display = match ? '' : 'none';
+        }
+    });
+
+    function isSameDay(date1, date2) {
+        return date1.getDate() === date2.getDate() &&
+            date1.getMonth() === date2.getMonth() &&
+            date1.getFullYear() === date2.getFullYear();
+    }
+</script>
+
+<script>
+    document.getElementById('refreshButton').addEventListener('click', function () {
+        // Clear the search input field
+        document.getElementById('searchInput').value = '';
+
+        // Reset the sorting to default values
+        document.getElementById('sortColumn').value = 'ProductGiverId';
+        document.getElementById('sortOrder').value = 'asc';
+
+        // Reset the extended search fields
+        document.getElementById('searchProductGiverId').value = '';
+        document.getElementById('searchProductTakerId').value = '';
+        document.getElementById('searchStartDate').value = '';
+        document.getElementById('searchEndDate').value = '';
+        document.getElementById('searchPurchaseAmount').value = '';
+
+        // Show all rows in the table
+        var rows = document.getElementById('PurchasesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].style.display = '';
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('toggleExtendedSearch').addEventListener('click', function () {
+        var extendedSearchContainer = document.getElementById('extendedSearchContainer');
+        if (extendedSearchContainer.style.display === 'none' || extendedSearchContainer.style.display === '') {
+            extendedSearchContainer.style.display = 'block';
+        } else {
+            extendedSearchContainer.style.display = 'none';
+        }
+    });
+</script>
+
+<script>
+    // Function to format the PurchaseAmount cells
+    function formatPurchaseAmountCells() {
+        var PurchaseAmountCells = document.querySelectorAll('.PurchaseAmount-cell');
+        PurchaseAmountCells.forEach(function (cell) {
+            var PurchaseAmount = parseFloat(cell.textContent);
+            if (!isNaN(PurchaseAmount)) {
+                cell.textContent = PurchaseAmount.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            }
+        });
+    }
+
+    // Call the function when the document is ready
+    document.addEventListener('DOMContentLoaded', function () {
+        formatPurchaseAmountCells();
+    });
+</script>
