@@ -40,10 +40,10 @@
                     <div class="form-group mt-3">
                         <label for="ProductGiverFilter">Tovar Beruvchi:</label>
                         <select class="form-control" id="ProductGiverId" name="ProductGiverId" required>
-                            <option value="">Выбрать ProductGiver Number</option>
+                            <option value="">Tovar Beruvchi:</option>
                             @foreach (var ProductGiver in ProductGivers)
                             {
-                                <option value="@ProductGiver.Id" data-ProductGiver-info="@ProductGiver.ProductGiverNumber / @ProductGiver.Customer.LastName @ProductGiver.Customer.FirstName @ProductGiver.Customer.MiddleName / @ProductGiver.Customer.PhoneNumberOne">@ProductGiver.ProductGiverNumber / @ProductGiver.Customer.LastName @ProductGiver.Customer.FirstName @ProductGiver.Customer.MiddleName / @ProductGiver.Customer.PhoneNumberOne</option>
+                                <option value="@ProductGiver.Id" data-ProductGiver-info="@ProductGiver.CompanyName / @ProductGiver.ResponsiblePersonName / @ProductGiver.PhoneNumber">@ProductGiver.CompanyName / @ProductGiver.ResponsiblePersonName / @ProductGiver.PhoneNumber</option>
                             }
                         </select>
                     </div>
@@ -82,12 +82,49 @@
                     </script>
 
                     <div class="form-group mt-3">
-                        <label asp-for="PaymentTypeId">Тип платежей:</label>
-                        <select class="form-control" asp-for="PaymentTypeId" asp-items="@(new SelectList(PaymentTypes, "Id", "Name"))" required>
-                            <option value="">Выбрать Тип платежей</option>
+                        <label for="ProductTakerFilter">Tovar Oluvchi:</label>
+                        <select class="form-control" id="ProductTakerId" name="ProductTakerId" required>
+                            <option value="">Tovar Beruvchi:</option>
+                            @foreach (var ProductTaker in ProductTakers)
+                            {
+                                <option value="@ProductTaker.Id" data-ProductTaker-info="@ProductTaker.CompanyName / @ProductTaker.ResponsiblePersonName / @ProductTaker.PhoneNumber">@ProductTaker.CompanyName / @ProductTaker.ResponsiblePersonName / @ProductTaker.PhoneNumber</option>
+                            }
                         </select>
-                        <span asp-validation-for="PaymentTypeId" class="text-danger"></span>
                     </div>
+
+                    <script>
+                        $(document).ready(function () {
+                            // Initialize Select2 with custom options
+                            $('#ProductTakerId').select2({
+                                placeholder: "Введите Номер контракта",
+                                allowClear: true,
+                                matcher: function (params, data) {
+                                    // If there's no search term, return all options
+                                    if ($.trim(params.term) === '') {
+                                        return data;
+                                    }
+
+                                    // Remove special characters and convert to lowercase for comparison
+                                    var term = $.trim(params.term).toLowerCase();
+                                    var text = data.text.toLowerCase();
+
+                                    // Check if the data text contains the term
+                                    if (text.indexOf(term) > -1) {
+                                        return data;
+                                    }
+
+                                    return null;
+                                }
+                            });
+
+                            // Set the selected option based on Model.ProductGiverId
+                            var ProductTakerId = "@Model.ProductTakerId";
+                            if (ProductTakerId) {
+                                $('#ProductTakerId').val(ProductTakerId).trigger('change');
+                            }
+                        });
+                    </script>
+
 
                     <div class="form-group button-group mt-3">
                         <button type="submit" class="btn btn-success">Сохранять</button>
