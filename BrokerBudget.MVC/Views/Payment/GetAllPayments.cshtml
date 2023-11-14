@@ -2,7 +2,7 @@
     Layout = "_Layout";
 }
 
-@model BrokerBudget.Application.UseCases.Payments.Response.PaymentResponse[]
+@model BrokerBudget.Application.UseCases.Payments.PaymentResponse[]
 
 <h3 class="text-center">Барча Тўловлар</h3>
 
@@ -93,7 +93,7 @@
                 @{
                     if (Model.Length == 0)
                     {
-                        <h2>Платежей пока нет...</h2>
+                        <h2>Ҳозирда тўловлар йўқ...</h2>
                     }
                 }
 
@@ -101,7 +101,7 @@
                     <table id="PaymentsTable" class="table">
                         <thead>
                             <tr>
-                                <th style="width: 25%;">Действия</th>
+                                <th style="width: 25%;">Aмаллар</th>
                                 <th data-column="ProductGiverId" style="width: 10%;">Товар Берувчи</th>
                                 <th data-column="ProductTakerId" style="width: 15%;">Товар Олувчи</th>
                                 <th data-column="PaymentDate" style="width: 15%;">Тўлов Куни</th>
@@ -117,13 +117,13 @@
                                             <a href="@Url.Action("PaymentInDocx", "Payment", new { id = Payment.Id })" class="btn btn-outline-primary">
                                                 <i class="fa-regular fa-file-word"></i>
                                             </a>
-                                            <a href="@Url.Action("ViewContract", "Contract", new { id = Payment.Contract.Id })" class="btn btn-secondary"><i class="fas fa-info-circle"></i> Батафсил</a>
+                                       @*     <a href="@Url.Action("ViewContract", "Contract", new { id = Payment.Contract.Id })" class="btn btn-secondary"><i class="fas fa-info-circle"></i> Батафсил</a>*@
                                             <a href="@Url.Action("UpdatePayment", new { id = Payment.Id })" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i></a>
                                             <a href="@Url.Action("DeletePayment", new { id = Payment.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
                                         </div>
                                     </td>
-                                    <td data-column="ProductGiverId">@Payment.ProductGiverId</td>
-                                    <td data-column="ProductTakerId">@Payment.Contract.ContractNumber</td>
+                                    <td data-column="ProductGiverId">@Payment.ProductGiver.CompanyName</td>
+                                    <td data-column="ProductTakerId">@Payment.ProductTaker.CompanyName</td>
                                     <td data-column="PaymentDate">@Payment.PaymentDate.ToString("yyyy-MM-dd")</td>
                                     <td data-column="PaymentAmount" class="PaymentAmount-cell">@Payment.PaymentAmount</td>
                                 </tr>
