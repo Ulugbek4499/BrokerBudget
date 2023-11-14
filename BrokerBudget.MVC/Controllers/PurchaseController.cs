@@ -8,6 +8,8 @@ using BrokerBudget.Application.UseCases.Purchases.Commands.UpdatePurchase;
 using BrokerBudget.Application.UseCases.Purchases.Queries.GetAllPurchases;
 using BrokerBudget.Application.UseCases.Purchases.Queries.GetPurchaseById;
 using Microsoft.AspNetCore.Mvc;
+using BrokerBudget.Application.UseCases.Products;
+using BrokerBudget.Application.UseCases.Products.Queries.GetAllProducts;
 
 namespace BrokerBudget.MVC.Controllers
 {
@@ -16,6 +18,9 @@ namespace BrokerBudget.MVC.Controllers
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> CreatePurchase()
         {
+            ProductResponse[] products = await Mediator.Send(new GetAllProductsQuery());
+            ViewData["Products"] = products;
+
             ProductGiverResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
             ViewData["ProductGivers"] = productGivers;
 
@@ -67,6 +72,9 @@ namespace BrokerBudget.MVC.Controllers
         public async ValueTask<IActionResult> UpdatePurchase(int Id)
         {
             var Purchase = await Mediator.Send(new GetPurchaseByIdQuery(Id));
+
+            ProductResponse[] products = await Mediator.Send(new GetAllProductsQuery());
+            ViewData["Products"] = products;
 
             ProductGiverResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
             ViewData["ProductGivers"] = productGivers;
