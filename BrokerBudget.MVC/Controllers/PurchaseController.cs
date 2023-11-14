@@ -1,4 +1,8 @@
-﻿using BrokerBudget.Application.UseCases.Purchases.Commands.CreatePurchase;
+﻿using BrokerBudget.Application.UseCases.ProductGivers.Queries.GetAllProductGivers;
+using BrokerBudget.Application.UseCases.ProductGivers;
+using BrokerBudget.Application.UseCases.ProductTakers;
+using BrokerBudget.Application.UseCases.ProductTakerTakers.Queries.GetAllProductTakerTakers;
+using BrokerBudget.Application.UseCases.Purchases.Commands.CreatePurchase;
 using BrokerBudget.Application.UseCases.Purchases.Commands.DeletePurchase;
 using BrokerBudget.Application.UseCases.Purchases.Commands.UpdatePurchase;
 using BrokerBudget.Application.UseCases.Purchases.Queries.GetAllPurchases;
@@ -12,6 +16,12 @@ namespace BrokerBudget.MVC.Controllers
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> CreatePurchase()
         {
+            ProductGiverResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
+            ViewData["ProductGivers"] = productGivers;
+
+            ProductTakerResponse[] productTakers = await Mediator.Send(new GetAllProductTakersQuery());
+            ViewData["ProductTakers"] = productTakers;
+
             return View();
         }
 
@@ -57,6 +67,12 @@ namespace BrokerBudget.MVC.Controllers
         public async ValueTask<IActionResult> UpdatePurchase(int Id)
         {
             var Purchase = await Mediator.Send(new GetPurchaseByIdQuery(Id));
+
+            ProductGiverResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
+            ViewData["ProductGivers"] = productGivers;
+
+            ProductTakerResponse[] productTakers = await Mediator.Send(new GetAllProductTakersQuery());
+            ViewData["ProductTakers"] = productTakers;
 
             return View(Purchase);
         }
