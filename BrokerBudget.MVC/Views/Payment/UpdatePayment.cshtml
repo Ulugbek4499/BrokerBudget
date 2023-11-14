@@ -1,1 +1,107 @@
-﻿
+﻿@using BrokerBudget.Application.UseCases.Payments.Commands.CreatePayment;
+@using BrokerBudget.Application.UseCases.Payments;
+@using BrokerBudget.Application.UseCases.ProductGivers;
+@using BrokerBudget.Application.UseCases.ProductTakers;
+@using BrokerBudget.Domain.Entities;
+
+@model PaymentResponse
+
+@{
+    ViewData["Title"] = "UpdatePayment";
+    Layout = "_Layout";
+
+    ProductGiverResponse[] ProductGivers = ViewData["ProductGivers"] as ProductGiverResponse[];
+    ProductTakerResponse[] ProductTakers = ViewData["ProductTakers"] as ProductTakerResponse[];
+}
+
+<h3 class="text-center">Изменить информацию об оплате</h3>
+<hr />
+
+<form asp-controller="Payment" asp-action="UpdatePayment" enctype="multipart/form-data" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6" style="overflow-y:scroll; width:50%; height:70vh">
+                <div class="custom-input">
+
+                    <div class="form-group mt-3">
+                        <label asp-for="PaymentAmount" class="form-label">To'lov Summasi::</label>
+                        <input asp-for="PaymentAmount" type="text" class="form-control" value="@Model.PaymentAmount">
+                        <span asp-validation-for="PaymentAmount" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label asp-for="PaymentDate">To'lov Kuni:</label>
+                        <input asp-for="PaymentDate" type="date" class="form-control" required value="@Model.PaymentDate.ToString("yyyy-MM-dd")" />
+                        <span asp-validation-for="PaymentDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="ProductGiverFilter">Tovar Beruvchi:</label>
+                        <select class="form-control" id="ProductGiverId" name="ProductGiverId" required>
+                            <option value="">Выбрать ProductGiver Number</option>
+                            @foreach (var ProductGiver in ProductGivers)
+                            {
+                                <option value="@ProductGiver.Id" data-ProductGiver-info="@ProductGiver.ProductGiverNumber / @ProductGiver.Customer.LastName @ProductGiver.Customer.FirstName @ProductGiver.Customer.MiddleName / @ProductGiver.Customer.PhoneNumberOne">@ProductGiver.ProductGiverNumber / @ProductGiver.Customer.LastName @ProductGiver.Customer.FirstName @ProductGiver.Customer.MiddleName / @ProductGiver.Customer.PhoneNumberOne</option>
+                            }
+                        </select>
+                    </div>
+
+                    <script>
+                        $(document).ready(function () {
+                            // Initialize Select2 with custom options
+                            $('#ProductGiverId').select2({
+                                placeholder: "Введите Номер контракта",
+                                allowClear: true,
+                                matcher: function (params, data) {
+                                    // If there's no search term, return all options
+                                    if ($.trim(params.term) === '') {
+                                        return data;
+                                    }
+
+                                    // Remove special characters and convert to lowercase for comparison
+                                    var term = $.trim(params.term).toLowerCase();
+                                    var text = data.text.toLowerCase();
+
+                                    // Check if the data text contains the term
+                                    if (text.indexOf(term) > -1) {
+                                        return data;
+                                    }
+
+                                    return null;
+                                }
+                            });
+
+                            // Set the selected option based on Model.ProductGiverId
+                            var ProductGiverId = "@Model.ProductGiverId";
+                            if (ProductGiverId) {
+                                $('#ProductGiverId').val(ProductGiverId).trigger('change');
+                            }
+                        });
+                    </script>
+
+                    <div class="form-group mt-3">
+                        <label asp-for="PaymentTypeId">Тип платежей:</label>
+                        <select class="form-control" asp-for="PaymentTypeId" asp-items="@(new SelectList(PaymentTypes, "Id", "Name"))" required>
+                            <option value="">Выбрать Тип платежей</option>
+                        </select>
+                        <span asp-validation-for="PaymentTypeId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group button-group mt-3">
+                        <button type="submit" class="btn btn-success">Сохранять</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
