@@ -18,61 +18,43 @@
                     <ul class="navbar-nav ml-auto ">
                     <li class="nav-item mb-1">
                         <a asp-controller="Home" asp-action="Index" class="nav-link">
-                            <div class="icon-wrapper">
-                                <i class="fa-solid fa-bars"></i>
-                            </div>
-                            <div class="name-wrapper">
-                                Asosiy Menyu
+                           <div class="name-wrapper">
+                            Aсосий меню
                             </div>
                         </a>
                     </li>
                     <li class="nav-item mb-2">
                         <a asp-controller="Product" asp-action="GetAllProducts" class="nav-link">
-                            <div class="icon-wrapper">
-                                <i class="fa-solid fa-file-signature"></i>
-                            </div>
                             <div class="name-wrapper">
-                                Tovarlar
+                            Товарлар
                             </div>
                         </a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a asp-controller="Payment" asp-action="GetAllPayments" class="nav-link">
-                            <div class="icon-wrapper">
-                                <i class="fa-solid fa-building"></i>
-                            </div>
+                        <a asp-controller="ProductGiver" asp-action="GetAllProductGivers" class="nav-link">
                             <div class="name-wrapper">
-                              Тўловлар
+                               Товар берувчилар
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a asp-controller="ProductTaker" asp-action="GetAllProductTakers" class="nav-link">
+                            <div class="name-wrapper">
+                               Товар олувчилар
                             </div>
                         </a>
                     </li>
                     <li class="nav-item mb-2">
                         <a asp-controller="Purchase" asp-action="GetAllPurchases" class="nav-link">
-                            <div class="icon-wrapper">
-                                <i class="fa-solid fa-address-card"></i>
-                            </div>
                             <div class="name-wrapper">
                                 Харидлар
                             </div>
                         </a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a asp-controller="ProductGiver" asp-action="GetAllProductGivers" class="nav-link">
-                            <div class="icon-wrapper">
-                                <i class="fa-solid fa-building"></i>
-                            </div>
+                        <a asp-controller="Payment" asp-action="GetAllPayments" class="nav-link">
                             <div class="name-wrapper">
-                                Tovar Beruvchilar
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a asp-controller="ProductTaker" asp-action="GetAllProductTakers" class="nav-link">
-                            <div class="icon-wrapper">
-                                <i class="fa-solid fa-address-card"></i>
-                            </div>
-                            <div class="name-wrapper">
-                                Tovar Oluvchilar
+                              Тўловлар
                             </div>
                         </a>
                     </li>

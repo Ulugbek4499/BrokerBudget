@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BrokerBudget.Application.UseCases.Purchases.Queries.GetAllPurchases
 {
-    public record GetAllPurchasesQuery : IRequest<ProductTakerResponse[]>;
+    public record GetAllPurchasesQuery : IRequest<PurchaseResponse[]>;
 
-    public class GetAllPurchasesQueryHandler : IRequestHandler<GetAllPurchasesQuery, ProductTakerResponse[]>
+    public class GetAllPurchasesQueryHandler : IRequestHandler<GetAllPurchasesQuery, PurchaseResponse[]>
     {
         private readonly IMapper _mapper;
         private readonly IApplicationDbContext _context;
@@ -19,11 +19,11 @@ namespace BrokerBudget.Application.UseCases.Purchases.Queries.GetAllPurchases
             _context = context;
         }
 
-        public async Task<ProductTakerResponse[]> Handle(GetAllPurchasesQuery request, CancellationToken cancellationToken)
+        public async Task<PurchaseResponse[]> Handle(GetAllPurchasesQuery request, CancellationToken cancellationToken)
         {
-            var ProductTakers = await _context.ProductTakers.ToArrayAsync();
+            var purchases = await _context.Purchases.ToArrayAsync();
 
-            return _mapper.Map<ProductTakerResponse[]>(ProductTakers);
+            return _mapper.Map<PurchaseResponse[]>(purchases);
         }
     }
 }
