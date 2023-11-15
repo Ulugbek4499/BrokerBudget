@@ -10,6 +10,7 @@ namespace BrokerBudget.Application.Common.Interfaces
         public DbSet<ProductGiver> ProductGivers { get; set; }
         public DbSet<ProductTaker> ProductTakers { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

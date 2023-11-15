@@ -1,9 +1,10 @@
-﻿@using BrokerBudget.Application.UseCases.Products;
-@using BrokerBudget.Application.UseCases.Purchases.Commands.CreatePurchase;
-@using BrokerBudget.Application.UseCases.Purchases;
-@using BrokerBudget.Application.UseCases.ProductGivers;
-@using BrokerBudget.Application.UseCases.ProductTakers;
-@using BrokerBudget.Domain.Entities;
+﻿@	using BrokerBudget.Application.UseCases.Products;
+@	using BrokerBudget.Application.UseCases.Purchases.Commands.CreatePurchase;
+@	using BrokerBudget.Application.UseCases.Purchases;
+@	using BrokerBudget.Application.UseCases.ProductGivers;
+@	using BrokerBudget.Application.UseCases.ProductTakers;
+@	using BrokerBudget.Domain.Entities;
+	using BrokerBudget.Application.UseCases.Expenses;
 
 @model PurchaseResponse
 
@@ -12,7 +13,7 @@
     Layout = "_Layout";
 
     ProductResponse[] Products = ViewData["Products"] as ProductResponse[];
-    ProductGiverResponse[] ProductGivers = ViewData["ProductGivers"] as ProductGiverResponse[];
+    ExpenseResponse[] ProductGivers = ViewData["ProductGivers"] as ExpenseResponse[];
     ProductTakerResponse[] ProductTakers = ViewData["ProductTakers"] as ProductTakerResponse[];
 }
 

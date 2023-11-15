@@ -5,7 +5,7 @@ using MediatR;
 
 namespace BrokerBudget.Application.UseCases.ProductGivers.Commands.CreateProductGiver
 {
-    public class CreateExpenseCommand : IRequest<int>
+    public class CreateProductGiverCommand : IRequest<int>
     {
         public string CompanyName { get; set; }
         public string ResponsiblePersonName { get; set; }
@@ -14,7 +14,7 @@ namespace BrokerBudget.Application.UseCases.ProductGivers.Commands.CreateProduct
         public string? BankAccountNumber { get; set; }
     }
 
-    public class CreateProductGiverCommandHandler : IRequestHandler<CreateExpenseCommand, int>
+    public class CreateProductGiverCommandHandler : IRequestHandler<CreateProductGiverCommand, int>
     {
         private readonly IMapper _mapper;
         private readonly IApplicationDbContext _context;
@@ -25,7 +25,7 @@ namespace BrokerBudget.Application.UseCases.ProductGivers.Commands.CreateProduct
             _context = context;
         }
 
-        public async Task<int> Handle(CreateExpenseCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateProductGiverCommand request, CancellationToken cancellationToken)
         {
             ProductGiver productGiver = _mapper.Map<ProductGiver>(request);
             await _context.ProductGivers.AddAsync(productGiver, cancellationToken);

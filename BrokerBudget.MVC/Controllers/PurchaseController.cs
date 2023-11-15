@@ -21,7 +21,7 @@ namespace BrokerBudget.MVC.Controllers
             ProductResponse[] products = await Mediator.Send(new GetAllProductsQuery());
             ViewData["Products"] = products;
 
-            ProductGiverResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
+            ExpenseResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
             ViewData["ProductGivers"] = productGivers;
 
             ProductTakerResponse[] productTakers = await Mediator.Send(new GetAllProductTakersQuery());
@@ -76,7 +76,7 @@ namespace BrokerBudget.MVC.Controllers
             ProductResponse[] products = await Mediator.Send(new GetAllProductsQuery());
             ViewData["Products"] = products;
 
-            ProductGiverResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
+            ExpenseResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
             ViewData["ProductGivers"] = productGivers;
 
             ProductTakerResponse[] productTakers = await Mediator.Send(new GetAllProductTakersQuery());

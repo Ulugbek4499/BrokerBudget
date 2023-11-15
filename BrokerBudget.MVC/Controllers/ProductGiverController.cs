@@ -40,7 +40,7 @@ namespace BrokerBudget.MVC.Controllers
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> GetAllProductGivers()
         {
-            var ProductGivers = await Mediator.Send(new GetAllProductGiversQuery());
+            var ProductGivers = await Mediator.Send(new GetAllExpensesQuery());
 
             return View(ProductGivers);
         }

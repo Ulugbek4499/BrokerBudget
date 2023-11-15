@@ -16,7 +16,7 @@ namespace BrokerBudget.MVC.Controllers
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> CreatePayment()
         {
-            ProductGiverResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
+            ExpenseResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
             ViewData["ProductGivers"] = productGivers;
 
             ProductTakerResponse[] productTakers = await Mediator.Send(new GetAllProductTakersQuery());
@@ -66,7 +66,7 @@ namespace BrokerBudget.MVC.Controllers
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> UpdatePayment(int Id)
         {
-            ProductGiverResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
+            ExpenseResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
             ViewData["ProductGivers"] = productGivers;
 
             ProductTakerResponse[] productTakers = await Mediator.Send(new GetAllProductTakersQuery());

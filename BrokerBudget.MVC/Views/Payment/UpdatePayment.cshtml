@@ -1,8 +1,9 @@
-﻿@using BrokerBudget.Application.UseCases.Payments.Commands.CreatePayment;
-@using BrokerBudget.Application.UseCases.Payments;
-@using BrokerBudget.Application.UseCases.ProductGivers;
-@using BrokerBudget.Application.UseCases.ProductTakers;
-@using BrokerBudget.Domain.Entities;
+﻿@	using BrokerBudget.Application.UseCases.Payments.Commands.CreatePayment;
+@	using BrokerBudget.Application.UseCases.Payments;
+@	using BrokerBudget.Application.UseCases.ProductGivers;
+@	using BrokerBudget.Application.UseCases.ProductTakers;
+@	using BrokerBudget.Domain.Entities;
+	using BrokerBudget.Application.UseCases.Expenses;
 
 @model PaymentResponse
 
@@ -10,7 +11,7 @@
     ViewData["Title"] = "UpdatePayment";
     Layout = "_Layout";
 
-    ProductGiverResponse[] ProductGivers = ViewData["ProductGivers"] as ProductGiverResponse[];
+    ExpenseResponse[] ProductGivers = ViewData["ProductGivers"] as ExpenseResponse[];
     ProductTakerResponse[] ProductTakers = ViewData["ProductTakers"] as ProductTakerResponse[];
 }
 

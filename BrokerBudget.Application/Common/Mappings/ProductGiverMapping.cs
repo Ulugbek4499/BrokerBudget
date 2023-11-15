@@ -14,7 +14,7 @@ namespace BrokerBudget.Application.Common.Mappings
             CreateMap<CreateProductGiverCommand, ProductGiver>().ReverseMap();
             CreateMap<DeleteProductGiverCommand, ProductGiver>().ReverseMap();
             CreateMap<UpdateProductGiverCommand, ProductGiver>().ReverseMap();
-            CreateMap<ProductGiverResponse, ProductGiver>().ReverseMap();
+            CreateMap<ExpenseResponse, ProductGiver>().ReverseMap();
 
         }
     }

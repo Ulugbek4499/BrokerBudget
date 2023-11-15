@@ -2,7 +2,7 @@
 
 namespace BrokerBudget.Application.UseCases.ProductGivers
 {
-    public class ExpenseResponse
+    public class ProductGiverResponse
     {
         public int Id { get; set; }
         public string CompanyName { get; set; }

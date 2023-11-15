@@ -5,8 +5,8 @@ using MediatR;
 
 namespace BrokerBudget.Application.UseCases.ProductGivers.Commands.DeleteProductGiver
 {
-    public record DeleteExpenseCommand(int Id) : IRequest;
-    public class DeleteProductGiverCommandHandler : IRequestHandler<DeleteExpenseCommand>
+    public record DeleteProductGiverCommand(int Id) : IRequest;
+    public class DeleteProductGiverCommandHandler : IRequestHandler<DeleteProductGiverCommand>
     {
         private readonly IApplicationDbContext _context;
 
@@ -15,7 +15,7 @@ namespace BrokerBudget.Application.UseCases.ProductGivers.Commands.DeleteProduct
             _context = context;
         }
 
-        public async Task Handle(DeleteExpenseCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteProductGiverCommand request, CancellationToken cancellationToken)
         {
             ProductGiver? productGiver = await _context.ProductGivers.FindAsync(request.Id, cancellationToken);
 

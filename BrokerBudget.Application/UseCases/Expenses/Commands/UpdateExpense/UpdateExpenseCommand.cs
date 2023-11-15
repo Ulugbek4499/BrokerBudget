@@ -5,7 +5,7 @@ using MediatR;
 
 namespace BrokerBudget.Application.UseCases.ProductGivers.Commands.UpdateProductGiver
 {
-    public class UpdateExpenseCommand : IRequest
+    public class UpdateProductGiverCommand : IRequest
     {
         public int Id { get; set; }
         public string CompanyName { get; set; }
@@ -15,7 +15,7 @@ namespace BrokerBudget.Application.UseCases.ProductGivers.Commands.UpdateProduct
         public string? BankAccountNumber { get; set; }
     }
 
-    public class UpdateProductGiverCommandHandler : IRequestHandler<UpdateExpenseCommand>
+    public class UpdateProductGiverCommandHandler : IRequestHandler<UpdateProductGiverCommand>
     {
         private readonly IMapper _mapper;
         private readonly IApplicationDbContext _context;
@@ -26,7 +26,7 @@ namespace BrokerBudget.Application.UseCases.ProductGivers.Commands.UpdateProduct
             _context = context;
         }
 
-        public async Task Handle(UpdateExpenseCommand request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateProductGiverCommand request, CancellationToken cancellationToken)
         {
             ProductGiver? productGiver = await _context.ProductGivers.FindAsync(request.Id);
             _mapper.Map(request, productGiver);
