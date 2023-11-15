@@ -2,14 +2,14 @@
 @	using BrokerBudget.Application.UseCases.ProductGivers;
 @	using BrokerBudget.Application.UseCases.ProductTakers;
 @	using BrokerBudget.Domain.Entities;
-	using BrokerBudget.Application.UseCases.Expenses;
+	using BrokerBudget.Application.UseCases.ProductGivers;
 
 
 @{
     ViewData["Title"] = "CreatePayment";
     Layout = "_Layout";
 
-    ExpenseResponse[] ProductGivers = ViewData["ProductGivers"] as ExpenseResponse[];
+    ProductGiverResponse[] ProductGivers = ViewData["ProductGivers"] as ProductGiverResponse[];
     ProductTakerResponse[] ProductTakers = ViewData["ProductTakers"] as ProductTakerResponse[];
 }
 

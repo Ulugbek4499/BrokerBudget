@@ -3,33 +3,31 @@ using BrokerBudget.Application.Common.Interfaces;
 using BrokerBudget.Domain.Entities;
 using MediatR;
 
-namespace BrokerBudget.Application.UseCases.ProductGivers.Commands.UpdateProductGiver
+namespace BrokerBudget.Application.UseCases.Expenses.Commands.UpdateExpense
 {
-    public class UpdateProductGiverCommand : IRequest
+    public class UpdateExpenseCommand : IRequest
     {
         public int Id { get; set; }
-        public string CompanyName { get; set; }
-        public string ResponsiblePersonName { get; set; }
-        public string? PhoneNumber { get; set; }
-        public string? INN { get; set; }
-        public string? BankAccountNumber { get; set; }
+        public decimal Amount { get; set; }
+        public string Note { get; set; }
+        public DateTime ExpenseDate { get; set; }
     }
 
-    public class UpdateProductGiverCommandHandler : IRequestHandler<UpdateProductGiverCommand>
+    public class UpdateExpenseCommandHandler : IRequestHandler<UpdateExpenseCommand>
     {
         private readonly IMapper _mapper;
         private readonly IApplicationDbContext _context;
 
-        public UpdateProductGiverCommandHandler(IMapper mapper, IApplicationDbContext context)
+        public UpdateExpenseCommandHandler(IMapper mapper, IApplicationDbContext context)
         {
             _mapper = mapper;
             _context = context;
         }
 
-        public async Task Handle(UpdateProductGiverCommand request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateExpenseCommand request, CancellationToken cancellationToken)
         {
-            ProductGiver? productGiver = await _context.ProductGivers.FindAsync(request.Id);
-            _mapper.Map(request, productGiver);
+            Expense? Expense = await _context.Expenses.FindAsync(request.Id);
+            _mapper.Map(request, Expense);
 
             await _context.SaveChangesAsync(cancellationToken);
         }

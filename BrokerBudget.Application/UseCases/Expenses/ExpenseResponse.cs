@@ -1,18 +1,13 @@
 ﻿using BrokerBudget.Domain.Entities;
 
-namespace BrokerBudget.Application.UseCases.ProductGivers
+namespace BrokerBudget.Application.UseCases.Expenses
 {
-    public class ProductGiverResponse
+    public class ExpenseResponse
     {
         public int Id { get; set; }
-        public string CompanyName { get; set; }
-        public string ResponsiblePersonName { get; set; }
-        public string? PhoneNumber { get; set; }
-        public string? INN { get; set; }
-        public string? BankAccountNumber { get; set; }
-
-        public virtual ICollection<Purchase>? Purchases { get; set; }
-        public virtual ICollection<Payment>? Payments { get; set; }
+        public decimal Amount { get; set; }
+        public string Note { get; set; }
+        public DateTime ExpenseDate { get; set; }
 
         public DateTime CreatedDate { get; set; }
         public string? CreatedBy { get; set; }

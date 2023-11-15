@@ -3,26 +3,26 @@ using BrokerBudget.Application.Common.Interfaces;
 using BrokerBudget.Domain.Entities;
 using MediatR;
 
-namespace BrokerBudget.Application.UseCases.ProductGivers.Commands.DeleteProductGiver
+namespace BrokerBudget.Application.UseCases.Expenses.Commands.DeleteExpense
 {
-    public record DeleteProductGiverCommand(int Id) : IRequest;
-    public class DeleteProductGiverCommandHandler : IRequestHandler<DeleteProductGiverCommand>
+    public record DeleteExpenseCommand(int Id) : IRequest;
+    public class DeleteExpenseCommandHandler : IRequestHandler<DeleteExpenseCommand>
     {
         private readonly IApplicationDbContext _context;
 
-        public DeleteProductGiverCommandHandler(IApplicationDbContext context)
+        public DeleteExpenseCommandHandler(IApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task Handle(DeleteProductGiverCommand request, CancellationToken cancellationToken)
+        public async Task Handle(DeleteExpenseCommand request, CancellationToken cancellationToken)
         {
-            ProductGiver? productGiver = await _context.ProductGivers.FindAsync(request.Id, cancellationToken);
+            Expense? Expense = await _context.Expenses.FindAsync(request.Id, cancellationToken);
 
-            if (productGiver is null)
-                throw new NotFoundException(nameof(productGiver), request.Id);
+            if (Expense is null)
+                throw new NotFoundException(nameof(Expense), request.Id);
 
-            _context.ProductGivers.Remove(productGiver);
+            _context.Expenses.Remove(Expense);
 
             await _context.SaveChangesAsync(cancellationToken);
         }

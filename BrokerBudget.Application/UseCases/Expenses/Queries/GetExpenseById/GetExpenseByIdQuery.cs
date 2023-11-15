@@ -1,36 +1,36 @@
 ﻿using AutoMapper;
 using BrokerBudget.Application.Common.Exceptions;
 using BrokerBudget.Application.Common.Interfaces;
-using BrokerBudget.Application.UseCases.ProductGivers;
+using BrokerBudget.Application.UseCases.Expenses;
 using BrokerBudget.Domain.Entities;
 using MediatR;
 
-namespace BrokerBudget.Application.UseCases.ProductGivers.Queries.GetProductGiverById
+namespace BrokerBudget.Application.UseCases.Expenses.Queries.GetExpenseById
 {
-    public record GetProductGiverByIdQuery(int Id) : IRequest<ExpenseResponse>;
+    public record GetExpenseByIdQuery(int Id) : IRequest<ExpenseResponse>;
 
-    public class GetProductGiverByIdQueryHandler : IRequestHandler<GetProductGiverByIdQuery, ExpenseResponse>
+    public class GetExpenseByIdQueryHandler : IRequestHandler<GetExpenseByIdQuery, ExpenseResponse>
     {
         IApplicationDbContext _dbContext;
         IMapper _mapper;
 
-        public GetProductGiverByIdQueryHandler(IApplicationDbContext dbContext, IMapper mapper)
+        public GetExpenseByIdQueryHandler(IApplicationDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
         }
 
-        public async Task<ExpenseResponse> Handle(GetProductGiverByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ExpenseResponse> Handle(GetExpenseByIdQuery request, CancellationToken cancellationToken)
         {
-            var ProductGiver = FilterIfProductGiverExsists(request.Id);
+            var Expense = FilterIfExpenseExsists(request.Id);
 
-            var result = _mapper.Map<ExpenseResponse>(ProductGiver);
+            var result = _mapper.Map<ExpenseResponse>(Expense);
             return await Task.FromResult(result);
         }
 
-        private ProductGiver FilterIfProductGiverExsists(int id)
-            => _dbContext.ProductGivers
+        private Expense FilterIfExpenseExsists(int id)
+            => _dbContext.Expenses
                 .Find(id) ?? throw new NotFoundException(
-                    " There is no ProductGiver with this Id. ");
+                    " There is no Expense with this Id. ");
     }
 }

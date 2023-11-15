@@ -1,15 +1,14 @@
 ﻿using AutoMapper;
 using BrokerBudget.Application.Common.Exceptions;
 using BrokerBudget.Application.Common.Interfaces;
-using BrokerBudget.Application.UseCases.ProductGivers;
 using BrokerBudget.Domain.Entities;
 using MediatR;
 
 namespace BrokerBudget.Application.UseCases.ProductGivers.Queries.GetProductGiverById
 {
-    public record GetProductGiverByIdQuery(int Id) : IRequest<ExpenseResponse>;
+    public record GetProductGiverByIdQuery(int Id) : IRequest<ProductGiverResponse>;
 
-    public class GetProductGiverByIdQueryHandler : IRequestHandler<GetProductGiverByIdQuery, ExpenseResponse>
+    public class GetProductGiverByIdQueryHandler : IRequestHandler<GetProductGiverByIdQuery, ProductGiverResponse>
     {
         IApplicationDbContext _dbContext;
         IMapper _mapper;
@@ -20,11 +19,11 @@ namespace BrokerBudget.Application.UseCases.ProductGivers.Queries.GetProductGive
             _mapper = mapper;
         }
 
-        public async Task<ExpenseResponse> Handle(GetProductGiverByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ProductGiverResponse> Handle(GetProductGiverByIdQuery request, CancellationToken cancellationToken)
         {
             var ProductGiver = FilterIfProductGiverExsists(request.Id);
 
-            var result = _mapper.Map<ExpenseResponse>(ProductGiver);
+            var result = _mapper.Map<ProductGiverResponse>(ProductGiver);
             return await Task.FromResult(result);
         }
 

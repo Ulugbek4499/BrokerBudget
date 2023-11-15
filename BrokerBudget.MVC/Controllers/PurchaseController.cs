@@ -10,6 +10,7 @@ using BrokerBudget.Application.UseCases.Purchases.Queries.GetPurchaseById;
 using Microsoft.AspNetCore.Mvc;
 using BrokerBudget.Application.UseCases.Products;
 using BrokerBudget.Application.UseCases.Products.Queries.GetAllProducts;
+using BrokerBudget.Application.UseCases.ProductGivers;
 
 namespace BrokerBudget.MVC.Controllers
 {
@@ -21,7 +22,7 @@ namespace BrokerBudget.MVC.Controllers
             ProductResponse[] products = await Mediator.Send(new GetAllProductsQuery());
             ViewData["Products"] = products;
 
-            ExpenseResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
+            ProductGiverResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
             ViewData["ProductGivers"] = productGivers;
 
             ProductTakerResponse[] productTakers = await Mediator.Send(new GetAllProductTakersQuery());
@@ -76,7 +77,7 @@ namespace BrokerBudget.MVC.Controllers
             ProductResponse[] products = await Mediator.Send(new GetAllProductsQuery());
             ViewData["Products"] = products;
 
-            ExpenseResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
+            ProductGiverResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
             ViewData["ProductGivers"] = productGivers;
 
             ProductTakerResponse[] productTakers = await Mediator.Send(new GetAllProductTakersQuery());

@@ -3,7 +3,7 @@
 @	using BrokerBudget.Application.UseCases.ProductGivers;
 @	using BrokerBudget.Application.UseCases.ProductTakers;
 @	using BrokerBudget.Domain.Entities;
-	using BrokerBudget.Application.UseCases.Expenses;
+	using BrokerBudget.Application.UseCases.ProductGivers;
 
 
 @{
@@ -11,7 +11,7 @@
     Layout = "_Layout";
 
     ProductResponse[] Products = ViewData["Products"] as ProductResponse[];
-    ExpenseResponse[] ProductGivers = ViewData["ProductGivers"] as ExpenseResponse[];
+    ProductGiverResponse[] ProductGivers = ViewData["ProductGivers"] as ProductGiverResponse[];
     ProductTakerResponse[] ProductTakers = ViewData["ProductTakers"] as ProductTakerResponse[];
 }
 

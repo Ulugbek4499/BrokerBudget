@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BrokerBudget.Application.UseCases.ProductGivers;
+using BrokerBudget.Application.UseCases.ProductGivers;
 using BrokerBudget.Application.UseCases.ProductGivers.Commands.CreateProductGiver;
 using BrokerBudget.Application.UseCases.ProductGivers.Commands.DeleteProductGiver;
 using BrokerBudget.Application.UseCases.ProductGivers.Commands.UpdateProductGiver;
@@ -14,7 +15,7 @@ namespace BrokerBudget.Application.Common.Mappings
             CreateMap<CreateProductGiverCommand, ProductGiver>().ReverseMap();
             CreateMap<DeleteProductGiverCommand, ProductGiver>().ReverseMap();
             CreateMap<UpdateProductGiverCommand, ProductGiver>().ReverseMap();
-            CreateMap<ExpenseResponse, ProductGiver>().ReverseMap();
+            CreateMap<ProductGiverResponse, ProductGiver>().ReverseMap();
 
         }
     }

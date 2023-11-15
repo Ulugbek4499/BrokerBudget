@@ -1,4 +1,5 @@
-﻿using BrokerBudget.Application.UseCases.Payments.Commands.CreatePayment;
+﻿using BrokerBudget.Application.UseCases.ProductGivers;
+using BrokerBudget.Application.UseCases.Payments.Commands.CreatePayment;
 using BrokerBudget.Application.UseCases.Payments.Commands.DeletePayment;
 using BrokerBudget.Application.UseCases.Payments.Commands.UpdatePayment;
 using BrokerBudget.Application.UseCases.Payments.Queries.GetAllPayments;
@@ -16,7 +17,7 @@ namespace BrokerBudget.MVC.Controllers
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> CreatePayment()
         {
-            ExpenseResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
+            ProductGiverResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
             ViewData["ProductGivers"] = productGivers;
 
             ProductTakerResponse[] productTakers = await Mediator.Send(new GetAllProductTakersQuery());
@@ -66,7 +67,7 @@ namespace BrokerBudget.MVC.Controllers
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> UpdatePayment(int Id)
         {
-            ExpenseResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
+            ProductGiverResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
             ViewData["ProductGivers"] = productGivers;
 
             ProductTakerResponse[] productTakers = await Mediator.Send(new GetAllProductTakersQuery());
