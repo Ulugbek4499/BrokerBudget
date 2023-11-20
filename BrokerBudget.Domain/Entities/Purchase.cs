@@ -1,4 +1,5 @@
-﻿using BrokerBudget.Domain.Common;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using BrokerBudget.Domain.Common;
 
 namespace BrokerBudget.Domain.Entities
 {
@@ -12,6 +13,20 @@ namespace BrokerBudget.Domain.Entities
 
         public decimal PricePerAmount { get; set; }
         public decimal? SaleForTotalPrice { get; set; }
+        public decimal finalPriceOfPurchase { get; set; }
+
+        [NotMapped]
+        public decimal FinalPriceOfPurchase
+        {
+            get
+            {
+                return finalPriceOfPurchase;
+            }
+            set
+            {
+                finalPriceOfPurchase = (decimal)((Amount - SaleAmountCategoryPercentage) * PricePerAmount - SaleForTotalPrice);
+            }
+        }
 
         public DateTime PurchaseDate { get; set; }
 

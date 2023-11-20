@@ -12,6 +12,13 @@ namespace BrokerBudget.Application.UseCases.Reports
         public int CountOfAllProductGivers { get; set; }
         public int CountOfAllProductTakers { get; set; }
 
+        public decimal AmountOfAllExpenses { get; set; }
+        public decimal AmountOfAllExpensesInLastYear { get; set; }
+        public decimal AmountOfAllExpensesInLastSixMonth { get; set; }
+        public decimal AmountOfAllExpensesInLastMonth { get; set; }
+        public decimal AmountOfAllExpensesInLastWeek { get; set; }
+        public decimal AmountOfAllExpensesToday { get; set; }
+
         public decimal AmountOfAllPaymentsByProductTaker { get; set; }
         public decimal AmountOfAllPaymentsByProductTakerInLastYear { get; set; }
         public decimal AmountOfAllPaymentsByProductTakerInLastSixMonth { get; set; }

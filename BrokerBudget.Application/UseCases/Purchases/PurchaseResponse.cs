@@ -14,6 +14,8 @@ namespace BrokerBudget.Application.UseCases.Purchases
         public decimal PricePerAmount { get; set; }
         public decimal? SaleForTotalPrice { get; set; }
 
+        public decimal? FinalPriceOfPurchase { get; set; }
+
         public DateTime PurchaseDate { get; set; }
 
         public int? ProductGiverId { get; set; }
