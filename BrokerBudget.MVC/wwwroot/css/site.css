@@ -20,3 +20,29 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    position: fixed;
+    padding: 0px 90px 0px 50px;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    background-color: black;
+}
+
+.body-faza{
+
+}
+
+.body-container {
+    background-color: white;
+    margin-top: 75px;
+    padding: 0px 50px 0px 50px;
+    display: flex;
+    justify-content: center;
+}
