@@ -10,24 +10,17 @@
 
     <div class="button-container">
         <a asp-controller="Report" asp-action="GetStatistics" class="btn btn-dark custom-btn">
-            <i class="fa-solid fa-play"></i> Statistika
+            Statistika
         </a>
-
-            <a asp-controller="Product" asp-action="GetAllProducts" class="nav-link">
-                <div class="name-wrapper">
-                    Товарлар
-                </div>
-            </a>
-            <a asp-controller="ProductGiver" asp-action="GetAllProductGivers" class="nav-link">
-                <div class="name-wrapper">
-                    Товар берувчилар
-                </div>
-            </a>
-            <a asp-controller="ProductTaker" asp-action="GetAllProductTakers" class="nav-link">
-                <div class="name-wrapper">
-                    Товар олувчилар
-                </div>
-            </a>
+        <a asp-controller="Product" asp-action="GetAllProducts" class="btn btn-dark custom-btn">
+            Товарлар
+        </a>
+        <a asp-controller="ProductGiver" asp-action="GetAllProductGivers" class="btn btn-dark custom-btn">
+            Товар берувчилар
+        </a>
+        <a asp-controller="ProductTaker" asp-action="GetAllProductTakers" class="btn btn-dark custom-btn">
+            Товар олувчилар
+        </a>
     </div>
 
 </div>

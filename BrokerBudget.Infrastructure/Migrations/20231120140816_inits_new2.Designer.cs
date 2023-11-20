@@ -3,6 +3,7 @@ using System;
 using BrokerBudget.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BrokerBudget.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231120140816_inits_new2")]
+    partial class inits_new2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -315,6 +318,9 @@ namespace BrokerBudget.Infrastructure.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
+                    b.Property<decimal>("FinalPriceOfPurchase")
+                        .HasColumnType("numeric");
+
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("timestamp without time zone");
 
@@ -340,6 +346,9 @@ namespace BrokerBudget.Infrastructure.Migrations
                         .HasColumnType("numeric");
 
                     b.Property<decimal?>("SaleForTotalPrice")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal>("finalPriceOfPurchase")
                         .HasColumnType("numeric");
 
                     b.HasKey("Id");

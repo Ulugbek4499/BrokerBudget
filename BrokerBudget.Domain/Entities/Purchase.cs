@@ -13,7 +13,8 @@ namespace BrokerBudget.Domain.Entities
 
         public decimal PricePerAmount { get; set; }
         public decimal? SaleForTotalPrice { get; set; }
-        public decimal finalPriceOfPurchase { get; set; }
+
+        private decimal finalPriceOfPurchase; 
 
         [NotMapped]
         public decimal FinalPriceOfPurchase
