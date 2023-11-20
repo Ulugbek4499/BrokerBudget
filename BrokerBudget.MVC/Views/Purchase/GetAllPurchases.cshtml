@@ -8,8 +8,8 @@
 <h3 class="text-center">Барча Харидлар</h3>
 
 <div class="row">
-    <div class="col">
-        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:20px;">
+    <div class="col ">
+        <div class="mb-1 mt-3 tool-bar">
 
             <div style="display: flex; gap: 20px;">
                 <a href="@Url.Action("CreatePurchase")" class="btn btn-primary mr-2">
@@ -33,14 +33,14 @@
 
 <div class="row">
     <div class="col">
-        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
+        <div class="mb-1 mt-3 tool-bar2">
             <div>
                 <a asp-controller="Purchase" asp-action="GetAllPurchasesExcel" class="btn btn-success">
                     <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-download"></i>Excel шаклда олиш
                 </a>
             </div>
             <div style="display:flex; gap:5px">
-                <select id="sortColumn" class="form-control">
+                <select id="sortColumn" class="form-control input-block">
                     <option value="ProductId">Товар:</option>
                     <option value="ProductGiverId">Товар Берувчи:</option>
                     <option value="ProductTakerId">Товар Олувчи:</option>
@@ -62,7 +62,7 @@
 <div id="extendedSearchContainer" style="display: none;">
     <div class="row">
         <div class="col">
-            <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:5px;">
+            <div class="input-block mb-1 mt-3" style="display:flex; justify-content:space-between; gap:5px;">
                 <input id="searchProductId" type="text" class="form-control" placeholder="Товар">
                 <input id="searchProductGiverId" type="text" class="form-control" placeholder="Товар Берувчи">
                 <input id="searchProductTakerId" type="text" class="form-control" placeholder="Товар Олувчи">

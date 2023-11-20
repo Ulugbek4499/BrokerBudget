@@ -22,6 +22,10 @@ body {
 }
 
 .navbar-container {
+    @media(max-width: 431px){
+        display:block;
+        place-content:center;
+    }
     display: flex;
     justify-content: space-between;
     gap: 10px;
@@ -40,9 +44,55 @@ body {
 }
 
 .body-container {
+    @media(max-width:431px){
+        margin-top:240px;
+        padding: 0px 410px 0px 410px;
+
+    }
+    
     background-color: white;
     margin-top: 75px;
     padding: 0px 50px 0px 50px;
     display: flex;
     justify-content: center;
+}
+.main-container {
+
+    @media(max-width:431px) {
+        
+    }
+}
+.tool-bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    @media(max-width:431px) {
+        justify-content: start;
+        gap:65px;
+    }
+}
+.tool-bar2 {
+    display: flex;
+    justify-content: space-between;
+    gap: 170px;
+    @media(max-width:431px) {
+        justify-content: start;
+        gap:10px;
+    }
+}
+.input-block {
+    @media(max-width:431px){
+     display:grid;
+     flex-wrap:wrap;
+     width:50%;
+    }
+}
+.create-form{
+    @media(max-width:431px){
+     width:200px;   
+     display:flex;
+     justify-content:start;
+     flex-direction:column;
+     padding:0px;
+    }
 }

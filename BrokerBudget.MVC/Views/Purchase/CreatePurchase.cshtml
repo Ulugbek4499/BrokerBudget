@@ -21,9 +21,9 @@
 <h3 class="text-center">Янги тўлов қўшиш</h3>
 <hr />
 <form asp-controller="Purchase" asp-action="CreatePurchase" enctype="multipart/form-data" method="post">
-    <div class="container mt-4">
+    <div class="mt-5 create-form">
         <div class="row">
-            <div class="col-lg-6 offset-lg-3" style="overflow-y:scroll; width:50%; height:70vh">
+            <div class="col-lg-6 offset-lg-3" style="overflow-y:scroll; height:70vh">
 
                 <div class="form-group mt-3">
                     <label for="ProductId">Товар:</label>
@@ -36,11 +36,11 @@
                     </select>
                 </div>
 
-                <script>
+                <saipt>
                     $(document).ready(function () {
                         $('#ProductId').select2();
                     });
-                </script>
+                </saipt>
 
                 <div class="form-group mt-3">
                     <label for="ProductGiverId">Товар Берувчи:</label>
