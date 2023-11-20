@@ -96,3 +96,14 @@ body {
      padding:0px;
     }
 }
+
+.header-text {
+    display:flex;
+    justify-content:center;
+
+    @media(max-width:431px) {
+        padding-left:150px;
+        display:flex;
+        justify-content:start;
+    }
+}
