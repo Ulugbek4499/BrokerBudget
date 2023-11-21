@@ -22,6 +22,12 @@ body {
 
 }
 
+.logoStyle {
+    margin-top:20px;
+    width:80%;
+    height:50%;
+}
+
 .navbar-container {
     @media(max-width: 431px){
         display:block;
