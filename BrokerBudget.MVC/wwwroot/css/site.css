@@ -19,6 +19,7 @@ html {
 
 body {
   margin-bottom: 60px;
+
 }
 
 .navbar-container {
@@ -45,9 +46,7 @@ body {
 
 .body-container {
     @media(max-width:431px){
-        margin-top:240px;
-        padding: 0px 410px 0px 410px;
-
+        margin-top:220px;
     }
     
     background-color: white;
@@ -59,32 +58,86 @@ body {
 .main-container {
     width:100%;
     @media(max-width:431px) {
-  
+        width:400px;
+        padding: 0px 3px 0px 3x;
     }
 }
 .tool-bar {
+    margin-bottom:10px;
+    margin-top:20px;
     display: flex;
     justify-content: space-between;
     gap: 20px;
     @media(max-width:431px) {
         justify-content: start;
-        gap:65px;
+        gap:90px;
     }
 }
 .tool-bar2 {
     display: flex;
     justify-content: space-between;
     gap: 170px;
+    margin-bottom:10px;
+    margin-top:10px;
     @media(max-width:431px) {
         justify-content: start;
-        gap:10px;
+        gap:40px;
     }
 }
+
+.tool-bar3 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:5px;
+    margin-top:5px;
+}
+
+.searchInput-style {
+    max-width: 200px;
+
+    @media(max-width:431px) {
+        max-width: 100px;
+    }
+}
+
+.sortInput-style {
+    max-width: 200px;
+
+    @media(max-width:431px) {
+        max-width: 100px;
+    }
+}
+
+.extendedSearchInput-style {
+    max-width: 250px;
+
+    @media(max-width:431px) {
+        max-width: 200px;
+    }
+}
+
+.bigTableContainer {
+    height: 100%;
+}
+
+.rowContainer{
+    width:100%;
+}
+
+.tableContainer {
+    overflow-y: scroll;
+    height: 68vh;
+    width: 100%
+}
+
+.columnName {
+    width:5%;
+}
 .input-block {
-    @media(max-width:431px){
-     display:grid;
-     flex-wrap:wrap;
-     width:50%;
+    @media(max-width:431px) {
+        display:grid;
+        flex-wrap:wrap;
+        width:50%;
     }
 }
 .create-form{
