@@ -118,16 +118,11 @@ body {
 
 .bigTableContainer {
     height: 100%;
+    width:100%;
 }
 
 .rowContainer{
     width:100%;
-}
-
-.tableContainer {
-    overflow-y: scroll;
-    height: 68vh;
-    width: 100%
 }
 
 .columnName {
