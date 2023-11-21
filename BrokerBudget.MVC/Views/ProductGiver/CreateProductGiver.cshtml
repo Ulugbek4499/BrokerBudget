@@ -8,12 +8,12 @@
 
 @model CreateProductGiverCommand
 
-<h3 class="text-center">Янги товар берувчи қўшиш</h3>
+<h3 class="header-text">Янги товар берувчи қўшиш</h3>
 <hr />
 <form asp-controller="ProductGiver" asp-action="CreateProductGiver" enctype="multipart/form-data" method="post">
-    <div class="container mt-4">
+    <div class="mt-5 create-form">
         <div class="row">
-            <div class="col-lg-6 offset-lg-3" style="overflow-y:scroll; width:50%; height:70vh">
+            <div class="col-lg-6 offset-lg-3" style="overflow-y:scroll; height:70vh">
 
                 <div class="form-group mt-3">
                     <label asp-for="CompanyName" class="form-label">Корхона номи:</label>
