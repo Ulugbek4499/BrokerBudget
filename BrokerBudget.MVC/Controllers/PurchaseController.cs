@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using BrokerBudget.Application.UseCases.Products;
 using BrokerBudget.Application.UseCases.Products.Queries.GetAllProducts;
 using BrokerBudget.Application.UseCases.ProductGivers;
+using BrokerBudget.Application.UseCases.Purchases.Reports;
 
 namespace BrokerBudget.MVC.Controllers
 {
@@ -45,14 +46,6 @@ namespace BrokerBudget.MVC.Controllers
             return View();
         }
 
-        /*        [HttpPost("[action]")]
-                public async ValueTask<IActionResult> CreatePurchaseFromExcel(IFormFile excelfile)
-                {
-                    var result = await Mediator.Send(new AddPurchasesFromExcel(excelfile));
-
-                    return RedirectToAction("GetAllPurchases");
-                }*/
-
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> GetAllPurchases()
         {
@@ -61,13 +54,13 @@ namespace BrokerBudget.MVC.Controllers
             return View(Purchases);
         }
 
-        /*        [HttpGet("[action]")]
-                public async ValueTask<FileResult> GetAllPurchasesExcel(string fileName = "AllPurchases")
-                {
-                    var result = await Mediator.Send(new GetPurchasesExcel { FileName = fileName });
+        [HttpGet("[action]")]
+        public async ValueTask<FileResult> GetAllPurchasesExcel(string fileName = "Барча_харидлар")
+        {
+            var result = await Mediator.Send(new GetPurchasesExcel { FileName = fileName });
 
-                    return File(result.FileContents, result.Option, result.FileName);
-                }*/
+            return File(result.FileContents, result.Option, result.FileName);
+        }
 
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> UpdatePurchase(int Id)

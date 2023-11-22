@@ -9,6 +9,7 @@ using BrokerBudget.Application.UseCases.ProductGivers.Queries.GetAllProductGiver
 using BrokerBudget.Application.UseCases.ProductTakers;
 using BrokerBudget.Application.UseCases.ProductTakerTakers.Queries.GetAllProductTakerTakers;
 using Microsoft.AspNetCore.Mvc;
+using BrokerBudget.Application.UseCases.Payments.Reports;
 
 namespace BrokerBudget.MVC.Controllers
 {
@@ -40,13 +41,6 @@ namespace BrokerBudget.MVC.Controllers
             return View();
         }
 
-/*        [HttpPost("[action]")]
-        public async ValueTask<IActionResult> CreatePaymentFromExcel(IFormFile excelfile)
-        {
-            var result = await Mediator.Send(new AddPaymentsFromExcel(excelfile));
-
-            return RedirectToAction("GetAllPayments");
-        }*/
 
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> GetAllPayments()
@@ -56,13 +50,13 @@ namespace BrokerBudget.MVC.Controllers
             return View(Payments);
         }
 
-/*        [HttpGet("[action]")]
-        public async ValueTask<FileResult> GetAllPaymentsExcel(string fileName = "AllPayments")
+        [HttpGet("[action]")]
+        public async ValueTask<FileResult> GetAllPaymentsExcel(string fileName = "Барча_Tўловлар")
         {
             var result = await Mediator.Send(new GetPaymentsExcel { FileName = fileName });
 
             return File(result.FileContents, result.Option, result.FileName);
-        }*/
+        }
 
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> UpdatePayment(int Id)

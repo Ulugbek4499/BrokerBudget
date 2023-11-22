@@ -3,6 +3,7 @@ using BrokerBudget.Application.UseCases.Expenses.Commands.DeleteExpense;
 using BrokerBudget.Application.UseCases.Expenses.Commands.UpdateExpense;
 using BrokerBudget.Application.UseCases.Expenses.Queries.GetAllExpenses;
 using BrokerBudget.Application.UseCases.Expenses.Queries.GetExpenseById;
+using BrokerBudget.Application.UseCases.Expenses.Queries.Reports;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BrokerBudget.MVC.Controllers
@@ -29,14 +30,6 @@ namespace BrokerBudget.MVC.Controllers
             return View();
         }
 
-        /*        [HttpPost("[action]")]
-                public async ValueTask<IActionResult> CreateExpenseFromExcel(IFormFile excelfile)
-                {
-                    var result = await Mediator.Send(new AddExpensesFromExcel(excelfile));
-
-                    return RedirectToAction("GetAllExpenses");
-                }*/
-
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> GetAllExpenses()
         {
@@ -45,13 +38,13 @@ namespace BrokerBudget.MVC.Controllers
             return View(Expenses);
         }
 
-        /*        [HttpGet("[action]")]
-                public async ValueTask<FileResult> GetAllExpensesExcel(string fileName = "AllExpenses")
-                {
-                    var result = await Mediator.Send(new GetExpensesExcel { FileName = fileName });
+        [HttpGet("[action]")]
+        public async ValueTask<FileResult> GetAllExpensesExcel(string fileName = "Барча_Xаражатлар")
+        {
+            var result = await Mediator.Send(new GetExpensesExcel { FileName = fileName });
 
-                    return File(result.FileContents, result.Option, result.FileName);
-                }*/
+            return File(result.FileContents, result.Option, result.FileName);
+        }
 
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> UpdateExpense(int Id)

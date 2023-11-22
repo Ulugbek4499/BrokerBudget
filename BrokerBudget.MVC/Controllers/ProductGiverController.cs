@@ -29,14 +29,6 @@ namespace BrokerBudget.MVC.Controllers
             return View();
         }
 
-        /*        [HttpPost("[action]")]
-                public async ValueTask<IActionResult> CreateProductGiverFromExcel(IFormFile excelfile)
-                {
-                    var result = await Mediator.Send(new AddProductGiversFromExcel(excelfile));
-
-                    return RedirectToAction("GetAllProductGivers");
-                }*/
-
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> GetAllProductGivers()
         {
@@ -44,14 +36,6 @@ namespace BrokerBudget.MVC.Controllers
 
             return View(ProductGivers);
         }
-
-        /*        [HttpGet("[action]")]
-                public async ValueTask<FileResult> GetAllProductGiversExcel(string fileName = "AllProductGivers")
-                {
-                    var result = await Mediator.Send(new GetProductGiversExcel { FileName = fileName });
-
-                    return File(result.FileContents, result.Option, result.FileName);
-                }*/
 
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> UpdateProductGiver(int Id)
