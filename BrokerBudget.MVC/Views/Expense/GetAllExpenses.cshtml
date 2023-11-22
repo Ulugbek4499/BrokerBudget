@@ -56,7 +56,7 @@
             </div>
             <div style="display:flex; gap:5px">
                 <select id="sortColumn" class="form-control sortInput-style">
-                    <option value="Amount">Харажат Суммаси:</option>
+                    <option value="Amount">Харажат Суммаси</option>
                     <option value="ExpenseDate">Харажат Куни</option>
                 </select>
                 <select id="sortOrder" class="form-control sortInput-style">
@@ -201,7 +201,8 @@
             var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
             var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
 
-            if (column === "ExpenseAmount" || column === "ProductGiverId") {
+            if (column === "ExpenseAmount") 
+            {
                 cellA = parseFloat(cellA.replace(',', '.')) || 0;
                 cellB = parseFloat(cellB.replace(',', '.')) || 0;
             }

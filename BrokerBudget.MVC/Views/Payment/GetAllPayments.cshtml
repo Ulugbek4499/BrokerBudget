@@ -56,7 +56,7 @@
                     <option value="ProductGiverId">Товар Берувчи</option>
                     <option value="ProductTakerId">Товар Олувчи</option>
                     <option value="PaymentDate">Тўлов Куни</option>
-                    <option value="PaymentPaymentAmount">Тўлов Суммаси</option>
+                    <option value="PaymentAmount">Тўлов Суммаси</option>
                 </select>
                 <select id="sortOrder" class="form-control">
                     <option value="asc">
@@ -127,7 +127,7 @@
                 }
 
                 <div class="table-container" style="overflow: scroll; height: 100%; width:100% ">
-                    <table id="PurchasesTable" class="table">
+                    <table id="PaymentsTable" class="table">
                         <thead>
                             <tr>
                                 <th class="columnName">Aмаллар</th>
@@ -166,7 +166,7 @@
                                     <td data-column="ProductGiverId">@Payment.ProductGiver.CompanyName</td>
                                     <td data-column="ProductTakerId">@Payment.ProductTaker.CompanyName</td>
                                     <td data-column="PaymentDate">@Payment.PaymentDate.ToString("yyyy-MM-dd")</td>
-                                    <td data-column="PaymentAmount" class="PaymentAmount-cell">@Payment.PaymentAmount</td>
+                                    <td data-column="PaymentAmount">@Payment.PaymentAmount</td>
                                 </tr>
                             }
                         </tbody>
@@ -206,8 +206,16 @@
         rows.sort(function (a, b) {
             var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
             var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
-
-            if (column === "PaymentAmount" || column === "ProductGiverId") {
+            
+            if (column === "ProductGiverId" || column === "ProductTakerId")
+            {
+                if (sortOrder === 'asc') {
+                    return cellA.localeCompare(cellB);
+                } else {
+                    return cellB.localeCompare(cellA);
+                }
+            }
+            if (column === "PaymentAmount") {
                 cellA = parseFloat(cellA.replace(',', '.')) || 0;
                 cellB = parseFloat(cellB.replace(',', '.')) || 0;
             }
@@ -315,23 +323,5 @@
         } else {
             extendedSearchContainer.style.display = 'none';
         }
-    });
-</script>
-
-<script>
-    // Function to format the PaymentAmount cells
-    function formatPaymentAmountCells() {
-        var PaymentAmountCells = document.querySelectorAll('.PaymentAmount-cell');
-        PaymentAmountCells.forEach(function (cell) {
-            var PaymentAmount = parseFloat(cell.textContent);
-            if (!isNaN(PaymentAmount)) {
-                cell.textContent = PaymentAmount.toLocaleString(undefined, { minimumFractionDigits: 2 });
-            }
-        });
-    }
-
-    // Call the function when the document is ready
-    document.addEventListener('DOMContentLoaded', function () {
-        formatPaymentAmountCells();
     });
 </script>
