@@ -121,7 +121,7 @@
                 }
 
                 <div class="table-container" style="overflow: scroll; height: 100%; width:100% ">
-                    <table id="PurchasesTable" class="table">
+                    <table id="ExpensesTable" class="table">
                         <thead>
                             <tr>
                                 <th class="columnName">Aмаллар</th>
@@ -235,7 +235,7 @@
 
         for (var i = 0; i < rows.length; i++) {
             var cells = rows[i].getElementsByTagName('td');
-            var ExpenseDate = Date.parse(cells[3].innerText);
+            var ExpenseDate = Date.parse(cells[2].innerText);
 
             var match = true; // Assume it's a match initially
 
