@@ -14,20 +14,7 @@ namespace BrokerBudget.Domain.Entities
         public decimal PricePerAmount { get; set; }
         public decimal? SaleForTotalPrice { get; set; }
 
-        private decimal finalPriceOfPurchase; 
-
-        [NotMapped]
-        public decimal FinalPriceOfPurchase
-        {
-            get
-            {
-                return finalPriceOfPurchase;
-            }
-            set
-            {
-                finalPriceOfPurchase = (decimal)((Amount - SaleAmountCategoryPercentage) * PricePerAmount - SaleForTotalPrice);
-            }
-        }
+        public decimal FinalPriceOfPurchase { get; set; }
 
         public DateTime PurchaseDate { get; set; }
 

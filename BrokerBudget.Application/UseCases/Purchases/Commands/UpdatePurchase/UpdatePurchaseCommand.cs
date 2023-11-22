@@ -35,6 +35,11 @@ namespace BrokerBudget.Application.UseCases.Purchases.Commands.UpdatePurchase
         public async Task Handle(UpdatePurchaseCommand request, CancellationToken cancellationToken)
         {
             Purchase? purchase = await _context.Purchases.FindAsync(request.Id);
+
+            purchase.FinalPriceOfPurchase =
+              ((purchase.Amount - purchase.SaleAmountCategoryPercentage)
+                  * purchase.PricePerAmount - purchase.SaleForTotalPrice) ?? 0;
+
             _mapper.Map(request, purchase);
 
             await _context.SaveChangesAsync(cancellationToken);
