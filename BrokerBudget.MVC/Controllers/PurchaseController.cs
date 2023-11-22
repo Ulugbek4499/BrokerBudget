@@ -55,7 +55,7 @@ namespace BrokerBudget.MVC.Controllers
         }
 
         [HttpGet("[action]")]
-        public async ValueTask<FileResult> GetAllPurchasesExcel(string fileName = "Барча_харидлар")
+        public async ValueTask<FileResult> GetAllPurchasesExcel(string fileName = "Барча_Xаридлар")
         {
             var result = await Mediator.Send(new GetPurchasesExcel { FileName = fileName });
 
