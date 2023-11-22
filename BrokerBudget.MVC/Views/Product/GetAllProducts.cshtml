@@ -47,8 +47,8 @@
                         <thead>
                             <tr>
                                 <th class="columnName">Aмаллар</th>
-                                <th class="columnName">Товар номи</th>
-                                <th class="columnName">Товар ўлчов бирлиги</th>
+                                <th data-column="ProductId" class="columnName">Товар номи</th>
+                                <th data-column="AmountCategory" class="columnName">Товар ўлчов бирлиги</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -90,7 +90,7 @@
 </div>
 
 <script>
-    document.getElementById('searchButton').addEventListener('click', function () {
+    document.getElementById('searchButtonSimple').addEventListener('click', function () {
         var input = document.getElementById('searchInput').value.toLowerCase();
         var rows = document.getElementById('ProductsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
