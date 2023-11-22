@@ -61,7 +61,6 @@
                     <option value="ProductGiverId">Товар Берувчи</option>
                     <option value="ProductTakerId">Товар Олувчи</option>
                     <option value="PurchaseDate">Харид Куни</option>
-                    <option value="Amount">Миқдор(Кг/Дона)</option>
                 </select>
                 <select id="sortOrder" class="form-control sortInput-style">
                     <option value="asc">Ўсиш тартибида</option>
@@ -228,12 +227,19 @@
             var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
             var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
 
-            if (column === "PurchaseAmount" || column === "ProductGiverId") {
+            if (column === "ProductId" ||column === "ProductGiverId" || column === "ProductTakerId") {
+                if (sortOrder === 'asc') {
+                    return cellA.localeCompare(cellB);
+                } else {
+                    return cellB.localeCompare(cellA);
+                }
+            }
+            if (column === "PaymentAmount") {
                 cellA = parseFloat(cellA.replace(',', '.')) || 0;
                 cellB = parseFloat(cellB.replace(',', '.')) || 0;
             }
 
-            if (column === "PurchaseDate") {
+            if (column === "PaymentDate") {
                 cellA = new Date(cellA);
                 cellB = new Date(cellB);
             }
@@ -265,7 +271,7 @@
 
         for (var i = 0; i < rows.length; i++) {
             var cells = rows[i].getElementsByTagName('td');
-            var PurchaseDate = Date.parse(cells[3].innerText);
+            var PurchaseDate = Date.parse(cells[4].innerText);
 
             var match = true; 
 
