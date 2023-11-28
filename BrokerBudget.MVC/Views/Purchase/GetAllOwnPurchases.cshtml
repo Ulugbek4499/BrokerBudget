@@ -60,7 +60,6 @@
                 <select id="sortColumn" class="form-control sortInput-style">
                     <option value="ProductId">Товар</option>
                     <option value="ProductGiverId">Товар Берувчи</option>
-                    <option value="ProductTakerId">Товар Олувчи</option>
                     <option value="PurchaseDate">Харид Куни</option>
                 </select>
                 <select id="sortOrder" class="form-control sortInput-style">
@@ -96,7 +95,6 @@
             <div class="input-block tool-bar3">
                 <input id="searchProductId" type="text" class="form-control extendedSearchInput-style" placeholder="Товар">
                 <input id="searchProductGiverId" type="text" class="form-control extendedSearchInput-style" placeholder="Товар Берувчи">
-                <input id="searchProductTakerId" type="text" class="form-control extendedSearchInput-style" placeholder="Товар Олувчи">
                 <input id="searchStartDate" type="date" class="form-control extendedSearchInput-style" placeholder="Дан">
                 <input id="searchEndDate" type="date" class="form-control extendedSearchInput-style" placeholder="Гача">
                 <div class="input-group-append">
@@ -134,7 +132,6 @@
                                 <th class="columnName">Aмаллар</th>
                                 <th data-column="ProductId" class="columnName">Товар</th>
                                 <th data-column="ProductGiverId" class="columnName">Товар Берувчи</th>
-                                <th data-column="ProductTakerId" class="columnName">Товар Олувчи</th>
                                 <th data-column="PurchaseDate" class="columnName">Харид Куни</th>
                                 <th data-column="PurchaseTotalSum" class="columnName">Умумий сумма</th>
                                 <th data-column="Amount" class="columnName">Миқдор</th>
@@ -178,9 +175,8 @@
                                             </a>
                                         </div>
                                     </td>
-                                    <td data-column="ProductGiverId">@Purchase.Product.Name</td>
+                                    <td data-column="ProductId">@Purchase.Product.Name</td>
                                     <td data-column="ProductGiverId">@Purchase.ProductGiver.CompanyName</td>
-                                    <td data-column="ProductTakerId">@Purchase.ProductTaker.CompanyName</td>
                                     <td data-column="PurchaseDate">@Purchase.PurchaseDate.ToString("yyyy-MM-dd")</td>
                                     <td data-column="PurchaseTotalSum">@Purchase.FinalPriceOfPurchase</td>
                                     <td data-column="Amount">@Purchase.Amount</td>
@@ -228,7 +224,7 @@
             var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
             var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
 
-            if (column === "ProductId" || column === "ProductGiverId" || column === "ProductTakerId") {
+            if (column === "ProductId" || column === "ProductGiverId") {
                 if (sortOrder === 'asc') {
                     return cellA.localeCompare(cellB);
                 } else {
@@ -264,7 +260,6 @@
     document.getElementById('searchButton').addEventListener('click', function () {
         var searchProductId = document.getElementById('searchProductId').value.toLowerCase();
         var searchProductGiverId = document.getElementById('searchProductGiverId').value.toLowerCase();
-        var searchProductTakerId = document.getElementById('searchProductTakerId').value.toLowerCase();
         var searchStartDate = document.getElementById('searchStartDate').value;
         var searchEndDate = document.getElementById('searchEndDate').value;
 
@@ -280,9 +275,6 @@
                 match = false;
             }
             if (searchProductGiverId && !cells[2].innerText.toLowerCase().includes(searchProductGiverId)) {
-                match = false;
-            }
-            if (searchProductTakerId && !cells[3].innerText.toLowerCase().includes(searchProductTakerId)) {
                 match = false;
             }
             if (searchStartDate) {
@@ -322,7 +314,6 @@
         // Reset the extended search fields
         document.getElementById('searchProductId').value = '';
         document.getElementById('searchProductGiverId').value = '';
-        document.getElementById('searchProductTakerId').value = '';
         document.getElementById('searchStartDate').value = '';
         document.getElementById('searchEndDate').value = '';
 
