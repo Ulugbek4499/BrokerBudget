@@ -2,18 +2,18 @@
 using BrokerBudget.Application.UseCases.Payments.Commands.CreatePayment;
 using BrokerBudget.Application.UseCases.Payments.Commands.DeletePayment;
 using BrokerBudget.Application.UseCases.Payments.Commands.UpdatePayment;
-using BrokerBudget.Application.UseCases.Payments.Queries.GetAllPayments;
 using BrokerBudget.Application.UseCases.Payments.Queries.GetPaymentById;
-using BrokerBudget.Application.UseCases.ProductGivers;
 using BrokerBudget.Application.UseCases.ProductGivers.Queries.GetAllProductGivers;
 using BrokerBudget.Application.UseCases.ProductTakers;
 using BrokerBudget.Application.UseCases.ProductTakerTakers.Queries.GetAllProductTakerTakers;
 using Microsoft.AspNetCore.Mvc;
 using BrokerBudget.Application.UseCases.Payments.Reports;
+using BrokerBudget.Application.UseCases.Payments.Queries.GetAllClientPayments;
+using BrokerBudget.Application.UseCases.Payments.Queries.GetAllOwnPayments;
 
 namespace BrokerBudget.MVC.Controllers
 {
-    public class PaymentController : ApiBaseController
+	public class PaymentController : ApiBaseController
     {
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> CreatePayment()
@@ -31,8 +31,13 @@ namespace BrokerBudget.MVC.Controllers
         public async ValueTask<IActionResult> CreatePayment([FromForm] CreatePaymentCommand Payment)
         {
             await Mediator.Send(Payment);
+            
+            if(Payment.ProductGiverId is null)
+            {
+				return RedirectToAction("GetAllOwnPayments");
+			}
 
-            return RedirectToAction("GetAllPayments");
+            return RedirectToAction("GetAllClientPayments");
         }
 
         [HttpGet("[action]")]
@@ -43,14 +48,21 @@ namespace BrokerBudget.MVC.Controllers
 
 
         [HttpGet("[action]")]
-        public async ValueTask<IActionResult> GetAllPayments()
+        public async ValueTask<IActionResult> GetAllClientPayments()
         {
-            var Payments = await Mediator.Send(new GetAllPaymentsQuery());
+            var Payments = await Mediator.Send(new GetAllClientPaymentsQuery());
 
             return View(Payments);
         }
+		[HttpGet("[action]")]
+		public async ValueTask<IActionResult> GetAllOwnPayments()
+		{
+			var Payments = await Mediator.Send(new GetAllOwnPaymentsQuery());
 
-        [HttpGet("[action]")]
+			return View(Payments);
+		}
+
+		[HttpGet("[action]")]
         public async ValueTask<FileResult> GetAllPaymentsExcel(string fileName = "Барча_Tўловлар")
         {
             var result = await Mediator.Send(new GetPaymentsExcel { FileName = fileName });
@@ -76,8 +88,14 @@ namespace BrokerBudget.MVC.Controllers
         public async ValueTask<IActionResult> UpdatePayment([FromForm] UpdatePaymentCommand Payment)
         {
             await Mediator.Send(Payment);
-            return RedirectToAction("GetAllPayments");
-        }
+
+			if (Payment.ProductGiverId is null)
+			{
+				return RedirectToAction("GetAllOwnPayments");
+			}
+
+			return RedirectToAction("GetAllClientPayments");
+		}
 
         public async ValueTask<IActionResult> DeletePayment(int Id)
         {

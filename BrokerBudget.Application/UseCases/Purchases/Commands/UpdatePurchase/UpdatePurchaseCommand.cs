@@ -14,7 +14,6 @@ namespace BrokerBudget.Application.UseCases.Purchases.Commands.UpdatePurchase
 
         public decimal PricePerAmount { get; set; }
         public decimal? SaleForTotalPrice { get; set; }
-
         public decimal? TakenMoneyAmount { get; set; }
         public DateTime PurchaseDate { get; set; }
 

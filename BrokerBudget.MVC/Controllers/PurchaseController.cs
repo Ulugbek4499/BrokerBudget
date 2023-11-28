@@ -12,6 +12,11 @@ using BrokerBudget.Application.UseCases.Products;
 using BrokerBudget.Application.UseCases.Products.Queries.GetAllProducts;
 using BrokerBudget.Application.UseCases.ProductGivers;
 using BrokerBudget.Application.UseCases.Purchases.Reports;
+using BrokerBudget.Application.UseCases.Payments.Queries.GetAllClientPayments;
+using BrokerBudget.Application.UseCases.Payments.Queries.GetAllOwnPayments;
+using BrokerBudget.Application.UseCases.Purchases.Queries.GetAllOwnPurchases;
+using BrokerBudget.Application.UseCases.Purchases.Queries.GetAllCustomerPurchases;
+using BrokerBudget.Domain.Entities;
 
 namespace BrokerBudget.MVC.Controllers
 {
@@ -37,7 +42,12 @@ namespace BrokerBudget.MVC.Controllers
         {
             await Mediator.Send(Purchase);
 
-            return RedirectToAction("GetAllPurchases");
+			if (Purchase.ProductGiverId is null)
+			{
+				return RedirectToAction("GetAllOwnPurchases");
+			}
+
+			return RedirectToAction("GetAllClientPurchases");
         }
 
         [HttpGet("[action]")]
@@ -46,13 +56,21 @@ namespace BrokerBudget.MVC.Controllers
             return View();
         }
 
-        [HttpGet("[action]")]
-        public async ValueTask<IActionResult> GetAllPurchases()
-        {
-            var Purchases = await Mediator.Send(new GetAllPurchasesQuery());
+		[HttpGet("[action]")]
+		public async ValueTask<IActionResult> GetAllClientPurchases()
+		{
+			var Payments = await Mediator.Send(new GetAllClientPurchasesQuery());
 
-            return View(Purchases);
-        }
+			return View(Payments);
+		}
+
+		[HttpGet("[action]")]
+		public async ValueTask<IActionResult> GetAllOwnPurchases()
+		{
+			var Payments = await Mediator.Send(new GetAllOwnPurchasesQuery());
+
+			return View(Payments);
+		}
 
         [HttpGet("[action]")]
         public async ValueTask<FileResult> GetAllPurchasesExcel(string fileName = "Барча_Xаридлар")
@@ -83,8 +101,14 @@ namespace BrokerBudget.MVC.Controllers
         public async ValueTask<IActionResult> UpdatePurchase([FromForm] UpdatePurchaseCommand Purchase)
         {
             await Mediator.Send(Purchase);
-            return RedirectToAction("GetAllPurchases");
-        }
+
+			if (Purchase.ProductGiverId is null)
+			{
+				return RedirectToAction("GetAllOwnPurchases");
+			}
+
+			return RedirectToAction("GetAllClientPurchases");
+		}
 
         public async ValueTask<IActionResult> DeletePurchase(int Id)
         {
