@@ -120,7 +120,7 @@ namespace BrokerBudget.Application.UseCases.Reports
                      .Sum(p => p.PaymentAmount),
 
 
-                AmountOfAllPurchasesByProductTakerName = productTakerPurchasesWithNameAndTotalPaymentsPair,
+         /*       AmountOfAllPurchasesByProductTakerName = productTakerPurchasesWithNameAndTotalPaymentsPair,
                 AmountOfAllPurchasesByProductTaker = purchases
                      .Where(p => p.ProductTakerId != null || p.ProductTakerId != 0)
                      .Sum(p => p.FinalPriceOfPurchase),
@@ -135,7 +135,7 @@ namespace BrokerBudget.Application.UseCases.Reports
                      .Sum(p => p.FinalPriceOfPurchase),
                 AmountOfAllPurchasesByProductTakerToday = purchases
                      .Where(p => p.PurchaseDate.Date == currentDate.Date && (p.ProductTakerId != null || p.ProductTakerId != 0))
-                     .Sum(p => p.FinalPriceOfPurchase),
+                     .Sum(p => p.FinalPriceOfPurchase),*/
 
 
                 AmountOfAllPaymentsToProductGiverName = productGiverPaymentsWithNameAndTotalPaymentsPair,
@@ -156,7 +156,7 @@ namespace BrokerBudget.Application.UseCases.Reports
                      .Sum(p => p.PaymentAmount),
 
 
-                AmountOfAllPurchasesToProductGiverName = productGiverPurchasesWithNameAndTotalPaymentsPair,
+       /*         AmountOfAllPurchasesToProductGiverName = productGiverPurchasesWithNameAndTotalPaymentsPair,
                 AmountOfAllPurchasesToProductGiver = purchases
                      .Where(p => p.ProductTakerId != null || p.ProductTakerId != 0)
                      .Sum(p => p.FinalPriceOfPurchase),
@@ -171,7 +171,7 @@ namespace BrokerBudget.Application.UseCases.Reports
                      .Sum(p => p.FinalPriceOfPurchase),
                 AmountOfAllPurchasesToProductGiverToday = purchases
                      .Where(p => p.PurchaseDate.Date == currentDate.Date && (p.ProductTakerId != null || p.ProductTakerId != 0))
-                     .Sum(p => p.FinalPriceOfPurchase),
+                     .Sum(p => p.FinalPriceOfPurchase),*/
             };
 
             return statistic;
