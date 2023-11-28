@@ -25,7 +25,7 @@ namespace BrokerBudget.Application.UseCases.Payments.Queries.GetAllClientPayment
 
 		public async Task<PaymentResponse[]> Handle(GetAllClientPaymentsQuery request, CancellationToken cancellationToken)
 		{
-			var Payments = await _context.Payments.Where(x=>x.ProductGiverId==null).ToArrayAsync();
+			var Payments = await _context.Payments.Where(x=>x.ProductGiver==null).ToArrayAsync();
 
 			return _mapper.Map<PaymentResponse[]>(Payments);
 		}

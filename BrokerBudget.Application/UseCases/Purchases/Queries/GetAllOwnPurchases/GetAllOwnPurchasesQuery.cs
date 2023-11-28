@@ -25,7 +25,7 @@ namespace BrokerBudget.Application.UseCases.Purchases.Queries.GetAllOwnPurchases
 
 		public async Task<PurchaseResponse[]> Handle(GetAllOwnPurchasesQuery request, CancellationToken cancellationToken)
 		{
-			var purchases = await _context.Purchases.Where(x=>x.ProductTakerId==null).ToArrayAsync();
+			var purchases = await _context.Purchases.Where(x=>x.ProductTaker==null).ToArrayAsync();
 
 			return _mapper.Map<PurchaseResponse[]>(purchases);
 		}

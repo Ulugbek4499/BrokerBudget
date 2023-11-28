@@ -12,6 +12,7 @@ using BrokerBudget.Application.UseCases.Products.Queries.GetAllProducts;
 using BrokerBudget.Application.UseCases.Purchases.Reports;
 using BrokerBudget.Application.UseCases.Purchases.Queries.GetAllOwnPurchases;
 using BrokerBudget.Application.UseCases.Purchases.Queries.GetAllCustomerPurchases;
+using BrokerBudget.Application.UseCases.Payments.Commands.CreatePayment;
 
 namespace BrokerBudget.MVC.Controllers
 {
@@ -34,12 +35,19 @@ namespace BrokerBudget.MVC.Controllers
         {
             await Mediator.Send(Purchase);
 
-			if (Purchase.ProductGiverId is null)
-			{
-				return RedirectToAction("GetAllOwnPurchases");
-			}
+            if (Purchase.TakenMoneyAmount is not null || Purchase.TakenMoneyAmount !=0)
+            {
+                 CreatePaymentCommand createPaymentCommand = new CreatePaymentCommand()
+                 {
+                     PaymentAmount = Purchase.TakenMoneyAmount??0,
+                     PaymentDate = Purchase.PurchaseDate,
+                     ProductGiverId = Purchase.ProductGiverId,
+                 };
 
-			return RedirectToAction("GetAllClientPurchases");
+                await Mediator.Send(createPaymentCommand);
+            }
+
+	        return RedirectToAction("GetAllOwnPurchases");
         }
 
 		[HttpGet("[action]")]
@@ -59,12 +67,19 @@ namespace BrokerBudget.MVC.Controllers
 		{
 			await Mediator.Send(Purchase);
 
-			if (Purchase.ProductGiverId is null)
-			{
-				return RedirectToAction("GetAllOwnPurchases");
-			}
+            if (Purchase.TakenMoneyAmount is not null || Purchase.TakenMoneyAmount != 0)
+            {
+                CreatePaymentCommand createPaymentCommand = new CreatePaymentCommand()
+                {
+                    PaymentAmount = Purchase.TakenMoneyAmount ?? 0,
+                    PaymentDate = Purchase.PurchaseDate,
+                    ProductTakerId = Purchase.ProductTakerId
+                };
 
-			return RedirectToAction("GetAllClientPurchases");
+                await Mediator.Send(createPaymentCommand);
+            }
+
+            return RedirectToAction("GetAllClientPurchases");
 		}
 
 		[HttpGet("[action]")]
