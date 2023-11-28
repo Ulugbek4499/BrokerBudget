@@ -11,9 +11,9 @@ using Microsoft.EntityFrameworkCore;
 namespace BrokerBudget.Application.UseCases.Purchases.Queries.GetAllCustomerPurchases
 {
 
-	public record GetAllCustomerPurchasesQuery : IRequest<PurchaseResponse[]>;
+	public record GetAllClientPurchasesQuery : IRequest<PurchaseResponse[]>;
 
-	public class GetAllCustomerPurchasesQueryHandler : IRequestHandler<GetAllCustomerPurchasesQuery, PurchaseResponse[]>
+	public class GetAllCustomerPurchasesQueryHandler : IRequestHandler<GetAllClientPurchasesQuery, PurchaseResponse[]>
 	{
 		private readonly IMapper _mapper;
 		private readonly IApplicationDbContext _context;
@@ -24,7 +24,7 @@ namespace BrokerBudget.Application.UseCases.Purchases.Queries.GetAllCustomerPurc
 			_context = context;
 		}
 
-		public async Task<PurchaseResponse[]> Handle(GetAllCustomerPurchasesQuery request, CancellationToken cancellationToken)
+		public async Task<PurchaseResponse[]> Handle(GetAllClientPurchasesQuery request, CancellationToken cancellationToken)
 		{
 			var purchases = await _context.Purchases.Where(x=>x.ProductGiverId==null).ToArrayAsync();
 
