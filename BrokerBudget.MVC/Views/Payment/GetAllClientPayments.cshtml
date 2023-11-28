@@ -53,7 +53,6 @@
             </div>
             <div style="display:flex; gap:5px">
                 <select id="sortColumn" class="form-control sortInput-style">
-                    <option value="ProductGiverId">Товар Берувчи</option>
                     <option value="ProductTakerId">Товар Олувчи</option>
                     <option value="PaymentDate">Тўлов Куни</option>
                     <option value="PaymentAmount">Тўлов Суммаси</option>
@@ -93,7 +92,6 @@
     <div class="row">
         <div class="col">
             <div class="input-block tool-bar3">
-                <input id="searchProductGiverId" type="text" class="form-control extendedSearchInput-style" placeholder="Товар Берувчи">
                 <input id="searchProductTakerId" type="text" class="form-control extendedSearchInput-style" placeholder="Товар Олувчи">
                 <input id="searchStartDate" type="date" class="form-control extendedSearchInput-style" placeholder="Дан">
                 <input id="searchEndDate" type="date" class="form-control extendedSearchInput-style" placeholder="Гача">
@@ -131,7 +129,6 @@
                         <thead>
                             <tr>
                                 <th class="columnName">Aмаллар</th>
-                                <th data-column="ProductGiverId" class="columnName">Товар Берувчи</th>
                                 <th data-column="ProductTakerId" class="columnName">Товар Олувчи</th>
                                 <th data-column="PaymentDate" class="columnName">Тўлов Куни</th>
                                 <th data-column="PaymentAmount" class="columnName">Тўлов Суммаси</th>
@@ -163,7 +160,6 @@
                                             </a>
                                         </div>
                                     </td>
-                                    <td data-column="ProductGiverId">@Payment.ProductGiver.CompanyName</td>
                                     <td data-column="ProductTakerId">@Payment.ProductTaker.CompanyName</td>
                                     <td data-column="PaymentDate">@Payment.PaymentDate.ToString("yyyy-MM-dd")</td>
                                     <td data-column="PaymentAmount">@Payment.PaymentAmount</td>
@@ -207,7 +203,7 @@
             var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
             var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
 
-            if (column === "ProductGiverId" || column === "ProductTakerId") {
+            if (column === "ProductTakerId") {
                 if (sortOrder === 'asc') {
                     return cellA.localeCompare(cellB);
                 } else {
@@ -241,7 +237,6 @@
 
 <script>
     document.getElementById('searchButton').addEventListener('click', function () {
-        var searchProductGiverId = document.getElementById('searchProductGiverId').value.toLowerCase();
         var searchProductTakerId = document.getElementById('searchProductTakerId').value.toLowerCase();
         var searchStartDate = document.getElementById('searchStartDate').value;
         var searchEndDate = document.getElementById('searchEndDate').value;
@@ -255,9 +250,6 @@
 
             var match = true; // Assume it's a match initially
 
-            if (searchProductGiverId && !cells[1].innerText.toLowerCase().includes(searchProductGiverId)) {
-                match = false;
-            }
             if (searchStartDate) {
                 var startDate = new Date(searchStartDate);
                 if (searchEndDate) {
@@ -296,11 +288,10 @@
         document.getElementById('searchInput').value = '';
 
         // Reset the sorting to default values
-        document.getElementById('sortColumn').value = 'ProductGiverId';
+        document.getElementById('sortColumn').value = 'ProductTakerId';
         document.getElementById('sortOrder').value = 'asc';
 
         // Reset the extended search fields
-        document.getElementById('searchProductGiverId').value = '';
         document.getElementById('searchProductTakerId').value = '';
         document.getElementById('searchStartDate').value = '';
         document.getElementById('searchEndDate').value = '';
