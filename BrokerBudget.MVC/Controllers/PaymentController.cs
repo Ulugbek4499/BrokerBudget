@@ -16,10 +16,25 @@ namespace BrokerBudget.MVC.Controllers
 	public class PaymentController : ApiBaseController
     {
         [HttpGet("[action]")]
-        public async ValueTask<IActionResult> CreatePayment()
+        public async ValueTask<IActionResult> CreateOwnPayment()
         {
             ProductGiverResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
             ViewData["ProductGivers"] = productGivers;
+
+            return View();
+        }
+
+        [HttpPost("[action]")]
+        public async ValueTask<IActionResult> CreateOwnPayment([FromForm] CreatePaymentCommand Payment)
+        {
+            await Mediator.Send(Payment);
+
+            return RedirectToAction("GetAllOwnPayments");
+        }
+
+        [HttpGet("[action]")]
+        public async ValueTask<IActionResult> CreateClientPayment()
+        {
 
             ProductTakerResponse[] productTakers = await Mediator.Send(new GetAllProductTakersQuery());
             ViewData["ProductTakers"] = productTakers;
@@ -28,24 +43,12 @@ namespace BrokerBudget.MVC.Controllers
         }
 
         [HttpPost("[action]")]
-        public async ValueTask<IActionResult> CreatePayment([FromForm] CreatePaymentCommand Payment)
+        public async ValueTask<IActionResult> CreateClientPayment([FromForm] CreatePaymentCommand Payment)
         {
             await Mediator.Send(Payment);
-            
-            if(Payment.ProductGiverId is null)
-            {
-				return RedirectToAction("GetAllOwnPayments");
-			}
 
             return RedirectToAction("GetAllClientPayments");
         }
-
-        [HttpGet("[action]")]
-        public async ValueTask<IActionResult> CreatePaymentFromExcel()
-        {
-            return View();
-        }
-
 
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> GetAllClientPayments()
