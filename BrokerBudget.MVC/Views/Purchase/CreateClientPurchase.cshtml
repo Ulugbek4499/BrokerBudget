@@ -1,0 +1,149 @@
+﻿@using BrokerBudget.Application.UseCases.Purchases.Commands.CreatePurchase;
+@using BrokerBudget.Application.UseCases.Products;
+@using BrokerBudget.Application.UseCases.ProductGivers;
+@using BrokerBudget.Application.UseCases.ProductTakers;
+@using BrokerBudget.Domain.Entities;
+
+
+@{
+    ViewData["Title"] = "CreateClientPurchase";
+    Layout = "_Layout";
+
+    ProductResponse[] Products = ViewData["Products"] as ProductResponse[];
+    ProductTakerResponse[] ProductTakers = ViewData["ProductTakers"] as ProductTakerResponse[];
+}
+
+@model CreatePurchaseCommand
+
+
+<h3 class="header-text">Янги тўлов қўшиш</h3>
+<hr />
+<form asp-controller="Purchase" asp-action="CreateClientPurchase" enctype="multipart/form-data" method="post">
+    <div class="mt-5 create-form">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3" style="overflow-y:scroll; height:70vh">
+
+                <div class="form-group mt-3">
+                    <label for="ProductId">Товар:</label>
+                    <select class="form-control" id="ProductId" name="ProductId" required>
+                        <option value="">Товарни киритиш</option>
+                        @foreach (var Product in Products)
+                        {
+                            <option value="@Product.Id" data-ProductGiver-number="@Product.Name">@Product.Name</option>
+                        }
+                    </select>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $('#ProductId').select2();
+                    });
+                </script>
+
+                <div class="form-group mt-3">
+                    <label for="ProductTakerId">Товар Олувчи:</label>
+                    <select class="form-control" id="ProductTakerId" name="ProductTakerId" required>
+                        <option value="">Товар Олувчини киритиш</option>
+                        @foreach (var ProductTaker in ProductTakers)
+                        {
+                            <option value="@ProductTaker.Id" data-ProductGiver-number="@ProductTaker.CompanyName">@ProductTaker.ResponsiblePersonName / @ProductTaker.PhoneNumber</option>
+                        }
+                    </select>
+                </div>
+
+                <script>
+                    $(document).ready(function () {
+                        $('#ProductTakerId').select2();
+                    });
+                </script>
+
+                <div class="form-group mt-3">
+                    <label asp-for="PurchaseDate">Харид куни:</label>
+                    <input asp-for="PurchaseDate" type="date" class="form-control" required />
+                    <span asp-validation-for="PurchaseDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="Amount" class="form-label">Миқдор (Кг / Дона):</label>
+                    <input asp-for="Amount" type="text" class="form-control" placeholder="Миқдор (Кг / Дона)">
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="SaleAmountCategoryPercentage" class="form-label">Чегирма (Кг / Дона):</label>
+                    <input asp-for="SaleAmountCategoryPercentage" type="text" class="form-control" placeholder="Чегирма (Кг / Дона)">
+                    <span asp-validation-for="SaleAmountCategoryPercentage" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="PricePerAmount" class="form-label">Бир дона/кг учун нархи:</label>
+                    <input asp-for="PricePerAmount" type="text" class="form-control" placeholder="Бир дона/кг учун нархини киритиш">
+                    <span asp-validation-for="PricePerAmount" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="SaleForTotalPrice" class="form-label">Умумий суммадан чегирма:</label>
+                    <input asp-for="SaleForTotalPrice" type="text" class="form-control" placeholder="Умумий суммадан чегирмани киритиш">
+                    <span asp-validation-for="SaleForTotalPrice" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="TakenMoneyAmount" class="form-label">Тўлов Суммаси:</label>
+                    <input asp-for="TakenMoneyAmount" type="text" class="form-control" placeholder="Тўлов Суммасини киритиш">
+                    <span asp-validation-for="TakenMoneyAmount" class="text-danger"></span>
+                </div>
+
+                <div class="form-group button-group mt-3">
+                    <button type="submit" class="btn btn-success">Сақлаш</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        $('#ProductId').select2({
+            placeholder: "Товар Танланг",
+            allowClear: true,
+            matcher: function (params, data) {
+                if ($.trim(params.term) === '') {
+                    return data;
+                }
+
+                var term = $.trim(params.term).toLowerCase();
+                var text = data.text.toLowerCase();
+
+                if (text.indexOf(term) > -1) {
+                    return data;
+                }
+
+                return null;
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $('#ProductTakerId').select2({
+            placeholder: "Товар Олувчини Танланг",
+            allowClear: true,
+            matcher: function (params, data) {
+                if ($.trim(params.term) === '') {
+                    return data;
+                }
+
+                var term = $.trim(params.term).toLowerCase();
+                var text = data.text.toLowerCase();
+
+                if (text.indexOf(term) > -1) {
+                    return data;
+                }
+
+                return null;
+            }
+        });
+    });
+</script>
+

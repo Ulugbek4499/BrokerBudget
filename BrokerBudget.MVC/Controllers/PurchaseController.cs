@@ -5,25 +5,20 @@ using BrokerBudget.Application.UseCases.ProductTakerTakers.Queries.GetAllProduct
 using BrokerBudget.Application.UseCases.Purchases.Commands.CreatePurchase;
 using BrokerBudget.Application.UseCases.Purchases.Commands.DeletePurchase;
 using BrokerBudget.Application.UseCases.Purchases.Commands.UpdatePurchase;
-using BrokerBudget.Application.UseCases.Purchases.Queries.GetAllPurchases;
 using BrokerBudget.Application.UseCases.Purchases.Queries.GetPurchaseById;
 using Microsoft.AspNetCore.Mvc;
 using BrokerBudget.Application.UseCases.Products;
 using BrokerBudget.Application.UseCases.Products.Queries.GetAllProducts;
-using BrokerBudget.Application.UseCases.ProductGivers;
 using BrokerBudget.Application.UseCases.Purchases.Reports;
-using BrokerBudget.Application.UseCases.Payments.Queries.GetAllClientPayments;
-using BrokerBudget.Application.UseCases.Payments.Queries.GetAllOwnPayments;
 using BrokerBudget.Application.UseCases.Purchases.Queries.GetAllOwnPurchases;
 using BrokerBudget.Application.UseCases.Purchases.Queries.GetAllCustomerPurchases;
-using BrokerBudget.Domain.Entities;
 
 namespace BrokerBudget.MVC.Controllers
 {
-    public class PurchaseController : ApiBaseController
+	public class PurchaseController : ApiBaseController
     {
         [HttpGet("[action]")]
-        public async ValueTask<IActionResult> CreatePurchase()
+        public async ValueTask<IActionResult> CreateOwnPurchase()
         {
             ProductResponse[] products = await Mediator.Send(new GetAllProductsQuery());
             ViewData["Products"] = products;
@@ -31,14 +26,11 @@ namespace BrokerBudget.MVC.Controllers
             ProductGiverResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
             ViewData["ProductGivers"] = productGivers;
 
-            ProductTakerResponse[] productTakers = await Mediator.Send(new GetAllProductTakersQuery());
-            ViewData["ProductTakers"] = productTakers;
-
             return View();
         }
 
         [HttpPost("[action]")]
-        public async ValueTask<IActionResult> CreatePurchase([FromForm] CreatePurchaseCommand Purchase)
+        public async ValueTask<IActionResult> CreateOwnPurchase([FromForm] CreatePurchaseCommand Purchase)
         {
             await Mediator.Send(Purchase);
 
@@ -50,7 +42,32 @@ namespace BrokerBudget.MVC.Controllers
 			return RedirectToAction("GetAllClientPurchases");
         }
 
-        [HttpGet("[action]")]
+		[HttpGet("[action]")]
+		public async ValueTask<IActionResult> CreateClientPurchase()
+		{
+			ProductResponse[] products = await Mediator.Send(new GetAllProductsQuery());
+			ViewData["Products"] = products;
+
+			ProductTakerResponse[] productTakers = await Mediator.Send(new GetAllProductTakersQuery());
+			ViewData["ProductTakers"] = productTakers;
+
+			return View();
+		}
+
+		[HttpPost("[action]")]
+		public async ValueTask<IActionResult> CreateClientPurchase([FromForm] CreatePurchaseCommand Purchase)
+		{
+			await Mediator.Send(Purchase);
+
+			if (Purchase.ProductGiverId is null)
+			{
+				return RedirectToAction("GetAllOwnPurchases");
+			}
+
+			return RedirectToAction("GetAllClientPurchases");
+		}
+
+		[HttpGet("[action]")]
         public async ValueTask<IActionResult> CreatePurchaseFromExcel()
         {
             return View();
