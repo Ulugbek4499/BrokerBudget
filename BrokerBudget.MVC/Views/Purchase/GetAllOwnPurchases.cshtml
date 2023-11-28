@@ -2,17 +2,19 @@
     Layout = "_Layout";
 }
 
-@model BrokerBudget.Application.UseCases.Payments.PaymentResponse[]
 
-<h3 class="header-text">Тўловлар</h3>
+@model BrokerBudget.Application.UseCases.Purchases.PurchaseResponse[]
+
+
+<h3 class="header-text">Харидлар</h3>
 
 <div class="row">
     <div class="col ">
         <div class="tool-bar">
 
             <div>
-                <a href="@Url.Action("CreatePayment")" class="btn btn-primary mr-2">
-                   Тўлов
+                <a href="@Url.Action("CreatePurchase")" class="btn btn-primary mr-2">
+                    Харид
                 </a>
             </div>
 
@@ -26,7 +28,9 @@
                         <path d="M142.9 142.9c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5c0 0 0 0 0 0H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5c7.7-21.8 20.2-42.3 37.8-59.8zM16 312v7.6 .7V440c0 9.7 5.8 18.5 14.8 22.2s19.3 1.7 26.2-5.2l41.6-41.6c87.6 86.5 228.7 86.2 315.8-1c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.2 62.2-162.7 62.5-225.3 1L185 329c6.9-6.9 8.9-17.2 5.2-26.2s-12.5-14.8-22.2-14.8H48.4h-.7H40c-13.3 0-24 10.7-24 24z" />
                     </svg>
                 </button>
+
                 <input id="searchInput" type="text" class="form-control searchInput-style" placeholder="Излаш">
+
                 <div class="input-group-append">
                     <button id="searchButtonSimple" class="btn btn-info" type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
@@ -39,6 +43,7 @@
                     </button>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -47,24 +52,20 @@
     <div class="col">
         <div class="tool-bar2">
             <div>
-                <a asp-controller="Payment" asp-action="GetAllPaymentsExcel" class="btn btn-success">
+                <a asp-controller="Purchase" asp-action="GetAllPurchasesExcel" class="btn btn-success">
                     Excel
                 </a>
             </div>
             <div style="display:flex; gap:5px">
                 <select id="sortColumn" class="form-control sortInput-style">
+                    <option value="ProductId">Товар</option>
                     <option value="ProductGiverId">Товар Берувчи</option>
                     <option value="ProductTakerId">Товар Олувчи</option>
-                    <option value="PaymentDate">Тўлов Куни</option>
-                    <option value="PaymentAmount">Тўлов Суммаси</option>
+                    <option value="PurchaseDate">Харид Куни</option>
                 </select>
-                <select id="sortOrder" class="form-control">
-                    <option value="asc">
-                        Ўсиш тартибида
-                    </option>
-                    <option value="desc">
-                        Камайиш тартибида
-                    </option>
+                <select id="sortOrder" class="form-control sortInput-style">
+                    <option value="asc">Ўсиш тартибида</option>
+                    <option value="desc">Камайиш тартибида</option>
                 </select>
                 <button id="sortButton" class="btn btn-info">
                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
@@ -90,14 +91,14 @@
     </div>
 </div>
 <div id="extendedSearchContainer" style="display: none;">
-<div class="row">
-    <div class="col">
-        <div class="input-block tool-bar3">
+    <div class="row">
+        <div class="col">
+            <div class="input-block tool-bar3">
+                <input id="searchProductId" type="text" class="form-control extendedSearchInput-style" placeholder="Товар">
                 <input id="searchProductGiverId" type="text" class="form-control extendedSearchInput-style" placeholder="Товар Берувчи">
                 <input id="searchProductTakerId" type="text" class="form-control extendedSearchInput-style" placeholder="Товар Олувчи">
                 <input id="searchStartDate" type="date" class="form-control extendedSearchInput-style" placeholder="Дан">
                 <input id="searchEndDate" type="date" class="form-control extendedSearchInput-style" placeholder="Гача">
-                <input id="searchPaymentAmount" type="text" class="form-control extendedSearchInput-style" placeholder="Тўлов Суммаси">
                 <div class="input-group-append">
                     <button id="searchButton" class="btn btn-info" type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
@@ -122,28 +123,42 @@
                 @{
                     if (Model.Length == 0)
                     {
-                        <h2>Ҳозирда тўловлар йўқ...</h2>
+                        <h2>Ҳозирда xаридлар йўқ...</h2>
                     }
                 }
 
                 <div class="table-container" style="overflow: scroll; height: 100%; width:100% ">
-                    <table id="PaymentsTable" class="table">
+                    <table id="PurchasesTable" class="table">
                         <thead>
                             <tr>
                                 <th class="columnName">Aмаллар</th>
+                                <th data-column="ProductId" class="columnName">Товар</th>
                                 <th data-column="ProductGiverId" class="columnName">Товар Берувчи</th>
                                 <th data-column="ProductTakerId" class="columnName">Товар Олувчи</th>
-                                <th data-column="PaymentDate" class="columnName">Тўлов Куни</th>
-                                <th data-column="PaymentAmount" class="columnName">Тўлов Суммаси</th>
+                                <th data-column="PurchaseDate" class="columnName">Харид Куни</th>
+                                <th data-column="PurchaseTotalSum" class="columnName">Умумий сумма</th>
+                                <th data-column="Amount" class="columnName">Миқдор</th>
+                                <th data-column="SaleAmountCategoryPercentage" class="columnName">Миқдордан чегирма</th>
+                                <th data-column="PricePerAmount" class="columnName">Нарх(1 кг/дона)</th>
+                                <th data-column="SaleForTotalPrice" class="columnName">Умумий суммадан чегирма</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var Payment in Model)
+                            @foreach (var Purchase in Model)
                             {
                                 <tr>
                                     <td class="action-links">
                                         <div style="display:flex; gap:5px">
-                                            <a href="@Url.Action("UpdatePayment", new { id = Payment.Id })" class="btn btn-secondary">
+                                            <a href="@Url.Action("ViewPurchase", new { id = Purchase.Id })" class="btn btn-secondary">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 512 512">
+                                                    <style>
+                                                        svg {
+                                                            fill: #c88a04
+                                                        }</style>
+                                                    <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
+                                                </svg>
+                                            </a>
+                                            <a href="@Url.Action("UpdatePurchase", new { id = Purchase.Id })" class="btn btn-secondary">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 512 512">
                                                     <style>
                                                         svg {
@@ -151,8 +166,8 @@
                                                         }</style>
                                                     <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z" />
                                                 </svg>
-                                                </a>
-                                            <a href="@Url.Action("DeletePayment", new { id = Payment.Id })" class="btn btn-danger">
+                                            </a>
+                                            <a href="@Url.Action("DeletePurchase", new { id = Purchase.Id })" class="btn btn-danger">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 448 512">
                                                     <style>
                                                         svg {
@@ -163,10 +178,16 @@
                                             </a>
                                         </div>
                                     </td>
-                                    <td data-column="ProductGiverId">@Payment.ProductGiver.CompanyName</td>
-                                    <td data-column="ProductTakerId">@Payment.ProductTaker.CompanyName</td>
-                                    <td data-column="PaymentDate">@Payment.PaymentDate.ToString("yyyy-MM-dd")</td>
-                                    <td data-column="PaymentAmount">@Payment.PaymentAmount</td>
+                                    <td data-column="ProductGiverId">@Purchase.Product.Name</td>
+                                    <td data-column="ProductGiverId">@Purchase.ProductGiver.CompanyName</td>
+                                    <td data-column="ProductTakerId">@Purchase.ProductTaker.CompanyName</td>
+                                    <td data-column="PurchaseDate">@Purchase.PurchaseDate.ToString("yyyy-MM-dd")</td>
+                                    <td data-column="PurchaseTotalSum">@Purchase.FinalPriceOfPurchase</td>
+                                    <td data-column="Amount">@Purchase.Amount</td>
+                                    <td data-column="SaleAmountCategoryPercentage">@Purchase.SaleAmountCategoryPercentage</td>
+                                    <td data-column="PricePerAmount">@Purchase.PricePerAmount</td>
+                                    <td data-column="SaleForTotalPrice">@Purchase.SaleForTotalPrice</td>
+
                                 </tr>
                             }
                         </tbody>
@@ -180,7 +201,7 @@
 <script>
     document.getElementById('searchButtonSimple').addEventListener('click', function () {
         var input = document.getElementById('searchInput').value.toLowerCase();
-        var rows = document.getElementById('PaymentsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        var rows = document.getElementById('PurchasesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
         for (var i = 0; i < rows.length; i++) {
             var cells = rows[i].getElementsByTagName('td');
@@ -201,14 +222,13 @@
     document.getElementById('sortButton').addEventListener('click', function () {
         var column = document.getElementById('sortColumn').value;
         var sortOrder = document.getElementById('sortOrder').value;
-        var rows = Array.from(document.getElementById('PaymentsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
+        var rows = Array.from(document.getElementById('PurchasesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
 
         rows.sort(function (a, b) {
             var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
             var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
-            
-            if (column === "ProductGiverId" || column === "ProductTakerId")
-            {
+
+            if (column === "ProductId" || column === "ProductGiverId" || column === "ProductTakerId") {
                 if (sortOrder === 'asc') {
                     return cellA.localeCompare(cellB);
                 } else {
@@ -232,7 +252,7 @@
             }
         });
 
-        var tbody = document.getElementById('PaymentsTable').getElementsByTagName('tbody')[0];
+        var tbody = document.getElementById('PurchasesTable').getElementsByTagName('tbody')[0];
         for (var i = 0; i < rows.length; i++) {
             tbody.appendChild(rows[i]);
         }
@@ -242,42 +262,41 @@
 
 <script>
     document.getElementById('searchButton').addEventListener('click', function () {
+        var searchProductId = document.getElementById('searchProductId').value.toLowerCase();
         var searchProductGiverId = document.getElementById('searchProductGiverId').value.toLowerCase();
         var searchProductTakerId = document.getElementById('searchProductTakerId').value.toLowerCase();
         var searchStartDate = document.getElementById('searchStartDate').value;
         var searchEndDate = document.getElementById('searchEndDate').value;
-        var searchPaymentAmount = document.getElementById('searchPaymentAmount').value.toLowerCase();
 
-        var rows = document.getElementById('PaymentsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        var rows = document.getElementById('PurchasesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
         for (var i = 0; i < rows.length; i++) {
             var cells = rows[i].getElementsByTagName('td');
-            var paymentDate = Date.parse(cells[3].innerText);
+            var PurchaseDate = Date.parse(cells[4].innerText);
 
-            var match = true; // Assume it's a match initially
+            var match = true;
 
-            if (searchProductGiverId && !cells[1].innerText.toLowerCase().includes(searchProductGiverId)) {
+            if (searchProductId && !cells[1].innerText.toLowerCase().includes(searchProductId)) {
+                match = false;
+            }
+            if (searchProductGiverId && !cells[2].innerText.toLowerCase().includes(searchProductGiverId)) {
+                match = false;
+            }
+            if (searchProductTakerId && !cells[3].innerText.toLowerCase().includes(searchProductTakerId)) {
                 match = false;
             }
             if (searchStartDate) {
                 var startDate = new Date(searchStartDate);
                 if (searchEndDate) {
                     var endDate = new Date(searchEndDate);
-                    if (paymentDate < startDate || paymentDate > endDate) {
+                    if (PurchaseDate < startDate || PurchaseDate > endDate) {
                         match = false;
                     }
                 } else {
-                    // If only start date is entered, show payments for that specific day
-                    if (!isSameDay(paymentDate, startDate)) {
+                    if (!isSameDay(PurchaseDate, startDate)) {
                         match = false;
                     }
                 }
-            }
-            if (searchPaymentAmount && !cells[4].innerText.toLowerCase().includes(searchPaymentAmount)) {
-                match = false;
-            }
-            if (searchProductTakerId && !cells[2].innerText.toLowerCase().includes(searchProductTakerId)) {
-                match = false;
             }
 
             rows[i].style.display = match ? '' : 'none';
@@ -301,14 +320,14 @@
         document.getElementById('sortOrder').value = 'asc';
 
         // Reset the extended search fields
+        document.getElementById('searchProductId').value = '';
         document.getElementById('searchProductGiverId').value = '';
         document.getElementById('searchProductTakerId').value = '';
         document.getElementById('searchStartDate').value = '';
         document.getElementById('searchEndDate').value = '';
-        document.getElementById('searchPaymentAmount').value = '';
 
         // Show all rows in the table
-        var rows = document.getElementById('PaymentsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        var rows = document.getElementById('PurchasesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
         for (var i = 0; i < rows.length; i++) {
             rows[i].style.display = '';
         }
