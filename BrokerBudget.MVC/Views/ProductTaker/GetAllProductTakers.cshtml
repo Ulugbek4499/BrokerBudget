@@ -5,7 +5,7 @@
 @model BrokerBudget.Application.UseCases.ProductTakers.ProductTakerResponse[]
 
 
-<h3 class="header-text">Товар олувчилар</h3>
+<h3 class="header-text">Юк Олувчилар</h3>
 
 <div class="row">
     <div class="col ">
@@ -13,7 +13,7 @@
 
             <div>
                  <a href="@Url.Action("CreateProductTaker")" class="btn btn-primary mr-2">
-                     Товар олувчи
+                    Юк Олувчи 
                  </a>
             </div>
             <div style="display:flex; gap:5px">
@@ -43,7 +43,7 @@
                 @{
                     if (Model.Length == 0)
                     {
-                        <h2>Ҳозирда товар берувчилар йўқ...</h2>
+                        <h2>Ҳозирда Юк Олувчиларлар йўқ...</h2>
                     }
                 }
 
@@ -53,10 +53,10 @@
                             <tr>
                                 <th class="columnName">Aмаллар</th>
                                 <th class="columnName">Корхона номи</th>
-                                <th class ="columnName">Маъсул шахс исми</th>
-                                <th class="columnName">Барча харидлар</th>
-                                <th class="columnName">Барча тўловлар</th>
-                                <th class="columnName">Фарқ</th>
+                                <th class ="columnName">Маъсул шахс</th>
+                                <th class="columnName">Юк Бердим</th>
+                                <th class="columnName">Пул Олдим</th>
+                                <th class="columnName">Oстаток</th>
                                 <th class ="columnName">Телефон рақам</th>
                                 <th class="columnName">INN</th>
                                 <th class="columnName">Банк хисоб рақам</th>

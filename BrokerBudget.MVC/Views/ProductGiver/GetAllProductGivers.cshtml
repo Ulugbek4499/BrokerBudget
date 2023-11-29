@@ -5,14 +5,15 @@
 @model BrokerBudget.Application.UseCases.ProductGivers.ProductGiverResponse[]
 
 
-<h3 class="header-text">Товар берувчилар</h3>
-<<div class="row">
+<h3 class="header-text">Юк Берувчилар</h3>
+
+<div class="row">
     <div class="col ">
         <div class="tool-bar">
 
             <div>
                 <a href="@Url.Action("CreateProductGiver")" class="btn btn-primary mr-2">
-                     Товар берувчи
+                    Юк Берувчи
                 </a>
             </div>
             <div style="display:flex; gap:5px">
@@ -41,7 +42,7 @@
                 @{
                     if (Model.Length == 0)
                     {
-                        <h2>Ҳозирда товар берувчилар йўқ...</h2>
+                        <h2>Ҳозирда Юк Берувчиларлар йўқ...</h2>
                     }
                 }
 
@@ -51,10 +52,10 @@
                             <tr>
                                 <th class="columnName">Aмаллар</th>
                                 <th class="columnName">Корхона номи</th>
-                                <th class="columnName">Маъсул шахс исми</th>
-                                <th class="columnName">Барча харидлар</th>
-                                <th class="columnName">Барча тўловлар</th>
-                                <th class="columnName">Фарқ</th>
+                                <th class="columnName">Маъсул шахс</th>
+                                <th class="columnName">Юк Олдим</th>
+                                <th class="columnName">Пул Бердим</th>
+                                <th class="columnName">Oстаток</th>
                                 <th class="columnName">Телефон рақам</th>
                                 <th class="columnName">INN</th>
                                 <th class="columnName">Банк хисоб рақам</th>

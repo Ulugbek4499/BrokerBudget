@@ -45,7 +45,7 @@
                         <option value="">Товар Олувчини киритиш</option>
                         @foreach (var ProductTaker in ProductTakers)
                         {
-                            <option value="@ProductTaker.Id" data-ProductGiver-number="@ProductTaker.CompanyName">@ProductTaker.ResponsiblePersonName / @ProductTaker.PhoneNumber</option>
+                            <option value="@ProductTaker.Id" data-ProductGiver-number="@ProductTaker.CompanyName">@ProductTaker.CompanyName / @ProductTaker.PhoneNumber</option>
                         }
                     </select>
                 </div>
