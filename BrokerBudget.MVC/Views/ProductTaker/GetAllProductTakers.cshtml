@@ -101,9 +101,9 @@
                                     </td>
                                     <td>@ProductTaker.CompanyName</td>
                                     <td>@ProductTaker.ResponsiblePersonName</td>
-                                    <td>@ProductTaker.Purchases.Sum(x=>x.Amount)</td>
-                                    <td>@ProductTaker.Payments.Sum(x=>x.PaymentAmount)</td>
-                                    <td>500.00 </td>
+                                    <td>@(ProductTaker.Purchases.Sum(x => x.FinalPriceOfPurchase))</td>
+                                    <td>@(ProductTaker.Payments.Sum(x => x.PaymentAmount))</td>
+                                    <td>@(ProductTaker.Purchases.Sum(x => x.FinalPriceOfPurchase) - ProductTaker.Payments.Sum(x => x.PaymentAmount))</td>
                                     <td>@ProductTaker.PhoneNumber</td>
                                     <td>@ProductTaker.INN</td>
                                     <td>@ProductTaker.BankAccountNumber</td>
