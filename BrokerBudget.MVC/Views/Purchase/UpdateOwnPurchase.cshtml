@@ -53,21 +53,17 @@
 
                     <script>
                         $(document).ready(function () {
-                            // Initialize Select2 with custom options
                             $('#ProductId').select2({
                                 placeholder: "Товарни Танланг",
                                 allowClear: true,
                                 matcher: function (params, data) {
-                                    // If there's no search term, return all options
                                     if ($.trim(params.term) === '') {
                                         return data;
                                     }
 
-                                    // Remove special characters and convert to lowercase for comparison
                                     var term = $.trim(params.term).toLowerCase();
                                     var text = data.text.toLowerCase();
 
-                                    // Check if the data text contains the term
                                     if (text.indexOf(term) > -1) {
                                         return data;
                                     }
@@ -76,7 +72,6 @@
                                 }
                             });
 
-                            // Set the selected option based on Model.ProductGiverId
                             var ProductId = "@Model.ProductId";
                             if (ProductId) {
                                 $('#ProductId').val(ProductId).trigger('change');
@@ -109,13 +104,6 @@
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="TakenMoneyAmount" class="form-label">Olingan pul:</label>
-                        <input asp-for="TakenMoneyAmount" type="text" class="form-control" value="@Model.TakenMoneyAmount">
-                        <span asp-validation-for="TakenMoneyAmount" class="text-danger"></span>
-                    </div>
-
-
-                    <div class="form-group mt-3">
                         <label for="ProductGiverFilter">Товар Олувчи:</label>
                         <select class="form-control" id="ProductGiverId" name="ProductGiverId" required>
                             <option value="">Товар Олувчини Танланг</option>
@@ -128,21 +116,17 @@
 
                     <script>
                         $(document).ready(function () {
-                            // Initialize Select2 with custom options
                             $('#ProductGiverId').select2({
                                 placeholder: "Товар Берувчини Танланг",
                                 allowClear: true,
                                 matcher: function (params, data) {
-                                    // If there's no search term, return all options
                                     if ($.trim(params.term) === '') {
                                         return data;
                                     }
 
-                                    // Remove special characters and convert to lowercase for comparison
                                     var term = $.trim(params.term).toLowerCase();
                                     var text = data.text.toLowerCase();
 
-                                    // Check if the data text contains the term
                                     if (text.indexOf(term) > -1) {
                                         return data;
                                     }
@@ -151,7 +135,6 @@
                                 }
                             });
 
-                            // Set the selected option based on Model.ProductGiverId
                             var ProductGiverId = "@Model.ProductGiverId";
                             if (ProductGiverId) {
                                 $('#ProductGiverId').val(ProductGiverId).trigger('change');
