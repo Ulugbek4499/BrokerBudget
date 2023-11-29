@@ -174,7 +174,7 @@
                                     </td>
                                     <td data-column="ProductGiverId">@Payment.ProductGiver.CompanyName</td>
                                     <td data-column="PaymentDate">@Payment.PaymentDate.ToString("yyyy-MM-dd")</td>
-                                    <td data-column="PaymentAmount">@Payment.PaymentAmount</td>
+                                    <td data-column="PaymentAmount">@String.Format("{0:N2}", Payment.PaymentAmount).TrimEnd('0').TrimEnd('.')</td>
                                 </tr>
                             }
                         </tbody>

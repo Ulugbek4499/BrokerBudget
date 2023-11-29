@@ -169,7 +169,7 @@
                                           
                                         </div>
                                     </td>
-                                    <td data-column="Amount">@Expense.Amount</td>
+                                    <td data-column="Amount">@String.Format("{0:N2}", Expense.Amount).TrimEnd('0').TrimEnd('.')</td>
                                     <td data-column="ExpenseDate">@Expense.ExpenseDate.ToString("yyyy-MM-dd")</td>
                                     <td data-column="Note">@Expense.Note</td>
                                 </tr>
@@ -214,8 +214,7 @@
             var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
             var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
 
-            if (column === "ExpenseAmount") 
-            {
+            if (column === "Amount") {
                 cellA = parseFloat(cellA.replace(',', '.')) || 0;
                 cellB = parseFloat(cellB.replace(',', '.')) || 0;
             }
@@ -237,6 +236,7 @@
             tbody.appendChild(rows[i]);
         }
     });
+
 
 </script>
 
