@@ -52,14 +52,14 @@
 <div class="row">
     <div class="col">
         <div class="tool-bar2">
-            @if (User.IsInRole("Admin"))
-            {
-                <div>
+            <div>
+                @if (User.IsInRole("Admin"))
+                {
                     <a asp-controller="Payment" asp-action="2Excel" class="btn btn-success">
                         Excel
                     </a>
-                </div>
-            }
+                }
+            </div>
             <div style="display:flex; gap:5px">
                 <select id="sortColumn" class="form-control sortInput-style">
                     <option value="ProductGiverId">Товар Берувчи</option>
