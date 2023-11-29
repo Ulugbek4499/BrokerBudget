@@ -35,7 +35,7 @@ namespace BrokerBudget.MVC.Controllers
         {
             await Mediator.Send(Purchase);
 
-            if (Purchase.TakenMoneyAmount is not null || Purchase.TakenMoneyAmount !=0)
+            if (Purchase.TakenMoneyAmount>0)
             {
                  CreatePaymentCommand createPaymentCommand = new CreatePaymentCommand()
                  {
@@ -67,7 +67,7 @@ namespace BrokerBudget.MVC.Controllers
 		{
 			await Mediator.Send(Purchase);
 
-            if (Purchase.TakenMoneyAmount is not null || Purchase.TakenMoneyAmount != 0)
+            if (Purchase.TakenMoneyAmount > 0)
             {
                 CreatePaymentCommand createPaymentCommand = new CreatePaymentCommand()
                 {

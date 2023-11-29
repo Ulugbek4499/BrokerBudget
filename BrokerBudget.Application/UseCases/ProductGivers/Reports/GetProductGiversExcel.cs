@@ -1,35 +1,39 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AutoMapper;
 using BrokerBudget.Application.Common.Interfaces;
 using BrokerBudget.Application.Common;
+using BrokerBudget.Application.UseCases.ProductGivers;
 using ClosedXML.Excel;
 using MediatR;
-using System.Data;
-using Microsoft.EntityFrameworkCore;
 
-namespace BrokerBudget.Application.UseCases.Purchases.Reports
+namespace BrokerBudget.Application.UseCases.ProductGivers.Reports
 {
-    public class GetPurchasesExcel : IRequest<ExcelReportResponse>
+    public class GetProductGiversExcel : IRequest<ExcelReportResponse>
     {
         public string FileName { get; set; }
     }
 
-    public class GetPurchasesExcelHandler : IRequestHandler<GetPurchasesExcel, ExcelReportResponse>
+    public class GetProductGiversExcelHandler : IRequestHandler<GetProductGiversExcel, ExcelReportResponse>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public GetPurchasesExcelHandler(IApplicationDbContext context, IMapper mapper)
+        public GetProductGiversExcelHandler(IApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<ExcelReportResponse> Handle(GetPurchasesExcel request, CancellationToken cancellationToken)
+        public async Task<ExcelReportResponse> Handle(GetProductGiversExcel request, CancellationToken cancellationToken)
         {
             using (XLWorkbook workbook = new())
             {
-                var orderData = await GetPurchasesAsync(cancellationToken);
-                var excelSheet = workbook.AddWorksheet(orderData, "Purchases");
+                var orderData = await GetProductGiversAsync(cancellationToken);
+                var excelSheet = workbook.AddWorksheet(orderData, "ProductGivers");
 
                 excelSheet.RowHeight = 20;
                 excelSheet.Column(1).Width = 18;
@@ -40,7 +44,7 @@ namespace BrokerBudget.Application.UseCases.Purchases.Reports
                 excelSheet.Column(6).Width = 18;
                 excelSheet.Column(7).Width = 18;
                 excelSheet.Column(8).Width = 18;
-                excelSheet.Column(9).Width = 18;
+                excelSheet.Column(8).Width = 18;
 
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
@@ -51,9 +55,9 @@ namespace BrokerBudget.Application.UseCases.Purchases.Reports
             }
         }
 
-        private async Task<DataTable> GetPurchasesAsync(CancellationToken cancellationToken = default)
+        private async Task<DataTable> GetProductGiversAsync(CancellationToken cancellationToken = default)
         {
-            var AllPurchases = await _context.Purchases.ToListAsync(cancellationToken);
+            var AllProductGivers = await _context.ProductGivers.ToListAsync(cancellationToken);
 
             DataTable excelDataTable = new()
             {
@@ -70,11 +74,11 @@ namespace BrokerBudget.Application.UseCases.Purchases.Reports
             excelDataTable.Columns.Add("Бир дона/кг учун нархи", typeof(decimal));
             excelDataTable.Columns.Add("Умумий суммадан чегирма", typeof(decimal));
 
-            var PurchasesList = _mapper.Map<List<PurchaseResponse>>(AllPurchases);
+            var ProductGiversList = _mapper.Map<List<PurchaseResponse>>(AllProductGivers);
 
-            if (PurchasesList.Count > 0)
+            if (ProductGiversList.Count > 0)
             {
-                PurchasesList.ForEach(item =>
+                ProductGiversList.ForEach(item =>
                 {
                     excelDataTable.Rows.Add(
                         item.Product.Name,
