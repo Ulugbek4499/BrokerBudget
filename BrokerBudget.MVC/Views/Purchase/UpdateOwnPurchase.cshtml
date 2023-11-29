@@ -1,10 +1,8 @@
 ﻿@using BrokerBudget.Application.UseCases.Products;
-@using BrokerBudget.Application.UseCases.Purchases.Commands.CreatePurchase;
+@using BrokerBudget.Application.UseCases.Purchases.Commands.UpdatePurchase;
 @using BrokerBudget.Application.UseCases.Purchases;
 @using BrokerBudget.Application.UseCases.ProductGivers;
-@using BrokerBudget.Application.UseCases.ProductTakers;
 @using BrokerBudget.Domain.Entities;
-@using BrokerBudget.Application.UseCases.ProductGivers;
 
 @model PurchaseResponse
 
@@ -14,13 +12,12 @@
 
     ProductResponse[] Products = ViewData["Products"] as ProductResponse[];
     ProductGiverResponse[] ProductGivers = ViewData["ProductGivers"] as ProductGiverResponse[];
-    ProductTakerResponse[] ProductTakers = ViewData["ProductTakers"] as ProductTakerResponse[];
 }
 
 <h3 class="header-text">Харидлар Изменить</h3>
 <hr />
 
-<form asp-controller="Purchase" asp-action="UpdatePurchase" enctype="multipart/form-data" method="post">
+<form asp-controller="Purchase" asp-action="UpdateOwnPurchase" enctype="multipart/form-data" method="post">
     <input type="hidden" asp-for="Id" />
 
     <div class="create-form mt-5">

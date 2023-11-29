@@ -113,7 +113,29 @@ namespace BrokerBudget.MVC.Controllers
         }
 
         [HttpGet("[action]")]
-        public async ValueTask<IActionResult> UpdatePurchase(int Id)
+        public async ValueTask<IActionResult> UpdateClientPurchase(int Id)
+        {
+            var Purchase = await Mediator.Send(new GetPurchaseByIdQuery(Id));
+
+            ProductResponse[] products = await Mediator.Send(new GetAllProductsQuery());
+            ViewData["Products"] = products;
+
+            ProductTakerResponse[] productTakers = await Mediator.Send(new GetAllProductTakersQuery());
+            ViewData["ProductTakers"] = productTakers;
+
+            return View(Purchase);
+        }
+
+        [HttpPost("[action]")]
+        public async ValueTask<IActionResult> UpdateClientPurchase([FromForm] UpdatePurchaseCommand Purchase)
+        {
+            await Mediator.Send(Purchase);
+
+            return RedirectToAction("GetAllClientPurchases");
+        }
+
+        [HttpGet("[action]")]
+        public async ValueTask<IActionResult> UpdateOwnPurchase(int Id)
         {
             var Purchase = await Mediator.Send(new GetPurchaseByIdQuery(Id));
 
@@ -123,23 +145,15 @@ namespace BrokerBudget.MVC.Controllers
             ProductGiverResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
             ViewData["ProductGivers"] = productGivers;
 
-            ProductTakerResponse[] productTakers = await Mediator.Send(new GetAllProductTakersQuery());
-            ViewData["ProductTakers"] = productTakers;
-
             return View(Purchase);
         }
 
         [HttpPost("[action]")]
-        public async ValueTask<IActionResult> UpdatePurchase([FromForm] UpdatePurchaseCommand Purchase)
+        public async ValueTask<IActionResult> UpdateOwnPurchase([FromForm] UpdatePurchaseCommand Purchase)
         {
             await Mediator.Send(Purchase);
 
-			if (Purchase.ProductGiverId is null)
-			{
-				return RedirectToAction("GetAllOwnPurchases");
-			}
-
-			return RedirectToAction("GetAllClientPurchases");
+    		return RedirectToAction("GetAllOwnPurchases");
 		}
 
         public async ValueTask<IActionResult> DeletePurchase(int Id)
