@@ -51,7 +51,7 @@ namespace BrokerBudget.Application.UseCases.Reports
                      (productTaker, purchases) => new
                      {
                          CompanyName = productTaker.CompanyName,
-                         TotalPurchases = purchases.Sum(purchase => purchase.FinalPriceOfPurchase)
+                         TotalPurchases = purchases.Sum(purchase => purchase.FinalPriceOfPurchase)??0
                      })
                  .ToDictionary(result => result.CompanyName, result => result.TotalPurchases);
 
@@ -75,7 +75,7 @@ namespace BrokerBudget.Application.UseCases.Reports
                      (productGiver, purchases) => new
                      {
                          CompanyName = productGiver.CompanyName,
-                         TotalPurchases = purchases.Sum(purchase => purchase.FinalPriceOfPurchase)
+                         TotalPurchases = purchases.Sum(purchase => purchase.FinalPriceOfPurchase) ?? 0
                      })
                  .ToDictionary(result => result.CompanyName, result => result.TotalPurchases);
 
@@ -120,22 +120,22 @@ namespace BrokerBudget.Application.UseCases.Reports
                      .Sum(p => p.PaymentAmount),
 
 
-         /*       AmountOfAllPurchasesByProductTakerName = productTakerPurchasesWithNameAndTotalPaymentsPair,
+                AmountOfAllPurchasesByProductTakerName = productTakerPurchasesWithNameAndTotalPaymentsPair,
                 AmountOfAllPurchasesByProductTaker = purchases
                      .Where(p => p.ProductTakerId != null || p.ProductTakerId != 0)
-                     .Sum(p => p.FinalPriceOfPurchase),
+                     .Sum(p => p.FinalPriceOfPurchase)??0,
                 AmountOfAllPurchasesByProductTakerInLastYear = purchases
                      .Where(p => p.PurchaseDate.Year == currentYear && (p.ProductTakerId != null || p.ProductTakerId != 0))
-                     .Sum(p => p.FinalPriceOfPurchase),
+                     .Sum(p => p.FinalPriceOfPurchase) ?? 0,
                 AmountOfAllPurchasesByProductTakerInCurrentMonth = purchases
                      .Where(p => p.PurchaseDate.Month == currentDate.Month && (p.ProductTakerId != null || p.ProductTakerId != 0))
-                     .Sum(p => p.FinalPriceOfPurchase),
+                     .Sum(p => p.FinalPriceOfPurchase) ?? 0,
                 AmountOfAllPurchasesByProductTakerInLastWeek = purchases
                      .Where(p => (currentDate - p.PurchaseDate).TotalDays <= 7 && (p.ProductTakerId != null || p.ProductTakerId != 0))
-                     .Sum(p => p.FinalPriceOfPurchase),
+                     .Sum(p => p.FinalPriceOfPurchase) ?? 0,
                 AmountOfAllPurchasesByProductTakerToday = purchases
                      .Where(p => p.PurchaseDate.Date == currentDate.Date && (p.ProductTakerId != null || p.ProductTakerId != 0))
-                     .Sum(p => p.FinalPriceOfPurchase),*/
+                     .Sum(p => p.FinalPriceOfPurchase) ?? 0,
 
 
                 AmountOfAllPaymentsToProductGiverName = productGiverPaymentsWithNameAndTotalPaymentsPair,
@@ -156,22 +156,22 @@ namespace BrokerBudget.Application.UseCases.Reports
                      .Sum(p => p.PaymentAmount),
 
 
-       /*         AmountOfAllPurchasesToProductGiverName = productGiverPurchasesWithNameAndTotalPaymentsPair,
+                AmountOfAllPurchasesToProductGiverName = productGiverPurchasesWithNameAndTotalPaymentsPair,
                 AmountOfAllPurchasesToProductGiver = purchases
                      .Where(p => p.ProductTakerId != null || p.ProductTakerId != 0)
-                     .Sum(p => p.FinalPriceOfPurchase),
+                     .Sum(p => p.FinalPriceOfPurchase) ?? 0,
                 AmountOfAllPurchasesToProductGiverInLastYear = purchases
                      .Where(p => p.PurchaseDate.Year == currentYear && (p.ProductTakerId != null || p.ProductTakerId != 0))
-                     .Sum(p => p.FinalPriceOfPurchase),
+                     .Sum(p => p.FinalPriceOfPurchase) ?? 0,
                 AmountOfAllPurchasesToProductGiverInCurrentMonth = purchases
                      .Where(p => p.PurchaseDate.Month == currentDate.Month && (p.ProductTakerId != null || p.ProductTakerId != 0))
-                     .Sum(p => p.FinalPriceOfPurchase),
+                     .Sum(p => p.FinalPriceOfPurchase) ?? 0,
                 AmountOfAllPurchasesToProductGiverInLastWeek = purchases
                      .Where(p => (currentDate - p.PurchaseDate).TotalDays <= 7 && (p.ProductTakerId != null || p.ProductTakerId != 0))
-                     .Sum(p => p.FinalPriceOfPurchase),
+                     .Sum(p => p.FinalPriceOfPurchase) ?? 0,
                 AmountOfAllPurchasesToProductGiverToday = purchases
                      .Where(p => p.PurchaseDate.Date == currentDate.Date && (p.ProductTakerId != null || p.ProductTakerId != 0))
-                     .Sum(p => p.FinalPriceOfPurchase),*/
+                     .Sum(p => p.FinalPriceOfPurchase) ?? 0,
             };
 
             return statistic;

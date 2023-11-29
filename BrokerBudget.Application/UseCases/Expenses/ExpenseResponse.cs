@@ -6,7 +6,7 @@ namespace BrokerBudget.Application.UseCases.Expenses
     {
         public int Id { get; set; }
         public decimal Amount { get; set; }
-        public string Note { get; set; }
+        public string? Note { get; set; }
         public DateTime ExpenseDate { get; set; }
 
         public DateTime CreatedDate { get; set; }

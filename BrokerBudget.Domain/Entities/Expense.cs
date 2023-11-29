@@ -10,7 +10,7 @@ namespace BrokerBudget.Domain.Entities
     public class Expense:BaseAuditableEntity
     {
         public decimal Amount { get; set; }
-        public string Note { get; set; }
+        public string? Note { get; set; }
         public DateTime ExpenseDate { get; set; }
     }
 }

@@ -53,29 +53,6 @@
                 </script>
 
                 <div class="form-group mt-3">
-                    <label for="ProductGiverId">Товар Берувчи:</label>
-                    <select class="form-control" id="ProductGiverId" name="ProductGiverId" required>
-                        <option value="">Товар Берувчини киритиш</option>
-                        @foreach (var ProductGiver in ProductGivers)
-                        {
-                            <option value="@ProductGiver.Id" data-ProductGiver-number="@ProductGiver.CompanyName">@ProductGiver.CompanyName / @ProductGiver.PhoneNumber</option>
-                        }
-                    </select>
-                </div>
-
-                <script>
-                    $(document).ready(function () {
-                        $('#ProductGiverId').select2();
-                    });
-                </script>
-
-                <div class="form-group mt-3">
-                    <label asp-for="PurchaseDate">Харид куни:</label>
-                    <input asp-for="PurchaseDate" type="date" class="form-control" required />
-                    <span asp-validation-for="PurchaseDate" class="text-danger"></span>
-                </div>
-
-                <div class="form-group mt-3">
                     <label asp-for="Amount" class="form-label">Миқдор (Кг / Дона):</label>
                     <input asp-for="Amount" type="text" class="form-control" placeholder="Миқдор (Кг / Дона)">
                     <span asp-validation-for="Amount" class="text-danger"></span>
@@ -100,9 +77,32 @@
                 </div>
 
                 <div class="form-group mt-3">
-                    <label asp-for="TakenMoneyAmount" class="form-label">Тўлов Суммаси:</label>
-                    <input asp-for="TakenMoneyAmount" type="text" class="form-control" placeholder="Тўлов Суммасини киритиш">
+                    <label asp-for="TakenMoneyAmount" class="form-label">Пул берим:</label>
+                    <input asp-for="TakenMoneyAmount" type="text" class="form-control" placeholder="Берилган пул миқдори">
                     <span asp-validation-for="TakenMoneyAmount" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="ProductGiverId">Товар Берувчи:</label>
+                    <select class="form-control" id="ProductGiverId" name="ProductGiverId" required>
+                        <option value="">Товар Берувчини киритиш</option>
+                        @foreach (var ProductGiver in ProductGivers)
+                        {
+                            <option value="@ProductGiver.Id" data-ProductGiver-number="@ProductGiver.CompanyName">@ProductGiver.CompanyName / @ProductGiver.PhoneNumber</option>
+                        }
+                    </select>
+                </div>
+
+                <script>
+                    $(document).ready(function () {
+                        $('#ProductGiverId').select2();
+                    });
+                </script>
+
+                <div class="form-group mt-3">
+                    <label asp-for="PurchaseDate">Харид куни:</label>
+                    <input asp-for="PurchaseDate" type="date" class="form-control" required />
+                    <span asp-validation-for="PurchaseDate" class="text-danger"></span>
                 </div>
 
                 <div class="form-group button-group mt-3">
