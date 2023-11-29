@@ -3,7 +3,6 @@ using BrokerBudget.Application.UseCases.ProductTakers.Commands.DeleteProductTake
 using BrokerBudget.Application.UseCases.ProductTakers.Commands.UpdateProductTaker;
 using BrokerBudget.Application.UseCases.ProductTakers.Queries.GetProductTakerTakerById;
 using BrokerBudget.Application.UseCases.ProductTakerTakers.Queries.GetAllProductTakerTakers;
-using GameStore.Domain.States;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
