@@ -64,7 +64,6 @@
                 <select id="sortColumn" class="form-control sortInput-style">
                     <option value="ProductTakerId">Товар Олувчи</option>
                     <option value="PaymentDate">Тўлов Куни</option>
-                    <option value="PaymentAmount">Тўлов Суммаси</option>
                 </select>
                 <select id="sortOrder" class="form-control">
                     <option value="asc">
@@ -220,19 +219,6 @@
                     return cellA.localeCompare(cellB);
                 } else {
                     return cellB.localeCompare(cellA);
-                }
-            }
-
-            if (column === "PaymentAmount") {
-                // Extract the numeric values for comparison
-                var numericCellA = parseFloat(cellA.replace(',', '.')) || 0;
-                var numericCellB = parseFloat(cellB.replace(',', '.')) || 0;
-
-                // Compare numeric values
-                if (sortOrder === 'asc') {
-                    return numericCellA - numericCellB;
-                } else {
-                    return numericCellB - numericCellA;
                 }
             }
 
