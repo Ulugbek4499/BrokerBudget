@@ -3,10 +3,12 @@ using BrokerBudget.Application.UseCases.Products.Commands.DeleteProduct;
 using BrokerBudget.Application.UseCases.Products.Commands.UpdateProduct;
 using BrokerBudget.Application.UseCases.Products.Queries.GetAllProducts;
 using BrokerBudget.Application.UseCases.Products.Queries.GetProductById;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BrokerBudget.MVC.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductController : ApiBaseController
     {
         [HttpGet("[action]")]

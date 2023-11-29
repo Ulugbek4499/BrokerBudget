@@ -3,10 +3,13 @@ using BrokerBudget.Application.UseCases.ProductGivers.Commands.DeleteProductGive
 using BrokerBudget.Application.UseCases.ProductGivers.Commands.UpdateProductGiver;
 using BrokerBudget.Application.UseCases.ProductGivers.Queries.GetAllProductGivers;
 using BrokerBudget.Application.UseCases.ProductGivers.Queries.GetProductGiverById;
+using GameStore.Domain.States;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BrokerBudget.MVC.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductGiverController : ApiBaseController
     {
         [HttpGet("[action]")]
