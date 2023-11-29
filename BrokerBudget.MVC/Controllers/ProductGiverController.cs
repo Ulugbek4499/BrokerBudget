@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BrokerBudget.MVC.Controllers
 {
-    [Authorize(Roles = "Admin")]
+/*    [Authorize(Roles = "Admin")]*/
     public class ProductGiverController : ApiBaseController
     {
         [HttpGet("[action]")]

@@ -1,4 +1,11 @@
-﻿@{
+﻿@using BrokerBudget.Domain.Entities.Identity;
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject IConfiguration Configuration
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -8,20 +15,23 @@
         <img src="/5.png" class="logoStyle"/>
     </div>
 
-    <div class="button-container">
-        <a asp-controller="Report" asp-action="GetStatistics" class="btn btn-dark custom-btn">
-            Statistika
-        </a>
-        <a asp-controller="Product" asp-action="GetAllProducts" class="btn btn-dark custom-btn">
-            Товарлар
-        </a>
-        <a asp-controller="ProductGiver" asp-action="GetAllProductGivers" class="btn btn-dark custom-btn">
-            Юк Берувчилар
-        </a>
-        <a asp-controller="ProductTaker" asp-action="GetAllProductTakers" class="btn btn-dark custom-btn">
-            Юк Олувчилар
-        </a>
-    </div>
+     @if (User.IsInRole("Admin"))
+    {
+        <div class="button-container">
+            <a asp-controller="Report" asp-action="GetStatistics" class="btn btn-dark custom-btn">
+                Statistika
+            </a>
+            <a asp-controller="Product" asp-action="GetAllProducts" class="btn btn-dark custom-btn">
+                Товарлар
+            </a>
+            <a asp-controller="ProductGiver" asp-action="GetAllProductGivers" class="btn btn-dark custom-btn">
+                Юк Берувчилар
+            </a>
+            <a asp-controller="ProductTaker" asp-action="GetAllProductTakers" class="btn btn-dark custom-btn">
+                Юк Олувчилар
+            </a>
+        </div>
+    }
 
 </div>
 
