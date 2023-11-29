@@ -4,6 +4,8 @@
 @using BrokerBudget.Application.UseCases.ProductGivers;
 @using BrokerBudget.Domain.Entities;
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 @model PurchaseResponse
 
 @{
@@ -14,7 +16,20 @@
     ProductGiverResponse[] ProductGivers = ViewData["ProductGivers"] as ProductGiverResponse[];
 }
 
+<style>
+    #calculatedAmount {
+        background-color: yellow;
+        color: black;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 10px;
+        width: 250px;
+    }
+</style>
+
 <h3 class="header-text">Харидлар Изменить</h3>
+<div id="calculatedAmount" class="mt-3"> Сумма:  </div>
 <hr />
 
 <form asp-controller="Purchase" asp-action="UpdateOwnPurchase" enctype="multipart/form-data" method="post">
@@ -69,11 +84,41 @@
                         });
                     </script>
 
+                    <div class="form-group mt-3">
+                        <label asp-for="Amount" class="form-label">Миқдор (Кг / Дона):</label>
+                        <input asp-for="Amount" type="text" class="form-control" value="@Model.Amount">
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
 
                     <div class="form-group mt-3">
-                        <label for="ProductGiverFilter">Товар Берувчи:</label>
+                        <label asp-for="SaleAmountCategoryPercentage" class="form-label">Чегирма (Кг / Дона):</label>
+                        <input asp-for="SaleAmountCategoryPercentage" type="text" class="form-control" value="@Model.SaleAmountCategoryPercentage">
+                        <span asp-validation-for="SaleAmountCategoryPercentage" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label asp-for="PricePerAmount" class="form-label">Бир дона/кг учун нархи:</label>
+                        <input asp-for="PricePerAmount" type="text" class="form-control" value="@Model.PricePerAmount">
+                        <span asp-validation-for="PricePerAmount" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label asp-for="SaleForTotalPrice" class="form-label">Умумий суммадан чегирма:</label>
+                        <input asp-for="SaleForTotalPrice" type="text" class="form-control" value="@Model.SaleForTotalPrice">
+                        <span asp-validation-for="SaleForTotalPrice" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label asp-for="TakenMoneyAmount" class="form-label">Olingan pul:</label>
+                        <input asp-for="TakenMoneyAmount" type="text" class="form-control" value="@Model.TakenMoneyAmount">
+                        <span asp-validation-for="TakenMoneyAmount" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="form-group mt-3">
+                        <label for="ProductGiverFilter">Товар Олувчи:</label>
                         <select class="form-control" id="ProductGiverId" name="ProductGiverId" required>
-                            <option value="">Товар Берувчини Танланг</option>
+                            <option value="">Товар Олувчини Танланг</option>
                             @foreach (var ProductGiver in ProductGivers)
                             {
                                 <option value="@ProductGiver.Id" data-ProductGiver-info="@ProductGiver.CompanyName / @ProductGiver.ResponsiblePersonName / @ProductGiver.PhoneNumber">@ProductGiver.CompanyName / @ProductGiver.ResponsiblePersonName / @ProductGiver.PhoneNumber</option>
@@ -115,78 +160,12 @@
                     </script>
 
                     <div class="form-group mt-3">
-                        <label for="ProductTakerFilter">Товар Олувчи:</label>
-                        <select class="form-control" id="ProductTakerId" name="ProductTakerId" required>
-                            <option value="">Товар Олувчини Танланг</option>
-                            @foreach (var ProductTaker in ProductTakers)
-                            {
-                                <option value="@ProductTaker.Id" data-ProductTaker-info="@ProductTaker.CompanyName / @ProductTaker.ResponsiblePersonName / @ProductTaker.PhoneNumber">@ProductTaker.CompanyName / @ProductTaker.ResponsiblePersonName / @ProductTaker.PhoneNumber</option>
-                            }
-                        </select>
-                    </div>
-
-                    <script>
-                        $(document).ready(function () {
-                            // Initialize Select2 with custom options
-                            $('#ProductTakerId').select2({
-                                placeholder: "Товар Олувчини Танланг",
-                                allowClear: true,
-                                matcher: function (params, data) {
-                                    // If there's no search term, return all options
-                                    if ($.trim(params.term) === '') {
-                                        return data;
-                                    }
-
-                                    // Remove special characters and convert to lowercase for comparison
-                                    var term = $.trim(params.term).toLowerCase();
-                                    var text = data.text.toLowerCase();
-
-                                    // Check if the data text contains the term
-                                    if (text.indexOf(term) > -1) {
-                                        return data;
-                                    }
-
-                                    return null;
-                                }
-                            });
-
-                            // Set the selected option based on Model.ProductGiverId
-                            var ProductTakerId = "@Model.ProductTakerId";
-                            if (ProductTakerId) {
-                                $('#ProductTakerId').val(ProductTakerId).trigger('change');
-                            }
-                        });
-                    </script>
-
-                    <div class="form-group mt-3">
                         <label asp-for="PurchaseDate">Тўлов Куни:</label>
                         <input asp-for="PurchaseDate" type="date" class="form-control" required value="@Model.PurchaseDate.ToString("yyyy-MM-dd")" />
                         <span asp-validation-for="PurchaseDate" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group mt-3">
-                        <label asp-for="Amount" class="form-label">Миқдор (Кг / Дона):</label>
-                        <input asp-for="Amount" type="text" class="form-control" value="@Model.Amount">
-                        <span asp-validation-for="Amount" class="text-danger"></span>
-                    </div>
 
-                    <div class="form-group mt-3">
-                        <label asp-for="SaleAmountCategoryPercentage" class="form-label">Чегирма (Кг / Дона):</label>
-                        <input asp-for="SaleAmountCategoryPercentage" type="text" class="form-control" value="@Model.SaleAmountCategoryPercentage">
-                        <span asp-validation-for="SaleAmountCategoryPercentage" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group mt-3">
-                        <label asp-for="PricePerAmount" class="form-label">Бир дона/кг учун нархи:</label>
-                        <input asp-for="PricePerAmount" type="text" class="form-control" value="@Model.PricePerAmount">
-                        <span asp-validation-for="PricePerAmount" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group mt-3">
-                        <label asp-for="SaleForTotalPrice" class="form-label">Умумий суммадан чегирма:</label>
-                        <input asp-for="SaleForTotalPrice" type="text" class="form-control" value="@Model.SaleForTotalPrice">
-                        <span asp-validation-for="SaleForTotalPrice" class="text-danger"></span>
-                    </div>
 
                     <div class="form-group button-group mt-3">
                         <button type="submit" class="btn btn-success">Сақлаш</button>
@@ -204,3 +183,26 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
+
+<script>
+    console.log("Script is running");
+
+    $(document).ready(function () {
+        function updateCalculatedAmount() {
+            // Get values from input fields
+            var amount = parseFloat($("#Amount").val()) || 0;
+            var saleAmountCategoryPercentage = parseFloat($("#SaleAmountCategoryPercentage").val()) || 0;
+            var pricePerAmount = parseFloat($("#PricePerAmount").val()) || 0;
+            var saleForTotalPrice = parseFloat($("#SaleForTotalPrice").val()) || 0;
+
+            var calculatedAmount = ((amount - saleAmountCategoryPercentage) * pricePerAmount) - saleForTotalPrice;
+
+            // Display the calculated amount
+            $("#calculatedAmount").text("Сумма: " + calculatedAmount.toFixed(2)); // You can format the amount as needed
+        }
+
+        // Attach the update function to input change events
+        $("#Amount, #SaleAmountCategoryPercentage, #PricePerAmount, #SaleForTotalPrice").on("input", updateCalculatedAmount);
+    });
+</script>
