@@ -100,9 +100,9 @@
                                     </td>
                                     <td>@ProductGiver.CompanyName</td>
                                     <td>@ProductGiver.ResponsiblePersonName</td>
-                                    <td>@ProductGiver.Purchases.Sum(x => x.FinalPriceOfPurchase)</td>
-                                    <td>@ProductGiver.Payments.Sum(x => x.PaymentAmount)</td>
-                                    <td>@(ProductGiver.Purchases.Sum(x => x.FinalPriceOfPurchase) - ProductGiver.Payments.Sum(x => x.PaymentAmount))</td>
+                                    <td>@String.Format("{0:N2}", ProductGiver.Purchases.Sum(x => x.FinalPriceOfPurchase)).TrimEnd('0').TrimEnd('.')</td>
+                                    <td>@String.Format("{0:N2}", ProductGiver.Payments.Sum(x => x.PaymentAmount)).TrimEnd('0').TrimEnd('.')</td>
+                                    <td>@(String.Format("{0:N2}", ProductGiver.Purchases.Sum(x => x.FinalPriceOfPurchase) - ProductGiver.Payments.Sum(x => x.PaymentAmount)).TrimEnd('0').TrimEnd('.'))</td>
                                     <td>@ProductGiver.PhoneNumber</td>
                                     <td>@ProductGiver.INN</td>
                                     <td>@ProductGiver.BankAccountNumber</td>
