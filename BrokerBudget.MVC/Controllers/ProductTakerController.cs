@@ -2,6 +2,7 @@
 using BrokerBudget.Application.UseCases.ProductTakers.Commands.DeleteProductTaker;
 using BrokerBudget.Application.UseCases.ProductTakers.Commands.UpdateProductTaker;
 using BrokerBudget.Application.UseCases.ProductTakers.Queries.GetProductTakerTakerById;
+using BrokerBudget.Application.UseCases.ProductTakers.Reports;
 using BrokerBudget.Application.UseCases.ProductTakerTakers.Queries.GetAllProductTakerTakers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -31,14 +32,6 @@ namespace BrokerBudget.MVC.Controllers
             return View();
         }
 
-        /*        [HttpPost("[action]")]
-                public async ValueTask<IActionResult> CreateProductTakerFromExcel(IFormFile excelfile)
-                {
-                    var result = await Mediator.Send(new AddProductTakersFromExcel(excelfile));
-
-                    return RedirectToAction("GetAllProductTakers");
-                }*/
-
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> GetAllProductTakers()
         {
@@ -47,13 +40,13 @@ namespace BrokerBudget.MVC.Controllers
             return View(ProductTakers);
         }
 
-        /*        [HttpGet("[action]")]
-                public async ValueTask<FileResult> GetAllProductTakersExcel(string fileName = "AllProductTakers")
-                {
-                    var result = await Mediator.Send(new GetProductTakersExcel { FileName = fileName });
+        [HttpGet("[action]")]
+        public async ValueTask<FileResult> GetAllProductTakersExcel(string fileName = "Юк_Олувчилар")
+        {
+            var result = await Mediator.Send(new GetProductTakersExcel { FileName = fileName });
 
-                    return File(result.FileContents, result.Option, result.FileName);
-                }*/
+            return File(result.FileContents, result.Option, result.FileName);
+        }
 
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> UpdateProductTaker(int Id)

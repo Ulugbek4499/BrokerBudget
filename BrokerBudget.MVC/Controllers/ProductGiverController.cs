@@ -3,6 +3,8 @@ using BrokerBudget.Application.UseCases.ProductGivers.Commands.DeleteProductGive
 using BrokerBudget.Application.UseCases.ProductGivers.Commands.UpdateProductGiver;
 using BrokerBudget.Application.UseCases.ProductGivers.Queries.GetAllProductGivers;
 using BrokerBudget.Application.UseCases.ProductGivers.Queries.GetProductGiverById;
+using BrokerBudget.Application.UseCases.ProductGivers.Reports;
+using BrokerBudget.Application.UseCases.ProductTakers.Reports;
 using GameStore.Domain.States;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +40,14 @@ namespace BrokerBudget.MVC.Controllers
             var ProductGivers = await Mediator.Send(new GetAllProductGiversQuery());
 
             return View(ProductGivers);
+        }
+
+        [HttpGet("[action]")]
+        public async ValueTask<FileResult> GetAllProductGiversExcel(string fileName = "Юк_Берувчилар")
+        {
+            var result = await Mediator.Send(new GetProductGiversExcel { FileName = fileName });
+
+            return File(result.FileContents, result.Option, result.FileName);
         }
 
         [HttpGet("[action]")]

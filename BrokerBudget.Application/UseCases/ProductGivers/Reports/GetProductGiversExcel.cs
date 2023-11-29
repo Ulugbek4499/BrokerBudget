@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using BrokerBudget.Application.Common.Interfaces;
 using BrokerBudget.Application.Common;
-using BrokerBudget.Application.UseCases.ProductGivers;
 using ClosedXML.Excel;
 using MediatR;
+using System.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace BrokerBudget.Application.UseCases.ProductGivers.Reports
 {
@@ -44,7 +40,6 @@ namespace BrokerBudget.Application.UseCases.ProductGivers.Reports
                 excelSheet.Column(6).Width = 18;
                 excelSheet.Column(7).Width = 18;
                 excelSheet.Column(8).Width = 18;
-                excelSheet.Column(8).Width = 18;
 
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
@@ -64,32 +59,36 @@ namespace BrokerBudget.Application.UseCases.ProductGivers.Reports
                 TableName = "Empdata"
             };
 
-            excelDataTable.Columns.Add("Товаp", typeof(string));
-            excelDataTable.Columns.Add("Товар Берувчи", typeof(string));
-            excelDataTable.Columns.Add("Товар Олувчи", typeof(string));
-            excelDataTable.Columns.Add("Харид куни", typeof(DateTime));
-            excelDataTable.Columns.Add("Umumiy Суммаси", typeof(decimal));
-            excelDataTable.Columns.Add("Миқдор (Кг/Дона)", typeof(decimal));
-            excelDataTable.Columns.Add("Чегирма (Кг/Дона)", typeof(decimal));
-            excelDataTable.Columns.Add("Бир дона/кг учун нархи", typeof(decimal));
-            excelDataTable.Columns.Add("Умумий суммадан чегирма", typeof(decimal));
+            excelDataTable.Columns.Add("Корхона номи", typeof(string));
 
-            var ProductGiversList = _mapper.Map<List<PurchaseResponse>>(AllProductGivers);
+            excelDataTable.Columns.Add("Юк Олдим", typeof(decimal));
+            excelDataTable.Columns.Add("Пул Бердим", typeof(decimal));
+            excelDataTable.Columns.Add("Oстаток", typeof(decimal));
+
+            excelDataTable.Columns.Add("Маъсул шахс", typeof(string));
+            excelDataTable.Columns.Add("Телефон рақам", typeof(string));
+            excelDataTable.Columns.Add("INN", typeof(string));
+            excelDataTable.Columns.Add("Банк хисоб рақам", typeof(string));
+
+            var ProductGiversList = _mapper.Map<List<ProductGiverResponse>>(AllProductGivers);
 
             if (ProductGiversList.Count > 0)
             {
                 ProductGiversList.ForEach(item =>
                 {
+                    decimal? totalPurchase = item.Purchases?.Sum(p => p.FinalPriceOfPurchase);
+                    decimal? totalPayment = item.Payments?.Sum(p => p.PaymentAmount);
+                    decimal? debtAmount = totalPurchase - totalPayment;
+
                     excelDataTable.Rows.Add(
-                        item.Product.Name,
-                        item.ProductGiver?.CompanyName,
-                        item.ProductTaker?.CompanyName,
-                        item.PurchaseDate,
-                        item.FinalPriceOfPurchase,
-                        item.Amount,
-                        item.SaleAmountCategoryPercentage,
-                        item.PricePerAmount,
-                        item.SaleForTotalPrice);
+                        item.CompanyName,
+                        totalPurchase,
+                        totalPayment,
+                        debtAmount,
+                        item.ResponsiblePersonName,
+                        item.PhoneNumber,
+                        item.INN,
+                        item.BankAccountNumber);
                 });
             }
 

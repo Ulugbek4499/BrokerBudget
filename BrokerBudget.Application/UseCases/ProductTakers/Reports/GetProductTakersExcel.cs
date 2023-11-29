@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using BrokerBudget.Application.Common.Interfaces;
 using BrokerBudget.Application.Common;
-using BrokerBudget.Application.UseCases.ProductTakers;
 using ClosedXML.Excel;
 using MediatR;
+using System.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace BrokerBudget.Application.UseCases.ProductTakers.Reports
 {
@@ -64,11 +60,9 @@ namespace BrokerBudget.Application.UseCases.ProductTakers.Reports
             };
 
             excelDataTable.Columns.Add("Корхона номи", typeof(string));
-
-            excelDataTable.Columns.Add("Юк Олдим", typeof(decimal));
-            excelDataTable.Columns.Add("Пул Бердим", typeof(decimal));
+            excelDataTable.Columns.Add("Юк Бердим", typeof(decimal));
+            excelDataTable.Columns.Add("Пул Олдим", typeof(decimal));
             excelDataTable.Columns.Add("Oстаток", typeof(decimal));
-
             excelDataTable.Columns.Add("Маъсул шахс", typeof(string));
             excelDataTable.Columns.Add("Телефон рақам", typeof(string));
             excelDataTable.Columns.Add("INN", typeof(string));
