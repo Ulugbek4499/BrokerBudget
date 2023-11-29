@@ -55,9 +55,9 @@
                 <div>
                      @if (User.IsInRole("Admin"))
                      {
-                             <a asp-controller="Payment" asp-action="2Excel" class="btn btn-success">
-                               Excel
-                             </a>
+                        <a asp-controller="Payment" asp-action="GetAllPaymentsExcel" class="btn btn-success">
+                            Excel
+                        </a>
                      }
                  </div>
             <div style="display:flex; gap:5px">
