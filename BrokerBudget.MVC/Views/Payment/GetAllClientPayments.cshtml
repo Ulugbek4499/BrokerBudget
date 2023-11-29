@@ -263,7 +263,7 @@
 
         for (var i = 0; i < rows.length; i++) {
             var cells = rows[i].getElementsByTagName('td');
-            var paymentDate = Date.parse(cells[3].innerText);
+            var paymentDate = Date.parse(cells[2].innerText);
 
             var match = true; // Assume it's a match initially
 
@@ -281,10 +281,10 @@
                     }
                 }
             }
-            if (searchPaymentAmount && !cells[4].innerText.toLowerCase().includes(searchPaymentAmount)) {
+            if (searchPaymentAmount && !cells[3].innerText.toLowerCase().includes(searchPaymentAmount)) {
                 match = false;
             }
-            if (searchProductTakerId && !cells[2].innerText.toLowerCase().includes(searchProductTakerId)) {
+            if (searchProductTakerId && !cells[1].innerText.toLowerCase().includes(searchProductTakerId)) {
                 match = false;
             }
 

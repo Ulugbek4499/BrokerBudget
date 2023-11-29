@@ -142,7 +142,7 @@
                                 <th data-column="ProductId" class="columnName">Товар</th>
                                 <th data-column="ProductGiverId" class="columnName">Товар Берувчи</th>
                                 <th data-column="PurchaseDate" class="columnName">Харид Куни</th>
-                                <th data-column="PurchaseTotalSum" class="columnName">Умумий сумма</th>
+                                <th data-column="FinalPriceOfPurchase" class="columnName">Умумий сумма</th>
                                 <th data-column="TakenMoneyAmount" class="columnName">Берилган пул</th>
                                 <th data-column="Amount" class="columnName">Миқдор</th>
                                 <th data-column="SaleAmountCategoryPercentage" class="columnName">Миқдордан чегирма</th>
@@ -182,13 +182,12 @@
                                     <td data-column="ProductId">@Purchase.Product.Name</td>
                                     <td data-column="ProductGiverId">@Purchase.ProductGiver.CompanyName</td>
                                     <td data-column="PurchaseDate">@Purchase.PurchaseDate.ToString("yyyy-MM-dd")</td>
-                                    <td data-column="PurchaseTotalSum">@Purchase.FinalPriceOfPurchase</td>
-                                    <td data-column="TakenMoneyAmount">@Purchase.TakenMoneyAmount</td>
+                                    <td data-column="FinalPriceOfPurchase">@String.Format("{0:N2}", Purchase.FinalPriceOfPurchase).TrimEnd('0').TrimEnd('.')</td>
+                                    <td data-column="TakenMoneyAmount">@String.Format("{0:N2}", Purchase.TakenMoneyAmount).TrimEnd('0').TrimEnd('.')</td>
                                     <td data-column="Amount">@Purchase.Amount</td>
                                     <td data-column="SaleAmountCategoryPercentage">@Purchase.SaleAmountCategoryPercentage</td>
-                                    <td data-column="PricePerAmount">@Purchase.PricePerAmount</td>
-                                    <td data-column="SaleForTotalPrice">@Purchase.SaleForTotalPrice</td>
-
+                                    <td data-column="PricePerAmount">@String.Format("{0:N2}", Purchase.PricePerAmount).TrimEnd('0').TrimEnd('.')</td>
+                                    <td data-column="SaleForTotalPrice">@String.Format("{0:N2}", Purchase.SaleForTotalPrice).TrimEnd('0').TrimEnd('.')</td>
                                 </tr>
                             }
                         </tbody>
@@ -236,11 +235,6 @@
                     return cellB.localeCompare(cellA);
                 }
             }
-            if (column === "PaymentAmount") {
-                cellA = parseFloat(cellA.replace(',', '.')) || 0;
-                cellB = parseFloat(cellB.replace(',', '.')) || 0;
-            }
-
             if (column === "PaymentDate") {
                 cellA = new Date(cellA);
                 cellB = new Date(cellB);
@@ -272,7 +266,7 @@
 
         for (var i = 0; i < rows.length; i++) {
             var cells = rows[i].getElementsByTagName('td');
-            var PurchaseDate = Date.parse(cells[4].innerText);
+            var PurchaseDate = Date.parse(cells[3].innerText);
 
             var match = true;
 
