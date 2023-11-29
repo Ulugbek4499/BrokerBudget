@@ -35,9 +35,12 @@ namespace BrokerBudget.Application.UseCases.Purchases.Commands.CreatePurchase
         {
             Purchase Purchase = _mapper.Map<Purchase>(request);
 
-            Purchase.FinalPriceOfPurchase = 
-                ((Purchase.Amount - Purchase.SaleAmountCategoryPercentage) 
-                    * Purchase.PricePerAmount - Purchase.SaleForTotalPrice) ?? 0;
+            decimal saleAmountCategoryPercentage = request.SaleAmountCategoryPercentage ?? 0;
+            decimal saleForTotalPrice = request.SaleForTotalPrice ?? 0;
+
+            Purchase.FinalPriceOfPurchase =
+                (Purchase.Amount - saleAmountCategoryPercentage)
+                    * Purchase.PricePerAmount - saleForTotalPrice;
 
             await _context.Purchases.AddAsync(Purchase, cancellationToken);
             await _context.SaveChangesAsync();

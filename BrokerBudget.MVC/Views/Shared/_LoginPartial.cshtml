@@ -22,17 +22,17 @@
                  <a class="nav-link text-white-50" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName</a>
              </li>
         
-             <li class="nav-item" style="margin-right:20px;">
-            <a class="nav-link text-white-50" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">Чиқиш</a>
-             </li>
-
             @if (User.IsInRole("Admin"))
             {
-            <li class="nav-item">
+            <li class="nav-item" style="margin-right:30px;">
                 <a class="nav-link text-white-50" asp-area="Identity" asp-page="/Account/Register">Рўйхатдан ўтиш</a>
             </li>
             }
-            
+
+           <li class="nav-item" style="margin-right:30px;">
+                <a class="nav-link text-white-50" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">Чиқиш</a>
+             </li>
+
          </div>
     }
     else

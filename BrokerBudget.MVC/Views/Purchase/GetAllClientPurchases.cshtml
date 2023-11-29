@@ -143,9 +143,10 @@
                                 <th data-column="ProductTakerId" class="columnName">Товар Олувчи</th>
                                 <th data-column="PurchaseDate" class="columnName">Харид Куни</th>
                                 <th data-column="PurchaseTotalSum" class="columnName">Умумий сумма</th>
+                                <th data-column="TakenMoneyAmount" class="columnName">Олинган Пул</th>
                                 <th data-column="Amount" class="columnName">Миқдор</th>
                                 <th data-column="SaleAmountCategoryPercentage" class="columnName">Миқдордан чегирма</th>
-                                <th data-column="PricePerAmount" class="columnName">Нарх(1 кг/дона)</th>
+                                <th data-column="PricePerAmount" class="columnName">Нарх (1кг/дона)</th>
                                 <th data-column="SaleForTotalPrice" class="columnName">Умумий суммадан чегирма</th>
                             </tr>
                         </thead>
@@ -182,6 +183,7 @@
                                     <td data-column="ProductTakerId">@Purchase.ProductTaker.CompanyName</td>
                                     <td data-column="PurchaseDate">@Purchase.PurchaseDate.ToString("yyyy-MM-dd")</td>
                                     <td data-column="PurchaseTotalSum">@Purchase.FinalPriceOfPurchase</td>
+                                    <td data-column="TakenMoneyAmount">@Purchase.TakenMoneyAmount</td>
                                     <td data-column="Amount">@Purchase.Amount</td>
                                     <td data-column="SaleAmountCategoryPercentage">@Purchase.SaleAmountCategoryPercentage</td>
                                     <td data-column="PricePerAmount">@Purchase.PricePerAmount</td>
