@@ -144,9 +144,16 @@ namespace BrokerBudget.MVC.Controllers
 
         public async ValueTask<IActionResult> DeletePurchase(int Id)
         {
+            var purchase = await Mediator.Send(new GetPurchaseByIdQuery(Id));
+
             await Mediator.Send(new DeletePurchaseCommand(Id));
 
-            return RedirectToAction("GetAllPurchases");
+            if (purchase.ProductTaker is not null)
+            {
+                return RedirectToAction("GetAllClientPurchases");
+            }
+
+            return RedirectToAction("GetAllOwnPurchases");
         }
 
         [HttpGet("[action]")]

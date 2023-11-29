@@ -102,9 +102,15 @@ namespace BrokerBudget.MVC.Controllers
 
         public async ValueTask<IActionResult> DeletePayment(int Id)
         {
+            var payment = await Mediator.Send(new GetPaymentByIdQuery(Id));
             await Mediator.Send(new DeletePaymentCommand(Id));
+            
+            if(payment.ProductTaker is not null)
+            {
+                return RedirectToAction("GetAllClientPayments");
+            }
 
-            return RedirectToAction("GetAllPayments");
+            return RedirectToAction("GetAllOwnPayments");
         }
 
         [HttpGet("[action]")]
