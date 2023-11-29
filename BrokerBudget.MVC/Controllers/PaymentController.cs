@@ -74,11 +74,8 @@ namespace BrokerBudget.MVC.Controllers
         }
 
         [HttpGet("[action]")]
-        public async ValueTask<IActionResult> UpdatePayment(int Id)
+        public async ValueTask<IActionResult> UpdateClientPayment(int Id)
         {
-            ProductGiverResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
-            ViewData["ProductGivers"] = productGivers;
-
             ProductTakerResponse[] productTakers = await Mediator.Send(new GetAllProductTakersQuery());
             ViewData["ProductTakers"] = productTakers;
 
@@ -88,17 +85,31 @@ namespace BrokerBudget.MVC.Controllers
         }
 
         [HttpPost("[action]")]
-        public async ValueTask<IActionResult> UpdatePayment([FromForm] UpdatePaymentCommand Payment)
+        public async ValueTask<IActionResult> UpdateClientPayment([FromForm] UpdatePaymentCommand Payment)
         {
             await Mediator.Send(Payment);
 
-			if (Payment.ProductGiverId is null)
-			{
-				return RedirectToAction("GetAllOwnPayments");
-			}
-
 			return RedirectToAction("GetAllClientPayments");
 		}
+
+        [HttpGet("[action]")]
+        public async ValueTask<IActionResult> UpdateOwnPayment(int Id)
+        {
+            ProductGiverResponse[] productGivers = await Mediator.Send(new GetAllProductGiversQuery());
+            ViewData["ProductGivers"] = productGivers;
+
+            var Payment = await Mediator.Send(new GetPaymentByIdQuery(Id));
+
+            return View(Payment);
+        }
+
+        [HttpPost("[action]")]
+        public async ValueTask<IActionResult> UpdateOwnPayment([FromForm] UpdatePaymentCommand Payment)
+        {
+            await Mediator.Send(Payment);
+
+            return RedirectToAction("GetAllOwnPayments");
+        }
 
         public async ValueTask<IActionResult> DeletePayment(int Id)
         {
