@@ -4,40 +4,40 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1>Рўйхатдан ўтиш</h1>
 
 <div class="row">
     <div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Create a new account.</h2>
+            <h2>Янги фойдаланувчи қўшиш.</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.FirstName" class="form-control" aria-required="true" placeholder="FirstName" />
-                <label asp-for="Input.FirstName">FirstName</label>
+                <input asp-for="Input.FirstName" class="form-control" aria-required="true" placeholder="исм" />
+                <label asp-for="Input.FirstName">Исм</label>
                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.LastName" class="form-control" aria-required="true" placeholder="LastName" />
-                <label asp-for="Input.LastName">LastName</label>
+                <input asp-for="Input.LastName" class="form-control" aria-required="true" placeholder="фамиля" />
+                <label asp-for="Input.LastName">Фамиля</label>
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control"  aria-required="true" placeholder="name@example.com" />
+                <input asp-for="Input.Email" class="form-control" aria-required="true" placeholder="исм@email.com" />
                 <label asp-for="Input.Email">Email</label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control"  aria-required="true" placeholder="password" />
-                <label asp-for="Input.Password">Password</label>
+                <input asp-for="Input.Password" class="form-control" aria-required="true" placeholder="парол" />
+                <label asp-for="Input.Password">Парол</label>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control" aria-required="true" placeholder="password" />
-                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                <input asp-for="Input.ConfirmPassword" class="form-control" aria-required="true" placeholder="парол" />
+                <label asp-for="Input.ConfirmPassword">Паролни қайта киритинг</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Сақлаш</button>
         </form>
     </div>
     <div class="col-md-6 col-md-offset-2">
