@@ -109,7 +109,7 @@
                             <option value="">Товар Олувчини Танланг</option>
                             @foreach (var ProductGiver in ProductGivers)
                             {
-                                <option value="@ProductGiver.Id" data-ProductGiver-info="@ProductGiver.CompanyName / @ProductGiver.ResponsiblePersonName / @ProductGiver.PhoneNumber">@ProductGiver.CompanyName / @ProductGiver.ResponsiblePersonName / @ProductGiver.PhoneNumber</option>
+                                <option value="@ProductGiver.Id" data-ProductGiver-number="@ProductGiver.CompanyName">@ProductGiver.CompanyName / @ProductGiver.PhoneNumber</option>
                             }
                         </select>
                     </div>
@@ -147,8 +147,6 @@
                         <input asp-for="PurchaseDate" type="date" class="form-control" required value="@Model.PurchaseDate.ToString("yyyy-MM-dd")" />
                         <span asp-validation-for="PurchaseDate" class="text-danger"></span>
                     </div>
-
-
 
                     <div class="form-group button-group mt-3">
                         <button type="submit" class="btn btn-success">Сақлаш</button>
