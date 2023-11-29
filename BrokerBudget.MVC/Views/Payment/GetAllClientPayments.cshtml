@@ -222,9 +222,18 @@
                     return cellB.localeCompare(cellA);
                 }
             }
+
             if (column === "PaymentAmount") {
-                cellA = parseFloat(cellA.replace(',', '.')) || 0;
-                cellB = parseFloat(cellB.replace(',', '.')) || 0;
+                // Extract the numeric values for comparison
+                var numericCellA = parseFloat(cellA.replace(',', '.')) || 0;
+                var numericCellB = parseFloat(cellB.replace(',', '.')) || 0;
+
+                // Compare numeric values
+                if (sortOrder === 'asc') {
+                    return numericCellA - numericCellB;
+                } else {
+                    return numericCellB - numericCellA;
+                }
             }
 
             if (column === "PaymentDate") {
@@ -232,10 +241,20 @@
                 cellB = new Date(cellB);
             }
 
-            if (sortOrder === 'asc') {
-                return cellA < cellB ? -1 : cellA > cellB ? 1 : 0;
+            // Handle date comparison separately
+            if (column === "PaymentDate") {
+                if (sortOrder === 'asc') {
+                    return cellA - cellB;
+                } else {
+                    return cellB - cellA;
+                }
             } else {
-                return cellB < cellA ? -1 : cellB > cellA ? 1 : 0;
+                // Handle other columns (numeric, string) here
+                if (sortOrder === 'asc') {
+                    return cellA < cellB ? -1 : cellA > cellB ? 1 : 0;
+                } else {
+                    return cellB < cellA ? -1 : cellB > cellA ? 1 : 0;
+                }
             }
         });
 
