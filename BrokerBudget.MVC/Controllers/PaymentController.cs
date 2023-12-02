@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using BrokerBudget.Application.UseCases.Payments.Reports;
 using BrokerBudget.Application.UseCases.Payments.Queries.GetAllClientPayments;
 using BrokerBudget.Application.UseCases.Payments.Queries.GetAllOwnPayments;
+using GameStore.Domain.States;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BrokerBudget.MVC.Controllers
 {
@@ -66,6 +68,7 @@ namespace BrokerBudget.MVC.Controllers
 		}
 
 		[HttpGet("[action]")]
+        [Authorize(Roles = "Admin")]
         public async ValueTask<FileResult> GetAllPaymentsExcel(string fileName = "Барча_Tўловлар")
         {
             var result = await Mediator.Send(new GetPaymentsExcel { FileName = fileName });
@@ -111,6 +114,7 @@ namespace BrokerBudget.MVC.Controllers
             return RedirectToAction("GetAllOwnPayments");
         }
 
+        [Authorize(Roles = "Admin")]
         public async ValueTask<IActionResult> DeletePayment(int Id)
         {
             var payment = await Mediator.Send(new GetPaymentByIdQuery(Id));

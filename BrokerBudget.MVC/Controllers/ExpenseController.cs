@@ -4,6 +4,8 @@ using BrokerBudget.Application.UseCases.Expenses.Commands.UpdateExpense;
 using BrokerBudget.Application.UseCases.Expenses.Queries.GetAllExpenses;
 using BrokerBudget.Application.UseCases.Expenses.Queries.GetExpenseById;
 using BrokerBudget.Application.UseCases.Expenses.Queries.Reports;
+using GameStore.Domain.States;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BrokerBudget.MVC.Controllers
@@ -39,6 +41,7 @@ namespace BrokerBudget.MVC.Controllers
         }
 
         [HttpGet("[action]")]
+        [Authorize(Roles = "Admin")]
         public async ValueTask<FileResult> GetAllExpensesExcel(string fileName = "Барча_Xаражатлар")
         {
             var result = await Mediator.Send(new GetExpensesExcel { FileName = fileName });
@@ -61,6 +64,7 @@ namespace BrokerBudget.MVC.Controllers
             return RedirectToAction("GetAllExpenses");
         }
 
+        [Authorize(Roles = "Admin")]
         public async ValueTask<IActionResult> DeleteExpense(int Id)
         {
             await Mediator.Send(new DeleteExpenseCommand(Id));
