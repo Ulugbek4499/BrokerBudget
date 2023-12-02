@@ -5,6 +5,8 @@ using ClosedXML.Excel;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
+using BrokerBudget.Domain.Entities.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace BrokerBudget.Application.UseCases.Expenses.Queries.Reports
 {
@@ -17,11 +19,12 @@ namespace BrokerBudget.Application.UseCases.Expenses.Queries.Reports
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
-
-        public GetExpensesExcelHandler(IApplicationDbContext context, IMapper mapper)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public GetExpensesExcelHandler(IApplicationDbContext context, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         public async Task<ExcelReportResponse> Handle(GetExpensesExcel request, CancellationToken cancellationToken)
@@ -35,6 +38,8 @@ namespace BrokerBudget.Application.UseCases.Expenses.Queries.Reports
                 excelSheet.Column(1).Width = 22;
                 excelSheet.Column(2).Width = 22;
                 excelSheet.Column(3).Width = 40;
+                excelSheet.Column(4).Width = 22;
+                excelSheet.Column(5).Width = 22;
 
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
@@ -57,21 +62,33 @@ namespace BrokerBudget.Application.UseCases.Expenses.Queries.Reports
             excelDataTable.Columns.Add("Харажат Суммаси", typeof(decimal));
             excelDataTable.Columns.Add("Харажат Куни", typeof(DateTime));
             excelDataTable.Columns.Add("Изоҳ", typeof(string));
+            excelDataTable.Columns.Add("CreatedBy", typeof(string));
+            excelDataTable.Columns.Add("CreatedAt", typeof(DateTime));
 
             var ExpensesList = _mapper.Map<List<ExpenseResponse>>(AllExpenses);
 
             if (ExpensesList.Count > 0)
             {
-                ExpensesList.ForEach(item =>
+                foreach (var item in ExpensesList)
                 {
+                    // Fetch user details based on CreatedBy
+                    var creator = await _userManager.FindByIdAsync(item.CreatedBy);
+                    var createdByFullName = creator != null
+                        ? $"{creator.FirstName} {creator.LastName}"
+                        : "User Not Found";
+
                     excelDataTable.Rows.Add(
                         item.Amount,
                         item.ExpenseDate,
-                        item.Note);
-                });
+                        item.Note,
+                        createdByFullName,
+                        item.CreatedDate);
+                }
             }
 
             return excelDataTable;
         }
+
+
     }
 }

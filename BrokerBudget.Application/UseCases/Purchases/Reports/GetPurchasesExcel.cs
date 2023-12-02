@@ -5,6 +5,8 @@ using ClosedXML.Excel;
 using MediatR;
 using System.Data;
 using Microsoft.EntityFrameworkCore;
+using BrokerBudget.Domain.Entities.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace BrokerBudget.Application.UseCases.Purchases.Reports
 {
@@ -17,11 +19,13 @@ namespace BrokerBudget.Application.UseCases.Purchases.Reports
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public GetPurchasesExcelHandler(IApplicationDbContext context, IMapper mapper)
+        public GetPurchasesExcelHandler(IApplicationDbContext context, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         public async Task<ExcelReportResponse> Handle(GetPurchasesExcel request, CancellationToken cancellationToken)
@@ -41,6 +45,8 @@ namespace BrokerBudget.Application.UseCases.Purchases.Reports
                 excelSheet.Column(7).Width = 18;
                 excelSheet.Column(8).Width = 18;
                 excelSheet.Column(9).Width = 18;
+                excelSheet.Column(10).Width = 18;
+                excelSheet.Column(11).Width = 18;
 
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
@@ -69,13 +75,20 @@ namespace BrokerBudget.Application.UseCases.Purchases.Reports
             excelDataTable.Columns.Add("Чегирма (Кг/Дона)", typeof(decimal));
             excelDataTable.Columns.Add("Бир дона/кг учун нархи", typeof(decimal));
             excelDataTable.Columns.Add("Умумий суммадан чегирма", typeof(decimal));
+            excelDataTable.Columns.Add("CreatedBy", typeof(string));
+            excelDataTable.Columns.Add("CreatedAt", typeof(DateTime));
 
             var PurchasesList = _mapper.Map<List<PurchaseResponse>>(AllPurchases);
 
             if (PurchasesList.Count > 0)
             {
-                PurchasesList.ForEach(item =>
+                foreach (var item in PurchasesList)
                 {
+                    var creator = await _userManager.FindByIdAsync(item.CreatedBy);
+                    var createdByFullName = creator != null
+                        ? $"{creator.FirstName} {creator.LastName}"
+                        : "User Not Found";
+
                     excelDataTable.Rows.Add(
                         item.Product.Name,
                         item.ProductGiver?.CompanyName,
@@ -85,8 +98,10 @@ namespace BrokerBudget.Application.UseCases.Purchases.Reports
                         item.Amount,
                         item.SaleAmountCategoryPercentage,
                         item.PricePerAmount,
-                        item.SaleForTotalPrice);
-                });
+                        item.SaleForTotalPrice,
+                        createdByFullName,
+                        item.CreatedDate);
+                }
             }
 
             return excelDataTable;

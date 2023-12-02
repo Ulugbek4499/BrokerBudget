@@ -2,8 +2,10 @@
 using AutoMapper;
 using BrokerBudget.Application.Common;
 using BrokerBudget.Application.Common.Interfaces;
+using BrokerBudget.Domain.Entities.Identity;
 using ClosedXML.Excel;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BrokerBudget.Application.UseCases.Payments.Reports
@@ -17,11 +19,13 @@ namespace BrokerBudget.Application.UseCases.Payments.Reports
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public GetPaymentsExcelHandler(IApplicationDbContext context, IMapper mapper)
+        public GetPaymentsExcelHandler(IApplicationDbContext context, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         public async Task<ExcelReportResponse> Handle(GetPaymentsExcel request, CancellationToken cancellationToken)
@@ -36,6 +40,8 @@ namespace BrokerBudget.Application.UseCases.Payments.Reports
                 excelSheet.Column(2).Width = 22;
                 excelSheet.Column(3).Width = 22;
                 excelSheet.Column(4).Width = 22;
+                excelSheet.Column(5).Width = 22;
+                excelSheet.Column(6).Width = 22;
 
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
@@ -59,19 +65,29 @@ namespace BrokerBudget.Application.UseCases.Payments.Reports
             excelDataTable.Columns.Add("Товар Берувчи", typeof(string));
             excelDataTable.Columns.Add("Товар Олувчи", typeof(string));
             excelDataTable.Columns.Add("Тўлов Куни", typeof(DateTime));
+            excelDataTable.Columns.Add("CreatedBy", typeof(string));
+            excelDataTable.Columns.Add("CreatedAt", typeof(DateTime));
 
             var PaymentsList = _mapper.Map<List<PaymentResponse>>(AllPayments);
 
             if (PaymentsList.Count > 0)
             {
-                PaymentsList.ForEach(item =>
+                foreach (var item in PaymentsList)
                 {
+                    var creator = await _userManager.FindByIdAsync(item.CreatedBy);
+                    var createdByFullName = creator != null
+                        ? $"{creator.FirstName} {creator.LastName}"
+                        : "User Not Found";
+
                     excelDataTable.Rows.Add(
                         item.PaymentAmount,
                         item.ProductGiver?.CompanyName,
                         item.ProductTaker?.CompanyName,
-                        item.PaymentDate);
-                });
+                        item.PaymentDate,
+                        createdByFullName,
+                        item.CreatedDate);
+                }
+                 
             }
 
             return excelDataTable;

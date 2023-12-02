@@ -182,7 +182,7 @@
                                     {
                                         <td data-column="CreatedBy">
                                             @{
-                                                var creatorId = Expense.CreatedBy;
+                                                var creatorId = Payment.CreatedBy;
                                                 var creator = await UserManager.FindByIdAsync(creatorId);
                                                 if (creator != null)
                                                 {
