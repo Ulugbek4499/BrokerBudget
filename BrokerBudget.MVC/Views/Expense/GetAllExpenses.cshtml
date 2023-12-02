@@ -137,6 +137,10 @@
                                 <th data-column="Amount" class="columnName">Харажат Суммаси</th>
                                 <th data-column="ExpenseDate" class="columnName">Харажат Куни</th>
                                 <th data-column="Note" class="columnName">Изоҳ</th>
+                                 @if (User.IsInRole("Admin"))
+                                 {
+                                    <th data-column="CreatedBy" class="columnName">CreatedBy</th>
+                                 }
                             </tr>
                         </thead>
                         <tbody>
@@ -172,6 +176,23 @@
                                     <td data-column="Amount">@String.Format("{0:N2}", Expense.Amount).TrimEnd('0').TrimEnd('.')</td>
                                     <td data-column="ExpenseDate">@Expense.ExpenseDate.ToString("yyyy-MM-dd")</td>
                                     <td data-column="Note">@Expense.Note</td>
+                                     @if (User.IsInRole("Admin"))
+                                    {
+                                        <td data-column="CreatedBy">
+                                            @{
+                                                var creatorId = Expense.CreatedBy;
+                                                var creator = await UserManager.FindByIdAsync(creatorId);
+                                                if (creator != null)
+                                                {
+                                                    @creator.FirstName @:&nbsp; @creator.LastName
+                                                }
+                                                else
+                                                {
+                                                    @("User Not Found")
+                                                }
+                                            }
+                                        </td>
+                                    }
                                 </tr>
                             }
                         </tbody>
