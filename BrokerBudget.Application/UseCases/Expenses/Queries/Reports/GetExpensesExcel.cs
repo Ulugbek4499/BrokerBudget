@@ -62,8 +62,8 @@ namespace BrokerBudget.Application.UseCases.Expenses.Queries.Reports
             excelDataTable.Columns.Add("Харажат Суммаси", typeof(decimal));
             excelDataTable.Columns.Add("Харажат Куни", typeof(DateTime));
             excelDataTable.Columns.Add("Изоҳ", typeof(string));
-            excelDataTable.Columns.Add("CreatedBy", typeof(string));
-            excelDataTable.Columns.Add("CreatedAt", typeof(DateTime));
+            excelDataTable.Columns.Add("Ким Томонидан", typeof(string));
+            excelDataTable.Columns.Add("Қўшилган кун", typeof(DateTime));
 
             var ExpensesList = _mapper.Map<List<ExpenseResponse>>(AllExpenses);
 

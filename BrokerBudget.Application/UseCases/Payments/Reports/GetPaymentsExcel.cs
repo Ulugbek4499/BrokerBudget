@@ -65,8 +65,8 @@ namespace BrokerBudget.Application.UseCases.Payments.Reports
             excelDataTable.Columns.Add("Товар Берувчи", typeof(string));
             excelDataTable.Columns.Add("Товар Олувчи", typeof(string));
             excelDataTable.Columns.Add("Тўлов Куни", typeof(DateTime));
-            excelDataTable.Columns.Add("CreatedBy", typeof(string));
-            excelDataTable.Columns.Add("CreatedAt", typeof(DateTime));
+            excelDataTable.Columns.Add("Ким Томонидан", typeof(string));
+            excelDataTable.Columns.Add("Қўшилган кун", typeof(DateTime));
 
             var PaymentsList = _mapper.Map<List<PaymentResponse>>(AllPayments);
 

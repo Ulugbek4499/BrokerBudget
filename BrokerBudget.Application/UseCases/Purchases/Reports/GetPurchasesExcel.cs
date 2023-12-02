@@ -75,8 +75,8 @@ namespace BrokerBudget.Application.UseCases.Purchases.Reports
             excelDataTable.Columns.Add("Чегирма (Кг/Дона)", typeof(decimal));
             excelDataTable.Columns.Add("Бир дона/кг учун нархи", typeof(decimal));
             excelDataTable.Columns.Add("Умумий суммадан чегирма", typeof(decimal));
-            excelDataTable.Columns.Add("CreatedBy", typeof(string));
-            excelDataTable.Columns.Add("CreatedAt", typeof(DateTime));
+            excelDataTable.Columns.Add("Ким Томонидан", typeof(string));
+            excelDataTable.Columns.Add("Қўшилган кун", typeof(DateTime));
 
             var PurchasesList = _mapper.Map<List<PurchaseResponse>>(AllPurchases);
 
