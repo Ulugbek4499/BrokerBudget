@@ -19,7 +19,7 @@
 
             <div>
                 <a href="@Url.Action("CreateExpense")" class="btn btn-primary mr-2">
-                    Харажат
+                    Харажат қўшиш
                 </a>
             </div>
 
@@ -154,9 +154,9 @@
                                                 var today = DateTime.Today;
                                                 var isAdmin = User.IsInRole("Admin");
 
-                                                var creatorId = Expense.CreatedBy; // Assuming this is the user ID
+                                                var creatorIds = Expense.CreatedBy; // Assuming this is the user ID
                                                 var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Retrieve the current user ID
-                                                var showUpdateButton = isAdmin || (Expense.ExpenseDate.Date == today && currentUserId == creatorId);
+                                                var showUpdateButton = isAdmin || (Expense.ExpenseDate.Date == today && currentUserId == creatorIds);
                                             }
                                             @if (showUpdateButton)
                                             {
