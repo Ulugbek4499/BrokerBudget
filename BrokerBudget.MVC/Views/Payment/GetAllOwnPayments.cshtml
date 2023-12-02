@@ -140,6 +140,10 @@
                                 <th data-column="ProductGiverId" class="columnName">Товар Берувчи</th>
                                 <th data-column="PaymentDate" class="columnName">Тўлов Куни</th>
                                 <th data-column="PaymentAmount" class="columnName">Тўлов Суммаси</th>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <th data-column="CreatedBy" class="columnName">Ким Томонидан</th>
+                                }
                             </tr>
                         </thead>
                         <tbody>
@@ -174,6 +178,23 @@
                                     <td data-column="ProductGiverId">@Payment.ProductGiver.CompanyName</td>
                                     <td data-column="PaymentDate">@Payment.PaymentDate.ToString("yyyy-MM-dd")</td>
                                     <td data-column="PaymentAmount">@String.Format("{0:N2}", Payment.PaymentAmount).TrimEnd('0').TrimEnd('.')</td>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <td data-column="CreatedBy">
+                                            @{
+                                                var creatorId = Payment.CreatedBy;
+                                                var creator = await UserManager.FindByIdAsync(creatorId);
+                                                if (creator != null)
+                                                {
+                                                    @creator.FirstName @:&nbsp; @creator.LastName
+                                                }
+                                                else
+                                                {
+                                                    @("User Not Found")
+                                                }
+                                            }
+                                        </td>
+                                    }
                                 </tr>
                             }
                         </tbody>

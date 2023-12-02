@@ -148,6 +148,10 @@
                                 <th data-column="SaleAmountCategoryPercentage" class="columnName">Миқдордан чегирма</th>
                                 <th data-column="PricePerAmount" class="columnName">Нарх(1 кг/дона)</th>
                                 <th data-column="SaleForTotalPrice" class="columnName">Умумий суммадан чегирма</th>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <th data-column="CreatedBy" class="columnName">Ким Томонидан</th>
+                                }
                             </tr>
                         </thead>
                         <tbody>
@@ -188,6 +192,23 @@
                                     <td data-column="SaleAmountCategoryPercentage">@Purchase.SaleAmountCategoryPercentage</td>
                                     <td data-column="PricePerAmount">@String.Format("{0:N2}", Purchase.PricePerAmount).TrimEnd('0').TrimEnd('.')</td>
                                     <td data-column="SaleForTotalPrice">@String.Format("{0:N2}", Purchase.SaleForTotalPrice).TrimEnd('0').TrimEnd('.')</td>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <td data-column="CreatedBy">
+                                            @{
+                                                var creatorId = Purchase.CreatedBy;
+                                                var creator = await UserManager.FindByIdAsync(creatorId);
+                                                if (creator != null)
+                                                {
+                                                    @creator.FirstName @:&nbsp; @creator.LastName
+                                                }
+                                                else
+                                                {
+                                                    @("User Not Found")
+                                                }
+                                            }
+                                        </td>
+                                    }
                                 </tr>
                             }
                         </tbody>
