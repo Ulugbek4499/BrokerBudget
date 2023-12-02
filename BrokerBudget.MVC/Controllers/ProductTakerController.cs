@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BrokerBudget.MVC.Controllers
 {
-/*    [Authorize(Roles = "Admin")]*/
+    [Authorize(Roles = "Admin")]
     public class ProductTakerController : ApiBaseController
     {
         [HttpGet("[action]")]
@@ -68,15 +68,6 @@ namespace BrokerBudget.MVC.Controllers
             await Mediator.Send(new DeleteProductTakerCommand(Id));
 
             return RedirectToAction("GetAllProductTakers");
-        }
-
-
-        [HttpGet("[action]")]
-        public async ValueTask<IActionResult> ViewProductTaker(int id)
-        {
-            var ProductTaker = await Mediator.Send(new GetProductTakerByIdQuery(id));
-
-            return View("ViewProductTaker", ProductTaker);
         }
     }
 }

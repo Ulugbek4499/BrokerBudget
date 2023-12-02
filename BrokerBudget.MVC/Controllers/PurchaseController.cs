@@ -169,13 +169,5 @@ namespace BrokerBudget.MVC.Controllers
 
             return RedirectToAction("GetAllOwnPurchases");
         }
-
-        [HttpGet("[action]")]
-        public async ValueTask<IActionResult> ViewPurchase(int id)
-        {
-            var Purchase = await Mediator.Send(new GetPurchaseByIdQuery(id));
-
-            return View("ViewPurchase", Purchase);
-        }
     }
 }

@@ -6,7 +6,7 @@ namespace BrokerBudget.MVC.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-/*    [Authorize]*/
+    [Authorize]
     public class ApiBaseController : Controller
     {
         private IMediator? _mediator;

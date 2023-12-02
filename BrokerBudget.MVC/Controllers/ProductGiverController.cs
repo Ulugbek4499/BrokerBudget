@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BrokerBudget.MVC.Controllers
 {
-/*    [Authorize(Roles = "Admin")]*/
+    [Authorize(Roles = "Admin")]
     public class ProductGiverController : ApiBaseController
     {
         [HttpGet("[action]")]
@@ -70,14 +70,6 @@ namespace BrokerBudget.MVC.Controllers
             await Mediator.Send(new DeleteProductGiverCommand(Id));
 
             return RedirectToAction("GetAllProductGivers");
-        }
-
-        [HttpGet("[action]")]
-        public async ValueTask<IActionResult> ViewProductGiver(int id)
-        {
-            var ProductGiver = await Mediator.Send(new GetProductGiverByIdQuery(id));
-
-            return View("ViewProductGiver", ProductGiver);
         }
     }
 }

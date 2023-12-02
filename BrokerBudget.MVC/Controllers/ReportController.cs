@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BrokerBudget.MVC.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ReportController : ApiBaseController
     {
         [HttpGet("[action]")]

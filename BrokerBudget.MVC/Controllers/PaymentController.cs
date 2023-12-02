@@ -123,13 +123,5 @@ namespace BrokerBudget.MVC.Controllers
 
             return RedirectToAction("GetAllOwnPayments");
         }
-
-        [HttpGet("[action]")]
-        public async ValueTask<IActionResult> ViewPayment(int id)
-        {
-            var Payment = await Mediator.Send(new GetPaymentByIdQuery(id));
-
-            return View("ViewPayment", Payment);
-        }
     }
 }

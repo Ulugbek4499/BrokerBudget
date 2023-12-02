@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BrokerBudget.MVC.Controllers
 {
-/*    [Authorize(Roles = "Admin")]*/
+    [Authorize(Roles = "Admin")]
     public class ProductController : ApiBaseController
     {
         [HttpGet("[action]")]
@@ -31,14 +31,6 @@ namespace BrokerBudget.MVC.Controllers
             return View();
         }
 
-        /*        [HttpPost("[action]")]
-                public async ValueTask<IActionResult> CreateProductFromExcel(IFormFile excelfile)
-                {
-                    var result = await Mediator.Send(new AddProductsFromExcel(excelfile));
-
-                    return RedirectToAction("GetAllProducts");
-                }*/
-
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> GetAllProducts()
         {
@@ -46,14 +38,6 @@ namespace BrokerBudget.MVC.Controllers
 
             return View(Products);
         }
-
-        /*        [HttpGet("[action]")]
-                public async ValueTask<FileResult> GetAllProductsExcel(string fileName = "AllProducts")
-                {
-                    var result = await Mediator.Send(new GetProductsExcel { FileName = fileName });
-
-                    return File(result.FileContents, result.Option, result.FileName);
-                }*/
 
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> UpdateProduct(int Id)
@@ -75,14 +59,6 @@ namespace BrokerBudget.MVC.Controllers
             await Mediator.Send(new DeleteProductCommand(Id));
 
             return RedirectToAction("GetAllProducts");
-        }
-
-        [HttpGet("[action]")]
-        public async ValueTask<IActionResult> ViewProduct(int id)
-        {
-            var Product = await Mediator.Send(new GetProductByIdQuery(id));
-
-            return View("ViewProduct", Product);
         }
     }
 }

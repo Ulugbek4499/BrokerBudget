@@ -67,13 +67,5 @@ namespace BrokerBudget.MVC.Controllers
 
             return RedirectToAction("GetAllExpenses");
         }
-
-        [HttpGet("[action]")]
-        public async ValueTask<IActionResult> ViewExpense(int id)
-        {
-            var Expense = await Mediator.Send(new GetExpenseByIdQuery(id));
-
-            return View("ViewExpense", Expense);
-        }
     }
 }
