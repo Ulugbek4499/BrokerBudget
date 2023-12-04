@@ -1,4 +1,6 @@
 ﻿using BrokerBudget.Application.UseCases.Reports;
+using GameStore.Domain.States;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BrokerBudget.MVC.Controllers
