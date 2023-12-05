@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrokerBudget.Application", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrokerBudget.Infrastructure", "BrokerBudget.Infrastructure\BrokerBudget.Infrastructure.csproj", "{117DE93F-7793-4427-B314-B03549AB9D85}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrokerBudget.API", "BrokerBudget.API\BrokerBudget.API.csproj", "{75717566-666F-444E-A1AD-A2A206667BE9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{117DE93F-7793-4427-B314-B03549AB9D85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{117DE93F-7793-4427-B314-B03549AB9D85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{117DE93F-7793-4427-B314-B03549AB9D85}.Release|Any CPU.Build.0 = Release|Any CPU
-		{75717566-666F-444E-A1AD-A2A206667BE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{75717566-666F-444E-A1AD-A2A206667BE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{75717566-666F-444E-A1AD-A2A206667BE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{75717566-666F-444E-A1AD-A2A206667BE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
