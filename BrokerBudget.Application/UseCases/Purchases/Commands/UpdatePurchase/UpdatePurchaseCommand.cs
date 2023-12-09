@@ -37,9 +37,12 @@ namespace BrokerBudget.Application.UseCases.Purchases.Commands.UpdatePurchase
             Purchase? purchase = await _context.Purchases.FindAsync(request.Id);
             decimal? oldTakenMoney = purchase.TakenMoneyAmount;
 
+            decimal saleAmountCategoryPercentage = request.SaleAmountCategoryPercentage ?? 0;
+            decimal saleForTotalPrice = request.SaleForTotalPrice ?? 0;
+
             purchase.FinalPriceOfPurchase =
-              ((purchase.Amount - purchase.SaleAmountCategoryPercentage)
-                  * purchase.PricePerAmount - purchase.SaleForTotalPrice) ?? 0;
+                (purchase.Amount - saleAmountCategoryPercentage)
+                    * purchase.PricePerAmount - saleForTotalPrice;
 
             request.TakenMoneyAmount = oldTakenMoney;
             _mapper.Map(request, purchase);
